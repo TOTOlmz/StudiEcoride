@@ -5,6 +5,7 @@
 
 
 require_once __DIR__ . '/../../models/users/UserRegistrationModel.php';
+require_once __DIR__ . '/../../models/users/UserSpaceModel.php';
 
 class UserRegistrationController {
     
@@ -47,7 +48,7 @@ class UserRegistrationController {
                 try {
                     $userId = UserRegistrationModel::create($pseudo, $email, $password);
                     if ($userId) {
-                        $user = UserRegistrationModel::getUserData($userId);
+                        $user = UserSpaceModel::getUserData($userId);
 
                         if ($user) {
                             // Créer la session

@@ -125,6 +125,113 @@ INSERT INTO `users` (`id`, `pseudo`, `email`, `password`, `photo`, `credits`, `r
 (1, 'Admin', 'admin@ecoride.fr', '$2y$12$7HiXnfPV7RzA0eaymlqAI.JEpVY/1oKdY31JD8yjYipiIvK1uxoPS', 'ecoride.png', 0, 'ADMIN');
 COMMIT;
 
+
+
+
+
+
+ALTER TABLE `carpools`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cars`
+--
+ALTER TABLE `cars`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `drivers`
+--
+ALTER TABLE `drivers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users_carpools`
+--
+ALTER TABLE `participations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `carpools`
+--
+ALTER TABLE `carpools`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cars`
+--
+ALTER TABLE `cars`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+--
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `participation`
+--
+ALTER TABLE `participations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `carpools`
+--
+ALTER TABLE `carpools`
+  ADD CONSTRAINT `carpools_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `carpools_ibfk_2` FOREIGN KEY (`car_id`) REFERENCES `cars` (`id`);
+
+--
+-- Constraints for table `cars`
+--
+ALTER TABLE `cars`
+  ADD CONSTRAINT `cars_ibfk_1` FOREIGN KEY (`driver_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`driver_id`) REFERENCES `carpools` (`driver_id`),
+  ADD CONSTRAINT `reviews_ibfk_3` FOREIGN KEY (`carpool_id`) REFERENCES `carpools` (`id`);
+
+--
+-- Constraints for table `participation`
+--
+ALTER TABLE `participations`
+  ADD CONSTRAINT `participations_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `participations_ibfk_2` FOREIGN KEY (`carpool_id`) REFERENCES `carpools` (`id`);
+COMMIT;
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

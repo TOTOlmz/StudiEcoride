@@ -18,6 +18,7 @@
             <a class="nav-btn" href="./trajets">Covoiturages</a>
             <?php if ($connected): ?>
                 <a class="nav-btn" href="./mon-espace">Mon espace</a>
+                <a class="nav-btn" href="./contact">Déconnexion</a>
             <?php else: ?>
                 <a class="nav-btn" href="./connexion">Connexion</a>
             <?php endif; ?>

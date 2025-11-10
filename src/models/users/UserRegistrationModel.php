@@ -32,11 +32,4 @@ class UserRegistrationModel {
         return $pdo->lastInsertId();
     }
 
-    // Fonction permettant de récupérer la ligne correspondant à un ID dans une table donnée
-    public static function getUserData($id) {
-        global $pdo;
-        $stmt = $pdo->prepare('SELECT * FROM users WHERE id = ?');
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
 }

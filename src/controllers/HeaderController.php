@@ -13,7 +13,7 @@ class HeaderController {
         if (isset($_SESSION['user_id'])) {
             $connected = true;
             // On vérifie si l'utilisateur est de l'entreprise
-            if ($_SESSION['user_id'] !== 'USER') {
+            if ($_SESSION['user_role'] !== 'USER') {
                 $staff = true;
             }
         }

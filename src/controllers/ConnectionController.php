@@ -26,7 +26,7 @@ class ConnectionController {
             if (empty($errors)) {
                 try {
                     $user = ConnectionModel::connection($email, $password);
-                    if (!$user) {  // ✅ Plus simple !
+                    if (!$user) {  // Si user n'est pas trouvé :
                         $errors[] = 'Ces identifiants ne correspondent à aucun compte';
                     }
 
