@@ -38,7 +38,7 @@
 <!-- Section reservée aux covoiturages -->
 <h2>Mes covoiturages</h2>
 <?php if (count($cars) > 0): ?>
-    <a href="./proposer-un-trajet">Ajouter un trajet</a>
+    <a href="./proposer-un-covoiturage">Ajouter un trajet</a>
 <?php else: ?>
     <p>Ajoutez un véhicule pour devenir chauffeur et pouvoir proposer un trajet. </p>
     <a href="./ajouter-un-vehicule">Ajouter un véhicule</a>
@@ -50,8 +50,8 @@
 <?php foreach ($activeCarpools as $c): ?>
     <li>
         <strong><?php echo $c['user_is_passenger'] ? 'Passager' : 'Au volant'; ?></strong><br>
-        <strong><?php echo htmlspecialchars($c['address_start']); ?></strong> → <strong><?php echo htmlspecialchars($c['address_end']); ?></strong>
-        le <?php echo htmlspecialchars($c['date']); ?> à <?php echo htmlspecialchars($c['time_start']); ?>
+        <strong><?php echo htmlspecialchars($c['departure_city']); ?></strong> → <strong><?php echo htmlspecialchars($c['arrival_city']); ?></strong>
+        le <?php echo htmlspecialchars($c['date']); ?> à <?php echo htmlspecialchars($c['departure_time']); ?>
         <br><?php echo htmlspecialchars($c['available_seats']); ?> réservées sur <?php echo htmlspecialchars($c['seats']); ?> places disponibles. Prix unitaire de <?php echo htmlspecialchars($c['price']); ?> Credits
         <form method="post" style="display:inline;">
             <input type="hidden" name="carpool_id" value="<?php echo intval($c['id']); ?>"/>
@@ -75,14 +75,14 @@
     <p>Vous n'avez pas de trajets en cours.</p>
 <?php endif; ?>
 <?php if (isset($historyCarpools) && count($historyCarpools) > 0): ?>
-    <a href="./historique-des-trajets">Consultez l'ensemble de vos trajets.</p>
+    <a href="./historique-des-covoiturages">Consultez l'ensemble de vos trajets.</p>
 <?php endif; ?>
 </ul>
 
 <!-- Section reservée aux vehicules -->
 <h2>Mes véhicules</h2>
 <a href="./ajouter-un-vehicule">Ajouter un véhicule</a>
-<?php if (count($cars) === 0): ?>
+<?php if (empty($cars)): ?>
     <p>Aucun véhicule renseigné.</p>
 <?php else: ?>
     <ul>
