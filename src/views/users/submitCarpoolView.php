@@ -1,29 +1,36 @@
-<div class="new-carpool-form">
+<div class="center-container">
     <h2>Proposer un nouveau trajet</h2>
 
+    <?php include __DIR__ . '/../checks.php'; ?>
+    
+    <form class="new-carpool" method="POST" action="">
 
-    <form method="POST" action="">
+        <div>
+            <input type="text"  class="carpool-form" id="departure-city" name="departure-city" placeholder="Ville de départ" required>
+            <input type="text" class="carpool-form" id="arrival-city" name="arrival-city" placeholder="Ville d'arrivée" required>
+        </div>
 
-        <label for="departure-city" class="form-label">Ville de départ</label>
-        <input type="text" class="form-control" id="departure-city" name="departure-city" required>
-        <label for="arrival-city" class="form-label">Ville d'arrivée</label>
-        <input type="text" class="form-control" id="arrival-city" name="arrival-city" required>
-        <br>
-        <label for="date" class="form-label">Date</label>
-        <input type="date" class="form-control" id="date" name="date" required>
+        <div>
+            <label for="date" class="form-label">Date</label>
+            <input type="date" class="carpool-form" id="date" name="date" required>
+        </div>
 
-        <label for="departure-time" class="form-label">Heure de départ</label>
-        <input type="time" class="form-control" id="departure-time" name="departure-time" required>
-        <label for="arrival-time" class="form-label">Heure d'arrivée</label>
-        <input type="time" class="form-control" id="arrival-time" name="arrival-time" required>
+        <div>
+            <label for="departure-time" class="form-label">Heure de départ</label>
+            <input type="time" class="carpool-form" id="departure-time" name="departure-time" required>
+        </div>
 
-        <br>
-        <label for="price" class="form-label">Prix</label>
-        <input type="number" class="form-control" id="price" name="price" step="0.5" required>
-        <br>
+        <div>
+            <label for="arrival-time" class="form-label">Heure d'arrivée</label>
+            <input type="time" class="carpool-form" id="arrival-time" name="arrival-time" required>
+        </div>
 
-        <label for="car-id" class="form-label">Choisir un véhicule</label>
-        <select name="car-id" id="car-id" class="form-select" required>
+        <div>
+            <input type="number" class="carpool-form" id="nb-seats" name="nb-seats" min="1" placeholder="Nombre de places" required>
+            <input type="number" class="carpool-form" id="price" name="price" step="0.5" placeholder="Prix par passager" required>
+        </div>
+
+        <select class="carpool-form" name="car-id" id="car-id" class="form-select" required>
             <option value="" selected disabled hidden>Choix du véhicule</option>
             <?php foreach ($cars as $c): ?>
                 <option value="<?php echo $c['id']; ?>">
@@ -31,24 +38,22 @@
                 </option>
             <?php endforeach; ?>
         </select>
-        <br>
-        <label for="nb-seats" class="form-label">Nombre de places disponibles</label>
-        <input type="number" class="form-control" id="nb-seats" name="nb-seats" min="1" value="1" required>
-        <div>
-        <p> Préférences de voyage </p>
 
-            <label for="smoke" class="form-label">Fumeurs acceptés</label>
-            <input type="checkbox" class="form-control" id="smoke" name="smoke">
-            <br>
-            <label for="animals" class="form-label">Animaux acceptés</label>
-            <input type="checkbox" class="form-control" id="animals" name="animals">
-            <br>
-            <label for="preferences" class="form-label">Autres préférences</label>
-            <input type="text" class="form-control" id="preferences" name="preferences">
+        <div class="preferences">
+            <p> Préférences de voyage </p>
+                <div>
+                <label for="smoke" class="form-label">Fumeurs acceptés 
+                <input type="checkbox" id="smoke" name="smoke"></label>
+                <label for="animals" class="form-label">Animaux acceptés 
+                <input type="checkbox" id="animals" name="animals"></label>
+            </div>
+                <br>
+                <label for="preferences" class="form-label">Autres préférences <br>
+                <textarea class="carpool-form" id="preferences" name="preferences"></textarea></label>
         </div>
 
 
-        <button type="submit">Créer le trajet</button>
+        <button class="button" type="submit">Créer le trajet</button>
     </form>
 
 </div>
@@ -87,9 +92,8 @@
                     suggestionBox.innerHTML = '';
                     if (data.features && data.features.length > 0) {
                         data.features.forEach(city => {
-                            console.log(city);
                             const suggestion = document.createElement('div');
-                            const cityName = city.properties.city || city.properties.name;      // city.coordinates[0] == lon et city.coordinates[1] == lat
+                            const cityName = city.properties.city || city.properties.name;
                             const postalCode = city.properties.postcode || '';
                             suggestion.textContent = cityName + ' (' + postalCode + ')';        
                             suggestion.style.cursor = 'pointer';
