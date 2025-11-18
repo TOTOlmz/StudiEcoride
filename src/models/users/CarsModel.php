@@ -16,6 +16,14 @@ class CarsModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Fonction permettant de récupérer une voiture par id
+    public static function getCarById($id) {
+        global $pdo;
+        $stmt = $pdo->prepare('SELECT * FROM cars WHERE id = ?');
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     // Fonction permettant de récupérer une seule voiture
     public static function getOneCar($driverId, $carId) {
         global $pdo;

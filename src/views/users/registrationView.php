@@ -1,4 +1,5 @@
-<div class="log-container">
+
+<div class="form-container">
     <h2>Créer un compte</h2>
     <form method="post" action="">
         <div class="form-group">
@@ -19,15 +20,14 @@
         <p> Déjà un compte ? <a href="./connexion">cliquez ici</a></p>
     </div>
 </div>
-
-<div>
-    <p id="passconf-label" style="opacity:0;">Les mots de passe ne correspondent pas.</p>
+<div class="form-container">
     <div class="password-requirements" style="opacity:0;">
         <p> Le mot de passe doit contenir au moins :</p>
-        <span>8 caractères : </span><span class="pass pass-length">✖</span>
-        <span>Une majuscule : </span><span class="pass pass-upper">✖</span>
-        <span>Une minuscule : </span><span class="pass pass-lower">✖</span>
-        <span>Un chiffre :  </span><span class="pass pass-number">✖</span>
+        <span class="pass pass-length">8 caractères</span>
+        <span class="pass pass-upper">Une majuscule</span>
+        <span class="pass pass-lower">Une minuscule</span>
+        <span class="pass pass-number">Un chiffre</span>
+        <p id="passconf-label" style="opacity:0;">Les mots de passe ne correspondent pas.</p>
     </div>
     <?php if (!empty($errors)): ?>
         <div class="errors">
@@ -50,6 +50,15 @@
     const password = document.getElementById('password');
     const passwordConfirm = document.getElementById('confirm-password');
 
+    document.querySelectorAll('.pass').forEach(item => {
+        item.style.padding = '0.2rem 0.5rem';
+        item.style.margin = '0.2rem';
+        item.style.borderRadius = '5px';
+        item.style.color = 'white';
+        item.style.backgroundColor = '#a10000';
+        item.style.display = 'inline-block';
+    });
+
     password.addEventListener('input', checkForm);
     passwordConfirm.addEventListener('input', checkForm);
 
@@ -57,8 +66,8 @@
         if (validatePassword()) {
             let confirmP = password.value === passwordConfirm.value;
             form.querySelector('button').disabled = confirmP ? false : true;
-            form.querySelector('#passconf-label').style.opacity = 1;
-            form.querySelector('#passconf-label').style.color = confirmP ? 'green' : 'red';    
+            form.querySelector('#passconf-label').style.opacity = confirmP ? '1' : '0';
+            form.querySelector('#passconf-label').style.color = confirmP ? '#196e44' : '#a10000';    
             form.querySelector('#passconf-label').textContent = confirmP ? 'Les mots de passe correspondent.' : 'Les mots de passe ne correspondent pas.'; 
         } 
     }
@@ -70,14 +79,10 @@
         let validUpper = passValue.toLowerCase() !== passValue;
         let validLower = passValue.toUpperCase() !== passValue;
         let validNumber = passValue.search(/[0-9]/) !== -1;
-        document.querySelector('.pass-length').textContent = validLength ? '✔' : '✖';
-        document.querySelector('.pass-upper').textContent = validUpper ? '✔' : '✖';
-        document.querySelector('.pass-lower').textContent = validLower ? '✔' : '✖';
-        document.querySelector('.pass-number').textContent = validNumber ? '✔' : '✖';
-        document.querySelector('.pass-length').style.color = validLength ? 'green' : 'red';
-        document.querySelector('.pass-upper').style.color = validUpper ? 'green' : 'red';
-        document.querySelector('.pass-lower').style.color = validLower ? 'green' : 'red';
-        document.querySelector('.pass-number').style.color = validNumber ? 'green' : 'red';
+        document.querySelector('.pass-length').style.backgroundColor = validLength ? '#196e44' : '#a10000';
+        document.querySelector('.pass-upper').style.backgroundColor = validUpper ? '#196e44' : '#a10000';
+        document.querySelector('.pass-lower').style.backgroundColor = validLower ? '#196e44' : '#a10000';
+        document.querySelector('.pass-number').style.backgroundColor = validNumber ? '#196e44' : '#a10000';
         return validLength && validUpper && validLower && validNumber;
     };
 </script>

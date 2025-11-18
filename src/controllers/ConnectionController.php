@@ -13,11 +13,11 @@ class ConnectionController {
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
-            $email = $_POST['email']  ?? '';
-            $password = $_POST['password'] ?? '';
+            $email = $_POST['email'];
+            $password = $_POST['password'];
 
 
-            if (empty($email) || empty($password)) {
+            if (!$email || !$password) {
                 $errors[] = 'Merci de renseigner tous les champs';
             }
             
@@ -35,8 +35,16 @@ class ConnectionController {
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['user_email'] = $user['email'];
                     $_SESSION['user_role'] = $user['roles'];
-                    
-                    $success = 'Connexion réussie';
+
+                    // On gère la redirection
+                    if ($user['roles'] === 'ADMIN') {
+                        header ('Location: ./espace-admin');
+                    }  elseif ($user['roles'] === 'STAFF') {
+                        header ('Location: ./espace-staff');
+                    } else {
+                        header ('Location: ./mon-espace');
+                    }
+                    exit;
                     
                 } catch (PDOException $e) {
                     $errors[] = 'Erreur lors de la connexion';

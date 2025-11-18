@@ -1,4 +1,5 @@
-<?php
+<?php 
+
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant l'inscription des utilisateurs
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
@@ -8,6 +9,7 @@ require_once __DIR__ . '/../../models/users/UserModel.php';
 class RegistrationController {
     
     public function registration() {
+
         $errors = [];
         $success = '';
         // Si le formulaire n'est pas soumis
@@ -41,12 +43,15 @@ class RegistrationController {
                 $errors[] = 'Ce pseudo est déjà utilisé';
             }
             
-            // Si pas d'erreurs, créer l'utilisateur
+            // Si pas d'erreurs :
             if (empty($errors)) {
                 try {
-                    $userId = UserModel::create($pseudo, $email, $password);
+                    // On crée l'utilisateur
+                    $userId = UserModel::create($pseudo, $email, $password, 20, 'USER');
+                    
+                    // Et on démarre la session
                     if ($userId) {
-                        $user = UserModel::getUserData($userId);
+                        $user = UserModel::getUserById($userId);
 
                         if ($user) {
                             // Créer la session
@@ -66,18 +71,19 @@ class RegistrationController {
                     $errors[] = 'Erreur lors de la création du compte : ' . $e->getMessage();
                 }
             }
+
+            header('Location: ./mon-espace');
         }
         
         // On charge la vue
         require __DIR__ . '/../../views/users/registrationView.php';
     }
 
-    // Fonction permettant de vérifier la robustesse du mot de passe (et sa confirmation)
+    // Fonction permettant de vérifier la robustesse du mot de passe
     private function passwordCheck($password) {
-        return strlen($password) >= 8 &&        // On vérifie la longueur minimale
-        strtolower($password) !== $password &&  // La presence d'une minuscule
-        strtoupper($password) !== $password &&  // La presence d'une majuscule
-        preg_match('/[0-9]/', $password);       // La presence d'un chiffre
-    }
-
+    return strlen($password) >= 8 &&        // On vérifie la longueur minimale
+    strtolower($password) !== $password &&  // La presence d'une minuscule
+    strtoupper($password) !== $password &&  // La presence d'une majuscule
+    preg_match('/[0-9]/', $password);       // La presence d'un chiffre
+}
 }

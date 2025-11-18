@@ -10,10 +10,12 @@ class ConnectionModel {
         $stmt = $pdo->prepare('SELECT * FROM users WHERE email = ?');
         $stmt->execute([$email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        // On vérifie la carrespondance du mot de passe
+        // On vérifie la correspondance du mot de passe
         if ($user && password_verify($password, $user['password'])) {  
             return $user;
         }
         return false;
     }
 }
+
+?>
