@@ -85,7 +85,6 @@ class UserSpaceController {
         if (isset($_POST['delete-car'])) {
             $carId = intval($_POST['car-id']);
             $deleteCar = CarsModel::deleteCar($carId);
-            echo ($carId);
             if ($deleteCar) {
                 $success = 'Véhicule supprimé avec succès';
             } else {
