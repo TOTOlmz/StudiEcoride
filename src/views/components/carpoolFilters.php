@@ -1,8 +1,8 @@
 <div class="search-box filters">
-    <label>Uniquement écologique : <input type="checkbox" name="is-ecological"></label>
-    <label>Prix maximal : <input type="number" name="price" min="0"></label>
-    <label>Temps maximal : <input type="time" name="duration" value="00:00" step="300"></label>
-    <label>Note minimale du chauffeur : <input type="number" name="rate" step="0.5" min="0" max="5"></label>
+    <label>Écologique : <input type="checkbox" name="is-ecological"></label>
+    <label>Prix max : <input type="number" name="price" min="0"></label>
+    <label>Temps max : <input type="time" name="duration" value="00:00" step="300"></label>
+    <label>Note min du chauffeur : <input type="number" name="rate" step="0.5" min="0" max="5"></label>
 </div>
 
 

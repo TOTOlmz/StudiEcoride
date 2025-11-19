@@ -48,5 +48,13 @@ class CarsModel {
         return $stmt->execute([$brand, $model, $color, $energy, $plate_number, $first_registration, $driverId]);
     }
 
+    // Fonction permettant de récupérer une seule voiture
+    public static function deleteCar($carId) {
+        global $pdo;
+        $stmt = $pdo->prepare('DELETE FROM cars WHERE id = ?');
+        $stmt->execute([$carId]);
+        return $stmt->rowCount();
+    }
+
 }
     
