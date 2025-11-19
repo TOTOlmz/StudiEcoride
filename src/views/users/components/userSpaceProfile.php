@@ -33,10 +33,3 @@
         <button type="submit" class="button">Changer la photo</button>
     </form>
 </div>
-
-
-
-<div class="review-cards">
-    
-    
-</div>

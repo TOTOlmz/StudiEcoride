@@ -600,6 +600,22 @@ h2 a {
     justify-self: center;
 }
 
+.car-card .delete-car {
+    text-align: end;
+    height: 0px;
+}
+
+.car-card .delete-car button {
+    color: #ffffff;
+    background-color: #800000;
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
 .review-cards {
     max-width: 900px;
     margin: 2rem auto;

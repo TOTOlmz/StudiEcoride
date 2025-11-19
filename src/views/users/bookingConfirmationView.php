@@ -9,7 +9,7 @@
         <p><?php echo intval($seats) > 1 ? 'Crédits débités : ' . $cost . '(' . $seats . 'x' . $price . ')' : $cost; ?></p>
 
         <a href="/ecoride/public/chercher-un-covoiturage" class="btn">Rechercher un autre covoiturage</a>
-        <a href="/ecoride/public/mon-espace" class="btn">Retour à
+        <a href="/ecoride/public/mon-espace" class="btn">Mon espace</a>
     </div>
 <?php else: ?>
     <h2>Page dédier à la reservation de covoiturages. vous avez perdu votre chemin</h2>
