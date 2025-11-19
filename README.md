@@ -46,7 +46,9 @@ Ecoride/
 │  └─ `symfony/` (…)
 
 
-#Git -2 branches pour le rendu, main, develoment
+#Git -3 branches pour le rendu :
+    - main et dev
+    - documents qui regroupe pleins de fichiers concernant le projet (dont des fichiers d'import pour la BDD)
 
 #Méthode de déploiement en local :
 
@@ -67,4 +69,5 @@ DB_PASS=
 Ouvrir la page https://127.0.0.1:8000/
 
 #Contact -theo.lemazurier@gmail.com
+
 
