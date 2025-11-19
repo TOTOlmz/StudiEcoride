@@ -9,7 +9,7 @@
     </form>
 <?php endif; ?>
 
-<?php if ($user['id'] === $carpool['driver_id'] && count($reviewsReceived) !== 0) : ?>
+<?php if ($user['id'] == $carpool['driver_id'] && count($reviewsReceived) !== 0) : ?>
     <?php foreach ($reviewsReceived as $review) : ?>
         <?php if ($review['carpool_id'] == $carpool['id']) : ?>
             <div style="margin-top:5px;">
@@ -19,8 +19,10 @@
         <?php endif; ?>
     <?php endforeach;?>
 <?php elseif ($user['id'] !== $carpool['driver_id'] && count($reviewsLeft) !== 0) : ?>
+    <?php $alreadyRate = 0; ?>
     <?php foreach ($reviewsLeft as $review) : ?>
         <?php if ($review['carpool_id'] == $carpool['id']) : ?>
+            <?php $alreadyRate = 1; ?>
             <div style="margin-top:5px;">
                 <p>Note laissée : <strong> <?php echo htmlspecialchars($review['rate']); ?> /5</strong></p><br>
                 <p>Commentaire laissé : <em><?php echo html_entity_decode($review['commentary'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?></em>
@@ -30,7 +32,8 @@
             </div>
         <?php endif; ?>
     <?php endforeach;?>
-<?php else: ?>
+<?php endif; ?>
+<?php if (!isset($alreadyRate) || $alreadyRate === 0) : ?>
     <form method="post" class="review-form" style="display:inline;">
         <p>Laisser un avis pour ce trajet :</p>
         <input type="hidden" name="carpool_id" value="<?php echo intval($carpool['id']); ?>"/>
