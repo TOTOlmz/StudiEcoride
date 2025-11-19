@@ -8,15 +8,15 @@
     </form>
 </div>
 <div class="society-presentation">
-    <div class="card" style="background-image: url('./../src/assets/images/mobility.webp');">
+    <div class="card" style="background-image: url('./assets/images/mobility.webp');">
         <h3>Une mobilité verte</h3>
         <p>Réduisez votre empreinte carbonne en privilégiant les trajets partagés en voiture électrique.</p>
     </div>
-    <div class="card" style="background-image: url('./../src/assets/images/community.webp');">
+    <div class="card" style="background-image: url('./assets/images/community.webp');">
         <h3>Une communautée engagée</h3>
         <p>Ne voyagez plus seul, trouvez le voyage qu'il vous faut ou partagez le votre.</p>
     </div>
-    <div class="card" style="background-image:url('./../src/assets/images/economy.webp');">
+    <div class="card" style="background-image:url('./assets/images/economy.webp');">
         <h3>Une écconomie positive</h3>
         <p>Voyager avec EcoRide réduit le cout individuel du déplacement. Comme quoi, l'union fait la force.</p>
     </div>

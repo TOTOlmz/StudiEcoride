@@ -1,5 +1,5 @@
 
-<ul class="detail-card">
+<ul class="carpool-card">
     <li><strong>Date :</strong> <?php echo $carpool['date']; ?></li>
     <li><strong>Départ :</strong> <?php echo html_entity_decode($carpool['departure_city'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?> à <span style="color: #196e44; font-weight: bold;"><?php echo htmlspecialchars($carpool['departure_time']); ?></span></li>
     <li><strong>Arrivée :</strong> <?php echo html_entity_decode($carpool['arrival_city'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?> à <span style="color: #196e44; font-weight: bold;"><?php echo htmlspecialchars($carpool['arrival_time']); ?></span></li>

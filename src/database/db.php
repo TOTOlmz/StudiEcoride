@@ -21,3 +21,5 @@ if(is_file($path) !== false){
     }
     return $dbElements;
 }
+
+?>

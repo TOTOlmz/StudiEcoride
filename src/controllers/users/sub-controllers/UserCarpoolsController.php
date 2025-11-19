@@ -34,7 +34,7 @@ class UserCarpoolsController {
         $carpools = UserCarpoolsModel::getCarpoolsByUserId($userId);
 
         if (empty($carpools)) {
-            $errors[] = "Covoiturages introuvable.";
+            $errors[] = 'Covoiturages introuvable.';
             return ['errors' => $errors];
         }
         // On identifie le covoiturage concerné
@@ -46,7 +46,7 @@ class UserCarpoolsController {
             }
         }
         if (empty($carpool)) {
-            $errors[] = "Covoiturage introuvable.";
+            $errors[] = 'Covoiturage introuvable.';
             return ['errors' => $errors];
         }
 
@@ -67,18 +67,18 @@ class UserCarpoolsController {
                     $adjustCredits = UserCarpoolsModel::adjustPassengerCredits($p['user_id'], $p['pending_credits']);
                     $leaveCarpool = UserCarpoolsModel::leaveCarpool($p['user_id'], $carpoolId);
                     if (!$adjustCredits || !$leaveCarpool) {
-                        $errors[] = "Erreur lors du traitement d'un passager.";
+                        $errors[] = 'Erreur lors du traitement d\'un passager.';
                     }
                     $email = UserCarpoolsModel::getPassengerEmail($p['user_id']);
 
                     if (!empty($email)) {
                         $to = $email;
-                        $subject = "Annulation du covoiturage";
-                        $content = "Bonjour,<br>Le conducteur a annulé le covoiturage auquel vous participiez. Vos crédits ont été remboursés.";
+                        $subject = 'Annulation du covoiturage';
+                        $content = 'Bonjour,<br>Le conducteur a annulé le covoiturage auquel vous participiez. Vos crédits ont été remboursés.';
                         $send = $this->sendEmailToUser($to, $subject, $content);
 
                         if (!$send) {
-                            $errors[] = "Erreur lors de l'envoi de l'email à un passager.";
+                            $errors[] = 'Erreur lors de l\'envoi de l\'email à un passager.';
                         }
                     }
                     
@@ -90,7 +90,7 @@ class UserCarpoolsController {
             if (empty($errors)) {
                 return ['success' => $success];
             } else {
-                return ['errors' => $success];
+                return ['errors' => $errors];
             }
             
         } else {
@@ -104,7 +104,7 @@ class UserCarpoolsController {
             if ($adjustCredits && $leaveCarpool && $updateSeats) {
                 return ['success' => $success];
             } else {
-                return ['errors' => $success];
+                return ['errors' => $errors];
             }
             
         }
@@ -129,7 +129,7 @@ class UserCarpoolsController {
             return true;
             
         } catch (Exception $e) {
-            error_log("Erreur email : " . $e->getMessage());
+            error_log('Erreur email : ' . $e->getMessage());
             return false;
         }
     }

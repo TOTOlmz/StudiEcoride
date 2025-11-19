@@ -48,7 +48,7 @@ class UserCarpoolController {
 
             $tomorrow = date("Y-m-d", strtotime("+1 day"));
             if ($date < $tomorrow) {
-                $errors[] = 'On ne peut pas soumettre de covoiturage pour le lendemain.';
+                $errors[] = 'Vous ne pouvez soumettre de covoiturage pour une date antérieure au ' . date('d-m-Y', strtotime("+2 day"));
             }
 
             // On évite les durées négatives

@@ -8,7 +8,7 @@
         <div class="form-group">
             <input type="password" id="password" name="password" placeholder="Mot de passe" required>
         </div>
-        <button type="submit">Se connecter</button>
+        <button name="connection" type="submit">Se connecter</button>
     </form>
 
     <div>

@@ -155,7 +155,7 @@ h2 a {
 
 /* Hero section */
 .hero {
-    background-image: url('../src/assets/images/heroPicture.webp');
+    background-image: url('./assets/images/heroPicture.webp');
     background-position: bottom;
     min-height: 200px;
     color: #fff;
@@ -298,7 +298,7 @@ h2 a {
 .offer {
     align-items: center;
     margin: auto;
-    background-image: url('../src/assets/images/offer.webp');
+    background-image: url('./assets/images/offer.webp');
     background-size: cover;
     background-position: center;
     color: #fff;
@@ -458,6 +458,9 @@ h2 a {
     flex-direction: column;
     gap: 0.8rem;
 }
+.carpool-card li {
+    list-style: none;
+}
 .carpool-card img {
     height: 50px;
     width: 50px;
@@ -598,6 +601,22 @@ h2 a {
     border-radius: 5px;
     padding: 5px;
     justify-self: center;
+}
+
+.car-card .delete-car {
+    text-align: end;
+    height: 0px;
+}
+
+.car-card .delete-car button {
+    color: #ffffff;
+    background-color: #800000;
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
 }
 
 .review-cards {

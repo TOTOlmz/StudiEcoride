@@ -28,7 +28,7 @@ class ProfileController {
             $user = UserModel::getUserById($userId);
             $userPseudo = $user['pseudo'];
 
-            $uploadDir = '../src/assets/images/users/';     // On définit le dossier de destination
+            $uploadDir = './assets/images/users/';     // On définit le dossier de destination
             $tmpName = $file['tmp_name'];                   // évite le problème de mise en cache
             $fileName = basename($file['name']);            // On récupère le nom du fichier, puis l'extension
             $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
@@ -41,7 +41,7 @@ class ProfileController {
             }
 
             // On renomme le fichier et le chemin de stockage
-            $newName = $userPseudo . '.' . $fileExt;
+            $newName = strtolower($userPseudo . '.' . $fileExt);
             $destination = $uploadDir . $newName;
 
             // On essaye de déposer le fichier dans le dossier

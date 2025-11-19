@@ -10,7 +10,7 @@
     <div>
         <div>
             <img class="profile-picture"
-            src="<?php echo isset($user['photo']) ? '../src/assets/images/users/' . html_entity_decode($user['photo'], ENT_QUOTES | ENT_HTML5, 'UTF-8') : '../src/assets/images/users/default.png'; ?>"
+            src="<?php echo isset($user['photo']) ? './assets/images/users/' . html_entity_decode($user['photo'], ENT_QUOTES | ENT_HTML5, 'UTF-8') : '../src/assets/images/users/default.png'; ?>"
             alt="Photo de profil"/>
             <div>
                 <p><strong><?php echo ucfirst(html_entity_decode($user['pseudo'], ENT_QUOTES | ENT_HTML5, 'UTF-8')); ?></strong></p>
@@ -32,11 +32,4 @@
         <input class="form-group" type="file" accept="image/*" id="addPicture" name="photo" required />
         <button type="submit" class="button">Changer la photo</button>
     </form>
-</div>
-
-
-
-<div class="review-cards">
-    
-    
 </div>

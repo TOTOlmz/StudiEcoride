@@ -1,6 +1,6 @@
 <nav class="navbar">
     <a href="./" class="brand-area">
-        <img src="../src/assets/images/logos/white.webp" alt="EcoRide Logo" class="navbar-logo">
+        <img src="./assets/images/logos/white.webp" alt="EcoRide Logo" class="navbar-logo">
         <p>EcoRide</p>
     </a>
 

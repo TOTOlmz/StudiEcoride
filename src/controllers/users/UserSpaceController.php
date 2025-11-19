@@ -51,6 +51,8 @@ class UserSpaceController {
             $results = $leaveCarpoolController->leaveCarpool(intval($_SESSION['user_id']), intval($_POST['carpool-id']));
             if (isset($results['errors'])) {
                 $errors = array_merge($errors, $results['errors']);
+            } else {
+                $success = 'Covoiturage annulé avec succès';
             }
         }
 
@@ -77,6 +79,17 @@ class UserSpaceController {
             } elseif (isset($result['success'])) {
                 $success = $result['success'];
             }           
+        }
+
+        // Gestion de la suppression de véhicule
+        if (isset($_POST['delete-car'])) {
+            $carId = intval($_POST['car-id']);
+            $deleteCar = CarsModel::deleteCar($carId);
+            if ($deleteCar) {
+                $success = 'Véhicule supprimé avec succès';
+            } else {
+                $errors[] = 'Erreur lors de la suppression du véhicule';
+            } 
         }
 
         
