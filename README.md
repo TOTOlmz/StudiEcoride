@@ -67,3 +67,4 @@ DB_PASS=
 Ouvrir la page https://127.0.0.1:8000/
 
 #Contact -theo.lemazurier@gmail.com
+
