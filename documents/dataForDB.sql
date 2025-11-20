@@ -3,7 +3,7 @@
 --
 
 INSERT INTO `users` (`id`, `pseudo`, `email`, `password`, `photo`, `credits`, `roles`, `is_suspended`) VALUES
-(1, 'Admin', 'ecoride-studi-to@gmail.com', '$2y$12$nX.GJIosY1QNNSUgpfXvTe8KaeWcKjUWOcHe6WfeTnREzBGyHq6km', 'default.png', 12, 'ADMIN', 0),
+(1, 'Admin', 'ecoride.studi.to@gmail.com', '$2y$12$nX.GJIosY1QNNSUgpfXvTe8KaeWcKjUWOcHe6WfeTnREzBGyHq6km', 'default.png', 12, 'ADMIN', 0),
 (2, 'employe', 'employee@ecoride.fr', '$2y$12$3jakAUj/TWh4QmleFkqhmOPi8ebdfBNwwyQpeO.eKdeiTSG5N9YTq', 'default.png', 0, 'STAFF', 0),
 (3, 'Conductrice', 'ecoride-studi-conductrice@proton.me', '$2y$12$uvwlSeKaOb/z11yl4wn.6us5Sxu3ZudIuF/ibNVVonQYN9F9akn66', 'Conductrice.jpg', 200, 'USER', 0),
 (4, 'Passager', 'ecoride-studi-passager@proton.me', '$2y$12$VyjNn.s4DsMkzAXGqVWz.O55W95IL.znOIeRsvv4tFwnMp3X3OXCy', 'Passager.jpg', 200, 'USER', 0),
