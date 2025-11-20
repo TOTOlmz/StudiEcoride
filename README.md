@@ -66,8 +66,9 @@ DB_NAME=ecoride
 DB_USER=root
 DB_PASS=
 
-Ouvrir la page https://127.0.0.1:8000/
+Ouvrir la page localhost/ecoride/pubic
 
 #Contact -theo.lemazurier@gmail.com
+
 
 
