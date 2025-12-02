@@ -46,7 +46,7 @@ class CarpoolSearchController {
             
             // S'il y a eu une erreur, on arrête ...
             if (!empty($errors)) {
-                require_once __DIR__ . '/../views/carpoolSearchView.php';
+                require_once __DIR__ . '/../../views/users/carpoolsSearchView.php';
                 return;
             }
             
