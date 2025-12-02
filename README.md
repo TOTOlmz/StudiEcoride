@@ -9,48 +9,15 @@ Application de covoiturage axé sur l'écologie, mise en avant des trajets élec
 
 #Strucutre du projet ecoride :
 
-Ecoride/
-├─ `composer.json`
-├─ `composer.lock`
-├─ `README.md`
-├─ `public/`
-│  ├─ `index.php`
-│  ├─ `style.css`
-├─ `src/`
-│  ├─ `assets/`
-│  │  └─ `images/` (…)
-│  ├─ `controllers/`
-|  |  ├─ `controllers`
-│  │  ├─ `users/` (…)
-│  │  ├─ `staff/` (…)
-│  │  └─ `sub-controllers/` (…)
-│  ├─ `database/`
-│  │  ├─ `db.php`
-│  │  └─ `dbConnection.php`
-│  ├─ `models/`
-│  │  ├─ `Models`
-│  │  ├─ `users/` (…)
-│  │  └─ `staff/` (…)
-│  └─ `views/`
-│  |  ├─ `views`
-│  │  ├─ `users/` (…)
-│  │  └─ `staff/` (…)
-│  |  └─ `components/` (…)
-├─ `documents/`
-│  ├─ `maquettage/`
-│  ├─ `wireframes/`
-│  ├─ `base de données.pdf`
-│  ├─ `charte graphique.pdf`
-│  ├─ `dataForDB.sql`
-│  ├─ `ecoride.sql`
-├─ `vendor/`
-│  ├─ `autoload.php`
-│  ├─ `bin/` (e.g. `var-dump-server`)
-│  ├─ `composer/` (autoload files)
-│  ├─ `doctrine/` (…)
-│  ├─ `egulias/` (…)
-│  ├─ `psr/` (…)
-│  └─ `symfony/` (…)
+- documents (comporte tous les fichiers d'information ainsi que le SQL)
+- public (comporte le fichier index.php, les styles, le .htaccess ainsi que les assets)
+- src (comporte le mvc)
+    |-- Controllers (avec ceux accessibles par tous, ceux pour les utilisateurs et ceux pour le staff)
+    |-- models (avec ceux accessibles par tous, ceux pour les utilisateurs et ceux pour le staff)
+    |-- views (avec ceux accessibles par tous, ceux pour les utilisateurs et ceux pour le staff)
+    |-- database (permet de récupérer les infos du fichier .env.local)
+- vendor (comporte les extensions utilisées et les fichiers composers nécessaires)
+... les fichiers docker, ceux github et readme
 
 
 #Git -2 branches pour le rendu :
