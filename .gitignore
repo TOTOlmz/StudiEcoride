@@ -1,0 +1,65 @@
+# .gitignore pour projet PHP / Composer (XAMPP)
+# Ignorer les dépendances installées, fichiers sensibles et artefacts locaux
+
+# Composer
+/vendor/
+
+# Ne pas ignorer composer.json (doit être versionné), mais ignorer le lock si vous ne voulez pas le suivre
+# (décommentez la ligne suivante si vous ne voulez pas suivre composer.lock)
+# /composer.lock
+
+# Fichiers d'environnement
+.env
+.env.*.local
+.env.local
+.env.testing
+
+# Fichiers et dossiers IDE
+/.idea/
+/.vscode/
+
+# Node / JS
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Build / artefacts
+/dist/
+/build/
+/public/build/
+/public/bundles/
+
+# Logs et caches
+logs/
+*.log
+var/log/
+var/cache/
+/storage/logs/
+/storage/framework/
+
+# PHPUnit
+.phpunit.result.cache
+phpunit.xml
+phpunit.xml.dist
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Fichiers temporaires courants
+*.swp
+*~
+*.tmp
+
+# Fichiers sensibles potentiels
+/.env.local.php
+/.phpunit.cache
+
+# Si vous utilisez Docker ou des fichiers de configuration locaux
+.envrc
+docker-compose.override.yml
+
+# Ignorer clés SSH si présentes
+*.pem
+
+# Fin

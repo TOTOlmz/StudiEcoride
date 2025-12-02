@@ -12,10 +12,10 @@ Application de covoiturage axé sur l'écologie, mise en avant des trajets élec
 - documents (comporte tous les fichiers d'information ainsi que le SQL)
 - public (comporte le fichier index.php, les styles, le .htaccess ainsi que les assets)
 - src (comporte le mvc)
-    |-- Controllers (avec ceux accessibles par tous, ceux pour les utilisateurs et ceux pour le staff)
-    |-- models (avec ceux accessibles par tous, ceux pour les utilisateurs et ceux pour le staff)
-    |-- views (avec ceux accessibles par tous, ceux pour les utilisateurs et ceux pour le staff)
-    |-- database (permet de récupérer les infos du fichier .env.local)
+|-- Controllers (avec ceux accessibles par tous, ceux pour les utilisateurs et ceux pour le staff)
+|-- models (avec ceux accessibles par tous, ceux pour les utilisateurs et ceux pour le staff)
+|-- views (avec ceux accessibles par tous, ceux pour les utilisateurs et ceux pour le staff)
+|-- database (permet de récupérer les infos du fichier .env.local)
 - vendor (comporte les extensions utilisées et les fichiers composers nécessaires)
 ... les fichiers docker, ceux github et readme
 
