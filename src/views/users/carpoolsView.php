@@ -9,7 +9,7 @@
             <strong><?php echo htmlspecialchars($c['departure_city']); ?></strong> → <strong><?php echo htmlspecialchars($c['arrival_city']); ?></strong>
             le <?php echo htmlspecialchars($c['date']); ?> à <?php echo htmlspecialchars($c['departure_time']); ?>
             <br><?php echo htmlspecialchars($c['available_seats']); ?> réservées sur <?php echo htmlspecialchars($c['seats']); ?> places disponibles. Prix unitaire de <?php echo htmlspecialchars($c['price']); ?> Credits
-            <form method="post" style="display:inline;">
+            <form method="post">
                 <input type="hidden" name="carpool_id" value="<?php echo intval($c['id']); ?>"/>
                 <button type="submit" name="leave-carpool" onclick="return confirm('Voulez-vous vraiment annuler ce trajet ?');">
                     Annuler ce trajet
@@ -41,12 +41,12 @@
             <strong><?php echo htmlspecialchars($c['departure_city']); ?></strong> → <strong><?php echo htmlspecialchars($c['arrival_city']); ?></strong>
             le <?php echo htmlspecialchars($c['date']); ?> à <?php echo htmlspecialchars($c['departure_time']); ?>
             <br><?php echo htmlspecialchars($c['available_seats']); ?> réservées sur <?php echo htmlspecialchars($c['seats']); ?> places disponibles. Prix unitaire de <?php echo htmlspecialchars($c['price']); ?> Credits
-            <span style="color: #888;">(<?php echo htmlspecialchars($c['status']); ?>)</span>
+            <span>(<?php echo htmlspecialchars($c['status']); ?>)</span>
             <?php if (count($reviewsLeft) === 0) : ?>
                 <?php if ($user['id'] === $c['driver_id']) : ?>
                     <p>Vous ne pouvez pas laisser de commentaire si vous êtes conducteur</p>
                 <?php else : ?>
-                <form method="post" class="review-form" style="display:inline;">
+                <form method="post" class="review-form">
                     <p>Laisser un avis pour ce trajet :</p>
                     <input type="hidden" name="carpool_id" value="<?php echo intval($c['id']); ?>"/>
                     <input type="hidden" name="driver_id" value="<?php echo intval($c['driver_id']); ?>"/>
@@ -58,7 +58,7 @@
             <?php else: ?>
                 <?php foreach ($reviewsLeft as $review) : ?>
                     <?php if ($review['carpool_id'] == $c['id']) : ?>
-                        <div style="margin-top:5px;">
+                        <div>
                         <p>Votre note : <strong> <?php echo htmlspecialchars($review['rate']); ?> /5</strong></p><br>
                         <p>Votre commentaire : <em><?php htmlspecialchars($review['commentary']); ?></em>
                         </div>

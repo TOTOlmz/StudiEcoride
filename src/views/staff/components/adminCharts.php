@@ -11,7 +11,7 @@
     <h2>Graphiques des crédits journaliers de la société</h2>
 
     <canvas id="creditsChart" width="400" height="200"></canvas>
-    <p style="text-align:center; margin:30px 0 0 0;">Total des crédits gagnés par la plateforme : <strong><?php echo htmlspecialchars($totalCredits); ?> crédits</strong></p>
+    <p>Total des crédits gagnés par la plateforme : <strong><?php echo htmlspecialchars($totalCredits); ?> crédits</strong></p>
 
 </div>
 

@@ -11,6 +11,7 @@ class ConnectionController {
         $errors = [];
         $success = '';
         
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $email = $_POST['email'];
@@ -24,18 +25,18 @@ class ConnectionController {
             
             // Si pas d'erreurs, on connecte l'utilisateur
             if (empty($errors)) {
-                try {
-                    $user = ConnectionModel::connection($email, $password);
-                    if (!$user) {  // Si user n'est pas trouvé :
-                        $errors[] = 'Ces identifiants ne correspondent à aucun compte';
-                    }
+                
+                $user = ConnectionModel::connection($email, $password);
+                if (empty($user)) {  // Si user n'est pas trouvé :
+                    $errors[] = 'Ces identifiants ne correspondent à aucun compte';
+                }
 
-                    
+                if (empty($errors)) {
                     // On démarre la session
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['user_email'] = $user['email'];
                     $_SESSION['user_role'] = $user['roles'];
-
+    
                     // On gère la redirection
                     if ($user['roles'] === 'ADMIN') {
                         header ('Location: ./espace-admin');
@@ -44,10 +45,8 @@ class ConnectionController {
                     } else {
                         header ('Location: ./mon-espace');
                     }
-                    exit;
-                    
-                } catch (PDOException $e) {
-                    $errors[] = 'Erreur lors de la connexion';
+                    $success = 'connexion réussie';
+                    return $success;
                 }
             }
         }

@@ -10,7 +10,7 @@
     <div>
         <div>
             <img class="profile-picture"
-            src="<?php echo isset($user['photo']) ? '../src/assets/images/users/' . html_entity_decode($user['photo'], ENT_QUOTES | ENT_HTML5, 'UTF-8') : '../src/assets/images/users/default.png'; ?>"
+            src="<?php echo isset($user['photo']) ? './assets/images/users/' . html_entity_decode($user['photo'], ENT_QUOTES | ENT_HTML5, 'UTF-8') : '../src/assets/images/users/default.png'; ?>"
             alt="Photo de profil"/>
             <div>
                 <p><strong><?php echo ucfirst(html_entity_decode($user['pseudo'], ENT_QUOTES | ENT_HTML5, 'UTF-8')); ?></strong></p>

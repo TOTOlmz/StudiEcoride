@@ -1,28 +1,30 @@
-<ul class="detail-card">
-    <li style="text-align: center; margin-bottom: 1rem;">
-        <img src="../src/assets/images/users/<?php echo htmlspecialchars($driver['photo']); ?>" 
-             alt="photo conducteur" 
-             style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #196e44;">
-    </li>
-    <li><strong>Pseudo :</strong> <?php echo htmlspecialchars($driver['pseudo']); ?></li>
-    <li><strong>Email :</strong> <?php echo htmlspecialchars($driver['email']); ?></li>
-    <li><strong>Note moyenne :</strong> 
-        <span style="font-size: 1.1em;">
-            <?php echo $driver['avg'] !== null ? $driver['avg'] . ' ⭐' : 'Non noté'; ?>
-        </span>
-    </li>
-    <?php if ($driverComments && count($driverComments) > 0): ?>
-        <li><strong>Commentaires :</strong>
-            <div style="margin-top: 0.5rem;">
-                <?php foreach ($driverComments as $comment): ?>
-                    <div style="background: #f3eee1; padding: 0.8rem; margin: 0.5rem 0; border-radius: 8px; border-left: 4px solid #196e44;">
-                        <p style="margin: 0 0 0.5rem 0; font-style: italic;"><?php echo html_entity_decode($comment['commentary'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?></p>
-                        <p style="margin: 0; font-weight: bold; color: #196e44;"><?php echo intval($comment['rate']); ?>⭐</p>
-                    </div>
-                <?php endforeach; ?>
+
+<div class="driver-infos">
+    <img class="profile-picture"
+    src="<?php echo isset($driver['photo']) ? './assets/images/users/' . html_entity_decode($driver['photo'], ENT_QUOTES | ENT_HTML5, 'UTF-8') : '../src/assets/images/users/default.png'; ?>"
+    alt="Photo de profil"/>
+    <div>
+        <p><strong><?php echo ucfirst(html_entity_decode($driver['pseudo'], ENT_QUOTES | ENT_HTML5, 'UTF-8')); ?></strong></p>
+    </div>
+</div>
+
+<div class="driver-avg"><strong>Note moyenne :</strong> 
+    <span>
+        <?php echo $driver['avg'] !== null ? $driver['avg'] . ' ★' : 'Non noté'; ?>
+    </span>
+</div>
+<div class="driver-comments">
+<?php if ($driverComments && count($driverComments) > 0): ?>
+    <strong>Commentaires :</strong>
+    <div class="driver-review-cards">
+        <?php foreach ($driverComments as $comment): ?>
+            <div class="review-card">
+                <p class="rate"><?php echo intval($comment['rate']); ?>★</p>
+                <p><?php echo html_entity_decode($comment['commentary'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?></p>
             </div>
-        </li>
-    <?php else: ?>
-        <li><em style="color: #666;">Aucun commentaire pour ce conducteur.</em></li>
-    <?php endif; ?>
-</ul>
+        <?php endforeach; ?>
+    </div>
+</div>
+<?php else: ?>
+    <em>Aucun commentaire pour ce conducteur.</em>
+<?php endif; ?>

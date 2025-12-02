@@ -2,8 +2,8 @@
 
 <div class="staff-panel">
     <h2>Gestion des comptes employé</h2>
-    <button class="button creat-form-call" style="width:40%;">Créer un compte employé</button>
-    <button class="button suspend-form-call" style="width:40%;">Suspendre / Réactiver un compte</button>
+    <button class="button creat-form-call">Créer un compte employé</button>
+    <button class="button suspend-form-call">Suspendre / Réactiver un compte</button>
 </div>
 
 <div class="security-area" id="create-account" hidden>

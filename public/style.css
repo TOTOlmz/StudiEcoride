@@ -37,6 +37,8 @@ h2 a {
     color: #fff;
 }
 
+.errors p { color: #aa0000; }
+.success p { color: #009200; }
 /* ||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                           header 
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
@@ -149,13 +151,13 @@ h2 a {
 
 
 /* ||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-                          accueil (!A FAIRE!)
+                          accueil
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 
 
 /* Hero section */
 .hero {
-    background-image: url('../src/assets/images/heroPicture.webp');
+    background-image: url('./assets/images/heroPicture.webp');
     background-position: bottom;
     min-height: 200px;
     color: #fff;
@@ -294,11 +296,16 @@ h2 a {
     text-align: justify;
 }
 
+.society-presentation .mobility { background-image: url('./assets/images/mobility.webp'); } 
+.society-presentation .community { background-image: url('./assets/images/community.webp'); } 
+.society-presentation .economy { background-image: url('./assets/images/economy.webp'); } 
+
+
 /* Offer section */
 .offer {
     align-items: center;
     margin: auto;
-    background-image: url('../src/assets/images/offer.webp');
+    background-image: url('./assets/images/offer.webp');
     background-size: cover;
     background-position: center;
     color: #fff;
@@ -398,7 +405,7 @@ h2 a {
     outline: none;
 }
 
-.form-container button[type="submit"] {
+.form-container button {
     width: 100%;
     background: #196e44;
     color: #fff;
@@ -412,8 +419,8 @@ h2 a {
     margin-bottom: 1.2rem;
 }
 
-.form-container button[type="submit"]:hover,
-.form-container button[type="submit"]:focus {
+.form-container button:hover,
+.form-container button:focus {
     background: #145a36;
 }
 
@@ -440,6 +447,12 @@ h2 a {
     justify-content: center;
 }
 
+form .buttons { 
+    display: flex; 
+    align-self: normal;
+    gap: 1rem;
+}
+
 /* Recherche de carpool */
 .carpool-cards {
     display: flex;
@@ -457,6 +470,9 @@ h2 a {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
+}
+.carpool-card li {
+    list-style: none;
 }
 .carpool-card img {
     height: 50px;
@@ -674,6 +690,29 @@ canvas {
     padding: 15px;
 }
 
+/* Cards des carpools */
+
+.detail-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 700px;
+    margin: 2rem auto;
+}
+
+.detail-card {
+    background: #fff;
+    color: #196e44;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(25, 110, 68, 0.08);
+    padding: 1.5rem;
+    list-style: none;
+    margin: 0;
+}
+
+.carpool-card li .green { color: #196e44; }
+.carpool-card li .red { color: #aa0000; }
+
 /* ||||||||||||||||||||||||||||||||||||||||||||||||||||||||
                        Profile User Space
 |||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
@@ -709,8 +748,27 @@ canvas {
     align-items: center;
 }
 
+.driver-infos {
+    display: flex;
+    align-items: center;
+}
 
 
+.driver-review-cards {
+    display: flex;
+    overflow-x: scroll;
+    background-color: #c7ead2;
+    border-radius: 10px;
+}
+
+.booking-btn{ text-align: center; }
+
+.review-card .actions form { display: inline; }
+
+.staff-panel creat-form-call { width: 40%; }
+.staff-panel suspend-form-call { width: 40%; }
+
+.review-status{ color:#a5a5a5; }
 
 /* Responsive */
 @media (max-width: 768px) {

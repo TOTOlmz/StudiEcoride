@@ -21,27 +21,17 @@
     </div>
 </div>
 <div class="form-container">
-    <div class="password-requirements" style="opacity:0;">
+    <div class="password-requirements">
         <p> Le mot de passe doit contenir au moins :</p>
         <span class="pass pass-length">8 caractères</span>
         <span class="pass pass-upper">Une majuscule</span>
         <span class="pass pass-lower">Une minuscule</span>
         <span class="pass pass-number">Un chiffre</span>
-        <p id="passconf-label" style="opacity:0;">Les mots de passe ne correspondent pas.</p>
+        <p id="passconf-label">Les mots de passe ne correspondent pas.</p>
     </div>
-    <?php if (!empty($errors)): ?>
-        <div class="errors">
-            <?php foreach ($errors as $error): ?>
-                <p style="color:red"><?= htmlspecialchars($error) ?></p>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
     
-    <?php if (!empty($success)): ?>
-        <p style="color:green"><?= htmlspecialchars($success) ?> 
-           <a href="./mon-espace">Accéder à mon espace</a>
-        </p>
-    <?php endif; ?>
+    <?php require_once __DIR__ . '/../checks.php' ?>
+
 </div>
 
 <script>
@@ -49,6 +39,10 @@
     const form = document.querySelector('form');
     const password = document.getElementById('password');
     const passwordConfirm = document.getElementById('confirm-password');
+
+    // Au chargement on cache les infos de validation
+    document.querySelector('.password-requirements').style.display = 'none'; 
+    document.querySelector('#passconf-label').style.display = 'none'; 
 
     document.querySelectorAll('.pass').forEach(item => {
         item.style.padding = '0.2rem 0.5rem';
@@ -66,14 +60,15 @@
         if (validatePassword()) {
             let confirmP = password.value === passwordConfirm.value;
             form.querySelector('button').disabled = confirmP ? false : true;
-            form.querySelector('#passconf-label').style.opacity = confirmP ? '1' : '0';
-            form.querySelector('#passconf-label').style.color = confirmP ? '#196e44' : '#a10000';    
-            form.querySelector('#passconf-label').textContent = confirmP ? 'Les mots de passe correspondent.' : 'Les mots de passe ne correspondent pas.'; 
+            document.querySelector('#passconf-label').style.display = 'block';
+            document.querySelector('#passconf-label').style.color = confirmP ? '#196e44' : '#a10000';    
+            document.querySelector('#passconf-label').textContent = confirmP ? 'Les mots de passe correspondent.' : 'Les mots de passe ne correspondent pas.'; 
+
         } 
     }
 
     function validatePassword(){
-        document.querySelector('.password-requirements').style.opacity = 1;
+        document.querySelector('.password-requirements').style.display = 'block';
         let passValue = password.value;
         let validLength = passValue.length >= 8;
         let validUpper = passValue.toLowerCase() !== passValue;

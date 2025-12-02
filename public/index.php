@@ -1,5 +1,9 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 session_start();
 
@@ -70,6 +74,7 @@ if (stripos($path, $base) === 0) {
 } else {
     $uri = $path;
 }
+
 $uri = '/'.ltrim($uri, '/'); // garantit un slash initial
 
 ?>
