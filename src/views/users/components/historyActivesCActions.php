@@ -1,5 +1,5 @@
 <?php if ($carpool['status'] === 'Planifié'): ?>    
-    <form method="post" style="display:inline;">
+    <form method="post">
         <input type="hidden" name="carpool-id" value="<?php echo intval($carpool['id']); ?>"/>
         <button type="submit" name="leave-carpool" onclick="return confirm('Voulez-vous vraiment annuler ce trajet ?');">Annuler ce trajet</button>
     </form>

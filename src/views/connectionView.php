@@ -15,20 +15,20 @@
         <?php if (!empty($errors)): ?>
             <div class="errors">
                 <?php foreach ($errors as $error): ?>
-                    <p style="color:red"><?php echo htmlspecialchars($error) ?></p>
+                    <p><?php echo htmlspecialchars($error) ?></p>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
         
         <?php if (!empty($success)): ?>
             <?php if ($_SESSION['user_role'] === 'USER'): ?>
-                <p style="color:green"><?php echo htmlspecialchars($success) ?> 
+                <p><?php echo htmlspecialchars($success) ?> 
                 <a href="./mon-espace">Accéder à mon espace</a></p>
             <?php elseif ($_SESSION['user_role'] === 'STAFF'): ?>
-                <p style="color:green"><?php echo htmlspecialchars($success) ?> 
+                <p><?php echo htmlspecialchars($success) ?> 
                 <a href="./staff-espace">Accéder à mon espace employé</a></p>
             <?php elseif ($_SESSION['user_role'] === 'ADMIN'): ?>
-                <p style="color:green"><?php echo htmlspecialchars($success) ?> 
+                <p><?php echo htmlspecialchars($success) ?> 
                 <a href="./admin-espace">Accéder à mon espace administrateur</a></p>;
             <?php endif; ?>
         <?php else: ?>

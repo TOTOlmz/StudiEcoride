@@ -16,7 +16,7 @@
 
 <div id="popup-overlay"></div>
 
-<div class="action-btn">
+<div class="action-btn booking-btn">
     <?php if (!isset($_SESSION['user_id'])): ?>
         <p>Connectez vous pour réserver</p>
         <a href="./connexion">Connexion</a>

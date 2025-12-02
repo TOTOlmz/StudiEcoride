@@ -23,8 +23,8 @@
                 <textarea name="description" placeholder="Décrivez le problème..." required rows="4"></textarea>
             </div>      
             <div class="buttons">
-                <button type="button" id="close">Annuler</button>
-                <button name="report" type="submit">Envoyer</button>
+                <button class="button" type="button" id="close">Annuler</button>
+                <button class="button" name="report" type="submit">Envoyer</button>
             </div>
         </form>
     </div>

@@ -1,5 +1,5 @@
 
-<div class="form-container" style="max-width: 800px; margin: 2rem auto;">
+<div class="form-container">
     <h1>Mentions Légales</h1>
     
     <h2>Éditeur du site</h2>

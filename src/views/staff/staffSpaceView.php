@@ -28,7 +28,7 @@
                     <div class="review-card">
                         <?php include __DIR__ . '/components/reports.php'; ?>
                         <div class="actions">
-                            <form method="POST" style="display: inline;">
+                            <form method="POST">
                                 <input type="hidden" name="report-id" value="<?php echo $report['id'] ?>">
                                 <button class="button" name="close-report">Cloturer</button>
                             </form>
@@ -49,7 +49,7 @@
                     <div class="review-card">
                         <?php include __DIR__ . '/components/reports.php'; ?>
                         <div class="actions">
-                            <form method="POST" style="display: inline;">
+                            <form method="POST">
                                 <input type="hidden" name="report-id" value="<?php echo $report['id'] ?>">
                                 <button class="button" name="open-report">Traiter</button>
                             </form>

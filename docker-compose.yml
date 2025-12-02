@@ -1,0 +1,77 @@
+# Docker Compose d'orchestration pour le projet EcoRide
+# Définit les services app (PHP/Apache) et db (MySQL) ainsi que le réseau
+services:
+  # Application PHP/Apache
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ecoride-app
+    # Expose Apache sur le port 8080 de la machine hôte
+    ports:
+      - "8080:80"
+    # Monte le répertoire du projet dans le conteneur pour le développement (live)
+    volumes:
+      - .:/var/www/html:delegated
+    # Variables d'environnement utilisées par l'application pour se connecter à la BDD
+    environment:
+      - DB_HOST=db
+      - DB_NAME=ecoride
+      - DB_USER=ecoride
+      - DB_PASS=ecoride_password
+      - DB_CHARSET=utf8mb4
+      - DB_PORT=3306
+    depends_on:
+      - db
+    networks:
+      - ecoride-network
+    restart: unless-stopped
+
+  # Base de données MySQL
+  db:
+    image: mysql:8.0
+    container_name: ecoride-db
+    # La commande configure le plugin d'authentification et force l'UTF-8 (utf8mb4)
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      # Mot de passe root et un utilisateur/bd dédiés à l'application
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: ecoride
+      MYSQL_USER: ecoride
+      MYSQL_PASSWORD: ecoride_password
+    # Persiste les fichiers de la base de données sur l'hôte via un volume Docker
+    volumes:
+      - db_data:/var/lib/mysql
+    # Expose le port de la BDD pour que les outils de l'hôte puissent s'y connecter (optionnel)
+    ports:
+      - "3306:3306"
+    networks:
+      - ecoride-network
+    restart: unless-stopped
+    # Healthcheck utilisé par Docker pour savoir si MySQL est prêt
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # Interface d'administration de la base de données
+  adminer:
+    image: adminer:latest
+    container_name: ecoride-adminer
+    ports:
+      - "8081:8080"   # accès : http://localhost:8081
+    depends_on:
+      - db
+    networks:
+      - ecoride-network
+    restart: unless-stopped
+
+volumes:
+  # Volume persistant pour les données MySQL
+  db_data:
+    driver: local
+
+networks:
+  # Réseau bridge personnalisé pour que les services puissent se joindre par nom
+  ecoride-network:
+    driver: bridge

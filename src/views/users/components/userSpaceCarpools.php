@@ -22,7 +22,7 @@
                 <br><?php echo intval($c['seats']) - intval($c['available_seats']); ?> réservées sur <?php echo htmlspecialchars($c['seats']); ?> places disponibles. Prix unitaire de <?php echo htmlspecialchars($c['price']); ?> Credits
                 <br><em><?php echo htmlspecialchars($c['status']); ?></em>
                 <?php if ($c['status'] === 'Planifié'): ?>    
-                    <form method="post" style="display:inline;">
+                    <form method="post">
                         <input type="hidden" name="carpool-id" value="<?php echo intval($c['id']); ?>"/>
                         <button type="submit" class="button" name="leave-carpool" onclick="return confirm('Voulez-vous vraiment annuler ce trajet ?');">Annuler ce trajet</button>
                     </form>
