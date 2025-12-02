@@ -10,6 +10,7 @@
 <?php endif; ?>
 
 <?php if ($user['id'] == $carpool['driver_id'] && count($reviewsReceived) !== 0) : ?>
+<?php if ($user['id'] == $carpool['driver_id'] && count($reviewsReceived) !== 0) : ?>
     <?php foreach ($reviewsReceived as $review) : ?>
         <?php if ($review['carpool_id'] == $carpool['id']) : ?>
             <div>
@@ -19,6 +20,7 @@
         <?php endif; ?>
     <?php endforeach;?>
 <?php elseif ($user['id'] !== $carpool['driver_id'] && count($reviewsLeft) !== 0) : ?>
+    <?php $alreadyRate = 0; ?>
     <?php $alreadyRate = 0; ?>
     <?php foreach ($reviewsLeft as $review) : ?>
         <?php if ($review['carpool_id'] == $carpool['id']) : ?>
