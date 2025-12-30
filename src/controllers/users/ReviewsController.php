@@ -2,11 +2,12 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant l'affichage des notes
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\users;
 
-require_once __DIR__ . '/../AccessController.php';
+use App\controllers\AccessController;
 
-require_once __DIR__ . '/../../models/users/UserModel.php';
-require_once __DIR__ . '/../../models/users/ReviewsModel.php';
+use App\models\users\UserModel;
+use App\models\users\ReviewsModel;
 
 class ReviewsController {
     

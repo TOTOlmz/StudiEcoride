@@ -2,11 +2,13 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant l'affichage de l'espace personnel d'un utilisateur
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers;
 
-require_once __DIR__ . '/../models/CarpoolDetailsModel.php';
-require_once __DIR__ . '/../models/users/UserModel.php';
-require_once __DIR__ . '/../models/users/UserProfileModel.php';
-require_once __DIR__ . '/sub-controllers/TimeLogicsController.php';
+use App\Models\CarpoolDetailsModel;
+use App\Models\users\UserModel;
+use App\Models\users\CarsModel;
+use App\Models\users\UserProfileModel;
+use App\Controllers\subControllers\TimeLogicsController;
 
 class CarpoolDetailsController {
 
@@ -48,7 +50,7 @@ class CarpoolDetailsController {
         $driver['avg'] = UserProfileModel::getUserAverage($carpool['driver_id']);
 
         if (!intval($driver['avg'])) {
-             $driver['avg'] = 'Non noté';
+            $driver['avg'] = 'Non noté';
         } else {
             $driver['avg'] = round(intval($driver['avg']), 1);
         }

@@ -4,9 +4,8 @@
 # Composer
 /vendor/
 
-# Ne pas ignorer composer.json (doit être versionné), mais ignorer le lock si vous ne voulez pas le suivre
-# (décommentez la ligne suivante si vous ne voulez pas suivre composer.lock)
-# /composer.lock
+# Ne pas ignorer composer.json (doit être versionné)
+/composer.lock
 
 # Fichiers d'environnement
 .env

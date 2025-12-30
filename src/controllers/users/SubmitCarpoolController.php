@@ -2,21 +2,23 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant la soumission d'un covoiturage
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\users;
 
-require_once __DIR__ . '/../../models/users/UserModel.php';
-require_once __DIR__ . '/../../models/users/CarsModel.php';
-require_once __DIR__ . '/../../models/users/CarpoolsModel.php';
-require_once __DIR__ . '/../../models/users/ParticipationModel.php';
+use App\Models\users\UserModel;
+use App\Models\users\CarsModel;
+use App\Models\users\CarpoolsModel;
+use App\Models\users\ParticipationModel;
+
 
 class SubmitCarpoolController {
 
-    // Foncion gérant l'affichage des infos utilisateur
+    // Fonction gérant l'ajout d'un covoiturage
     public function userCarpoolsArea() {
 
         $errors = [];
         $success = '';
 
-        $user = UserModel::getUserData($_SESSION['user_id']);
+        $user = UserModel::getUserById($_SESSION['user_id']);
         $cars = CarsModel::getUserCars($user['id']);
         $carpools = CarpoolsModel::getUserCarpools($user['id']);
         

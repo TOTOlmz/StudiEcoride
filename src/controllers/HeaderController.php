@@ -1,7 +1,9 @@
 <?php
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-    Controlleur gérant l'affichage de l'entête
+    Contrôleur gérant l'affichage de l'entête
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+
+namespace App\Controllers;
 
 class HeaderController {
     

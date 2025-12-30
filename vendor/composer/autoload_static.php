@@ -41,6 +41,10 @@ class ComposerStaticInit14b259b952ff223e46f158e45513084a
         array (
             'Doctrine\\Common\\Lexer\\' => 22,
         ),
+        'A' => 
+        array (
+            'App\\' => 4,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -99,6 +103,10 @@ class ComposerStaticInit14b259b952ff223e46f158e45513084a
         'Doctrine\\Common\\Lexer\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/lexer/src',
+        ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 

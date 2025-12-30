@@ -16,11 +16,13 @@
     <?php if (isset($activeCarpools) && count($activeCarpools) > 0): ?>
         <?php foreach ($activeCarpools as $c): ?>
             <div class="carpool-card">
-                <strong><?php echo $c['user_is_passenger'] ? 'Passager' : 'Au volant'; ?></strong><br>
-                <strong><?php echo html_entity_decode($c['departure_city'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?></strong> → <strong><?php echo html_entity_decode($c['arrival_city'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?></strong>
-                le <?php echo htmlspecialchars($c['date']); ?> à <?php echo substr(htmlspecialchars($c['departure_time']), 0, 5); ?>
-                <br><?php echo intval($c['seats']) - intval($c['available_seats']); ?> réservées sur <?php echo htmlspecialchars($c['seats']); ?> places disponibles. Prix unitaire de <?php echo htmlspecialchars($c['price']); ?> Credits
-                <br><em><?php echo htmlspecialchars($c['status']); ?></em>
+                <p>
+                    <strong><?php echo $c['user_is_passenger'] ? 'Passager' : 'Au volant'; ?></strong><br><br>
+                    <strong><?php echo html_entity_decode($c['departure_city'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?></strong> → <strong><?php echo html_entity_decode($c['arrival_city'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?></strong>
+                    <br><br>le <?php echo htmlspecialchars($c['date']); ?> à <?php echo substr(htmlspecialchars($c['departure_time']), 0, 5); ?>
+                    <br><?php echo intval($c['seats']) - intval($c['available_seats']); ?> réservées sur <?php echo htmlspecialchars($c['seats']); ?> places disponibles. Prix unitaire de <?php echo htmlspecialchars($c['price']); ?> Credits
+                    <br><em><?php echo htmlspecialchars($c['status']); ?></em>
+                </p>
                 <?php if ($c['status'] === 'Planifié'): ?>    
                     <form method="post">
                         <input type="hidden" name="carpool-id" value="<?php echo intval($c['id']); ?>"/>

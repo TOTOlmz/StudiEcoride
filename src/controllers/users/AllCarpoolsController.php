@@ -2,12 +2,13 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant l'affichage de l'espace personnel d'un utilisateur
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\users;
 
-require_once __DIR__ . '/../../models/users/UserModel.php';
-require_once __DIR__ . '/../../models/users/CarsModel.php';
-require_once __DIR__ . '/../../models/users/CarpoolsModel.php';
-require_once __DIR__ . '/../../models/users/ParticipationModel.php';
-require_once __DIR__ . '/../../models/users/ReviewsModel.php';
+use App\models\users\UserModel;
+use App\models\users\CarsModel;
+use App\models\users\CarpoolsModel;
+use App\models\users\ParticipationModel;
+use App\models\users\ReviewsModel;
 
 class AllCarpoolsController {
 
@@ -15,7 +16,7 @@ class AllCarpoolsController {
         
 
 
-        $user = UserModel::getUserData($_SESSION['user_id']);
+        $user = UserModel::getUserById($_SESSION['user_id']);
         $reviewsLeft = ReviewsModel::getUserReviewsLeft($user['id']);
         $carpools = CarpoolsModel::getUserCarpools($user['id']);
 

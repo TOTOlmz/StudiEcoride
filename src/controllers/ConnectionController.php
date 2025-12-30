@@ -2,8 +2,9 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant la connexion d'un utilisateur
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers;
 
-require_once __DIR__ . '/../models/ConnectionModel.php';
+use App\Models\ConnectionModel;
 
 class ConnectionController {
     

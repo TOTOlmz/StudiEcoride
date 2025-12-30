@@ -2,13 +2,13 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant l'ajout d'un véhicule
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\users;
 
-require_once __DIR__ . '/../AccessController.php';
+use App\Controllers\AccessController;
+use App\Controllers\subControllers\TimeLogicsController;
 
-require_once __DIR__ . '/../sub-controllers/TimeLogicsController.php';
-
-require_once __DIR__ . '/../../models/users/UserModel.php';
-require_once __DIR__ . '/../../models/users/CarsModel.php';
+use App\models\users\UserModel;
+use App\models\users\CarsModel;
 
 class UserCarsController {
 

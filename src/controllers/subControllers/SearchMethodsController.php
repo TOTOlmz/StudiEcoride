@@ -2,9 +2,10 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant le re retour des carpools trouvés
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\subControllers;
 
-require_once __DIR__ . '/../../models/SearchCarpoolModel.php';
-require_once __DIR__ . '/SearchCarpoolProcessController.php';
+use App\Models\SearchCarpoolModel;
+use App\Controllers\subControllers\SearchCarpoolProcessController;
 
 class SearchMethodsController {
 

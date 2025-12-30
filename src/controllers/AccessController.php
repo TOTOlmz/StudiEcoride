@@ -2,8 +2,9 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controller gérant les accès aux pages
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers;
 
-require_once __DIR__ . '/../models/users/UserModel.php';
+use App\Models\users\UserModel;
 
 
 class AccessController {

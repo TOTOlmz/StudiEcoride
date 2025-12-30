@@ -1,21 +1,27 @@
 <?php
+/* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    Modèle gérant les connexions utilisateur
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Models;
 
-require_once __DIR__ . '/../database/dbConnection.php';
+use App\Models\BaseModel;
 
-class ConnectionModel {
+class ConnectionModel extends BaseModel {
     
-    // Fonction permettant de récupérer les informations utilisateur dans la bdd
-    public static function connection($email, $password) {
-        global $pdo;
-        $stmt = $pdo->prepare('SELECT * FROM users WHERE email = ?');
-        $stmt->execute([$email]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        // On vérifie la correspondance du mot de passe
-        if ($user && password_verify($password, $user['password'])) {  
+    // Fonction permettant de gérer la connexion utilisateur
+    public static function connection(string $email, string $password) {
+        if (empty($email) || empty($password)) {
+            throw new \Exception('Email and password are required.');
+        }
+        
+        $sql = 'SELECT * FROM users WHERE email = ?';
+        $user = self::fetchOne($sql, [$email]);
+        
+        // Vérifier la correspondance du mot de passe
+        if ($user && password_verify($password, $user['password'])) {
             return $user;
         }
+        
         return false;
     }
 }
-
-?>

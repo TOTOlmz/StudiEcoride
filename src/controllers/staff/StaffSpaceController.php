@@ -2,12 +2,13 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant l'affichage de l'espace employé
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\staff;
 
-require_once __DIR__ . '/../AccessController.php';
-require_once __DIR__ . '/../users/sub-controllers/ProfileController.php';
-require_once __DIR__ . '/../../models/users/ReviewsModel.php';
-require_once __DIR__ . '/../../models/ReportsModel.php';
-require_once __DIR__ . '/../sub-controllers/TimeLogicsController.php';
+use App\Controllers\AccessController;
+use App\Controllers\users\subControllers\ProfileController;
+use App\models\users\ReviewsModel;
+use App\models\ReportsModel;
+use App\Controllers\subControllers\TimeLogicsController;
 
 class StaffSpaceController {
 

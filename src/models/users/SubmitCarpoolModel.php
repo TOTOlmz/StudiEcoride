@@ -3,20 +3,20 @@
     Modèle permettant de récupérer les covoiturages,
     les véhicules et les avis liés à l'utilisateur
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Models\users;
 
+use App\Models\BaseModel;
 
-require_once __DIR__ . '/../../database/dbConnection.php';
-
-class SubmitCarpoolModel {
+class SubmitCarpoolModel extends BaseModel {
 
     // Fonction permettant d'ajouter un participant au covoiturage
     public static function addDriver($userId, $carpoolId) {
-        global $pdo;
-        $stmt = $pdo->prepare('
-            INSERT INTO participations (user_id, carpool_id, is_passenger, is_confirmed, is_satisfied, pending_credits)
-            VALUES (?, ?, 0, 0, 0, 0) ');
-        $stmt->execute([$userId, $carpoolId]);
-        return $pdo->lastInsertId();
+        if (empty($userId) || empty($carpoolId)) {
+            throw new \InvalidArgumentException('User ID and Carpool ID are required.');
+        }
+        $sql = 'INSERT INTO participations (user_id, carpool_id, is_passenger, is_confirmed, is_satisfied, pending_credits)
+                VALUES (?, ?, 0, 0, 0, 0)';
+        return self::executeQuery($sql, [$userId, $carpoolId])->rowCount();
     }
 
 
@@ -44,16 +44,18 @@ class SubmitCarpoolModel {
         $smoke,
         $animals,
         $preferences) {
-        global $pdo;
-        $stmt = $pdo->prepare('
+        
+        $sql ='
             INSERT INTO carpools (date, departure_time, departure_city, departure_postalcode, departure_lat, departure_lon,
             arrival_time, arrival_city, arrival_postalcode, arrival_lat, arrival_lon, 
             duration, status, seats, available_seats, price, driver_id, car_id, is_ecological, smoke, animals, preferences, commission)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0) ');
-        $stmt->execute([$date, $departureTime, $departureCity, $departurePostalcode, $departureLat, $departureLon,
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0) ';
+        self::executeQuery($sql, [$date, $departureTime, $departureCity, $departurePostalcode, $departureLat, $departureLon,
         $arrivalTime, $arrivalCity, $arrivalPostalcode, $arrivalLat, $arrivalLon, 
         $duration, $status, $seats, $availableSeats, $price, $driverId, $carId, $isEcological, $smoke, $animals, $preferences]);
-        return $pdo->lastInsertId();
+        return self::lastInsert($sql, [$date, $departureTime, $departureCity, $departurePostalcode, $departureLat, $departureLon,
+        $arrivalTime, $arrivalCity, $arrivalPostalcode, $arrivalLat, $arrivalLon, 
+        $duration, $status, $seats, $availableSeats, $price, $driverId, $carId, $isEcological, $smoke, $animals, $preferences]);
     }
 
 }

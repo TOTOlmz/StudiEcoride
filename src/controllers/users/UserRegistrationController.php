@@ -2,10 +2,10 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant l'inscription des utilisateurs
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\users;
 
-
-require_once __DIR__ . '/../../models/users/UserRegistrationModel.php';
-require_once __DIR__ . '/../../models/users/UserSpaceModel.php';
+use App\models\users\UserRegistrationModel;
+use App\models\users\UserSpaceModel;
 
 class UserRegistrationController {
     

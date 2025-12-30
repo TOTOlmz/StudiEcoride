@@ -3,10 +3,13 @@
     Controlleur gérant l'affichage de l'espace administrateur
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 
-require_once __DIR__ . '/../AccessController.php';
-require_once __DIR__ . '/../users/sub-controllers/ProfileController.php';
-require_once __DIR__ . '/../../models/users/UserModel.php';
-require_once __DIR__ . '/../../models/staff/StaffModel.php';
+namespace App\Controllers\staff;
+
+use App\Controllers\AccessController;
+use App\Controllers\users\subControllers\ProfileController;
+use App\Models\users\UserModel;
+use App\Models\staff\StaffModel;
+
 
 class AdminSpaceController {
 

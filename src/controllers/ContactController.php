@@ -2,11 +2,9 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant la connexion d'un utilisateur
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers;
 
-// Inclusion de l'autoloader Composer
-require_once __DIR__ . '/../../vendor/autoload.php';
-
-require_once __DIR__ . '/../models/ConnectionModel.php';
+use App\Models\ConnectionModel;
 
 // Import des classes Symfony Mailer
 use Symfony\Component\Mailer\Mailer;

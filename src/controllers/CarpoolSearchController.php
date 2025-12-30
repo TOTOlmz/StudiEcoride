@@ -2,10 +2,11 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant la recherche de covoiturages
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers;
 
-require_once __DIR__ . '/sub-controllers/SearchMethodsController.php';
-require_once __DIR__ . '/sub-controllers/GpsLogicsController.php';
-require_once __DIR__ . '/sub-controllers/TimeLogicsController.php';
+use App\Controllers\subControllers\SearchMethodsController;
+use App\Controllers\subControllers\GpsLogicsController;
+use App\Controllers\subControllers\TimeLogicsController;
 
 
 class CarpoolSearchController {

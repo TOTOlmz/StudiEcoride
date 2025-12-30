@@ -1,35 +1,51 @@
 <?php
-require_once __DIR__ . '/../../database/dbConnection.php';
+/* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+    Modèle permettant de gérer l'enregistrement d'un utilisateur
+||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Models\users;
 
-class UserRegistrationModel {
+use App\Models\BaseModel;
+
+class UserRegistrationModel extends BaseModel {
     
-    // Fonction permettant de vérifier l'existance du mail dans la bdd
-    public static function emailExists($email) {
-        global $pdo;
-        $stmt = $pdo->prepare('SELECT COUNT(*) FROM users WHERE email = ?');
-        $stmt->execute([$email]);
-        return $stmt->fetchColumn() > 0;
+    // Fonction pour vérifier si un email existe
+    public static function emailExists(string $email): bool {
+        if (empty($email)) {
+            throw new \Exception('Email is required.');
+        }
+
+        $sql = 'SELECT COUNT(*) FROM users WHERE email = ?';
+        return self::count($sql, [$email]) > 0;
     }
     
-    // Fonction permettant de vérifier l'existance du pseudo dans la bdd
-    public static function pseudoExists($pseudo) {
-        global $pdo;
-        $stmt = $pdo->prepare('SELECT COUNT(*) FROM users WHERE pseudo = ?');
-        $stmt->execute([$pseudo]);
-        return $stmt->fetchColumn() > 0;
+    // Fonction pour vérifier si un pseudo existe
+    public static function pseudoExists(string $pseudo): bool {
+        if (empty($pseudo)) {
+            throw new \Exception('Pseudo is required.');
+        }
+
+        $sql = 'SELECT COUNT(*) FROM users WHERE pseudo = ?';
+        return self::count($sql, [$pseudo]) > 0;
     }
 
+    // Fonction pour créer un nouvel utilisateur
+    public static function create(string $pseudo, string $email, string $password) {
+        if (empty($pseudo) || empty($email) || empty($password)) {
+            throw new \Exception('Pseudo, email, and password are required.');
+        }
 
-    // Fonction permettant de créer un nouvel utilisateur dans la bdd
-    public static function create($pseudo, $email, $password) {
-        global $pdo;
+        // Hasher le mot de passe
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-        // On insert une nouvelle ligne dans la table users
-        $stmt = $pdo->prepare("INSERT INTO users (pseudo, email, password, photo, credits, roles) 
-                              VALUES (?, ?, ?, 'default.png', 20, 'USER')");
-        $stmt->execute([$pseudo, $email, $passwordHash]);
-        // On récupère l'ID du nouvel utilisateur
-        return $pdo->lastInsertId();
+        
+        // Créer l'utilisateur avec les paramètres par défaut : 20 crédits, rôle USER
+        $sql = "
+            INSERT INTO users (pseudo, email, password, photo, credits, roles, created_at) 
+            VALUES (?, ?, ?, 'default.png', 20, 'USER', NOW())
+        ";
+        
+        $stmt = self::executeQuery($sql, [$pseudo, $email, $passwordHash]);
+        
+        // Récupérer l'ID du nouvel utilisateur
+        return self::getPdo()->lastInsertId() ?: false;
     }
-
 }

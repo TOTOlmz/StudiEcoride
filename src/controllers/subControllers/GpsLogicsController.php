@@ -2,6 +2,7 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant les calculs GPS
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\subControllers;
 
 class GpsLogicsController {
 

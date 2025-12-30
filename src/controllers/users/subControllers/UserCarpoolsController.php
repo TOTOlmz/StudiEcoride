@@ -2,10 +2,9 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant le les covoiturages
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\users\subControllers;
 
-require_once __DIR__ . '/../../../../vendor/autoload.php';
-
-require_once __DIR__ . '/../../../models/users/UserCarpoolsModel.php';
+use App\models\users\UserCarpoolsModel;
 
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;

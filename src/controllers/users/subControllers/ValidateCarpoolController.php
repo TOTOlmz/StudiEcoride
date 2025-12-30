@@ -2,11 +2,12 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant le les covoiturages
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\users\subControllers;
 
-require_once __DIR__ . '/../../../models/users/UserValidationModel.php';
-require_once __DIR__ . '/../../../models/CarpoolDetailsModel.php';
-require_once __DIR__ . '/../../../models/users/UserModel.php';
-require_once __DIR__ . '/../../../models/ReportsModel.php';
+use App\models\users\UserValidationModel;
+use App\models\CarpoolDetailsModel;
+use App\models\users\UserModel;
+use App\models\ReportsModel;
 
 class ValidateCarpoolController {
 

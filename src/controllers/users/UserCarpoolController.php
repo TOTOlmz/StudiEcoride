@@ -2,15 +2,16 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant l'ajout d'un covoiturage
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\users;
 
-require_once __DIR__ . '/../AccessController.php';
+use App\Controllers\AccessController;
+use App\Controllers\subControllers\GpsLogicsController;
 
-require_once __DIR__ . '/../sub-controllers/GpsLogicsController.php';
+use App\models\users\UserModel;
+use App\models\users\CarsModel;
+use App\models\users\UserCarpoolsModel;
+use App\models\users\SubmitCarpoolModel;
 
-require_once __DIR__ . '/../../models/users/UserModel.php';
-require_once __DIR__ . '/../../models/users/CarsModel.php'; 
-require_once __DIR__ . '/../../models/users/UserCarpoolsModel.php';
-require_once __DIR__ . '/../../models/users/SubmitCarpoolModel.php';
 
 class UserCarpoolController {
 

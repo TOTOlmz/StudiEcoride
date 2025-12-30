@@ -2,6 +2,9 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant les formats de temps
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\subControllers;
+
+use DateTime;
 
 class TimeLogicsController {
 

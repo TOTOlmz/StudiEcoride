@@ -2,8 +2,12 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur mettant en forme un covoiturage
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\subControllers;
 
-require_once __DIR__ . '/../../models/SearchCarpoolModel.php';
+use App\Models\users\UserModel;
+use App\Models\SearchCarpoolModel;
+use App\Controllers\subControllers\GpsLogicsController;
+use App\Controllers\subControllers\TimeLogicsController;
 
 class SearchCarpoolProcessController {
 

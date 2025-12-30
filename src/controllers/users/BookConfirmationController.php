@@ -2,12 +2,12 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant la confirmation d'inscription
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\users;
 
-require_once __DIR__ . '/../AccessController.php';
-
-require_once __DIR__ . '/../../models/users/UserModel.php';
-require_once __DIR__ . '/../../models/CarpoolDetailsModel.php';
-require_once __DIR__ . '/../../models/users/UserBookingModel.php';
+use App\controllers\AccessController;
+use App\models\CarpoolDetailsModel;
+use App\models\users\UserModel;
+use App\models\users\UserBookingModel;
 
 class BookConfirmationController {
     

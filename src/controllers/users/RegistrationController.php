@@ -3,8 +3,9 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant l'inscription des utilisateurs
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\users;
 
-require_once __DIR__ . '/../../models/users/UserModel.php';
+use App\models\users\UserModel;
 
 class RegistrationController {
     

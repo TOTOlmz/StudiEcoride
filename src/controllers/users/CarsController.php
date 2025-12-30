@@ -2,9 +2,10 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant l'ajout d'un véhicule
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\users;
 
-require_once __DIR__ . '/../../models/users/UserModel.php';
-require_once __DIR__ . '/../../models/users/CarsModel.php';
+use App\models\users\UserModel;
+use App\models\users\CarsModel;
 
 class CarsController {
 
@@ -14,7 +15,7 @@ class CarsController {
         $errors = [];
         $success = '';
 
-        $user = UserModel::getUserData($_SESSION['user_id']);
+        $user = UserModel::getUserById($_SESSION['user_id']);
         $cars = CarsModel::getUserCars($user['id']);
 
         // Si le formulaire est soumis

@@ -2,16 +2,20 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant l'affichage de l'espace personnel d'un utilisateur
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\users;
 
-require_once __DIR__ . '/../AccessController.php';
+use App\Controllers\AccessController;
 
-require_once __DIR__ . '/../../models/users/UserModel.php';
-require_once __DIR__ . '/../../models/users/CarsModel.php';
-require_once __DIR__ . '/../../models/users/ReviewsModel.php';
-require_once __DIR__ . '/sub-controllers/ProfileController.php';
-require_once __DIR__ . '/sub-controllers/UserCarpoolsController.php';
-require_once __DIR__ . '/sub-controllers/ValidateCarpoolController.php';
-require_once __DIR__ . '/sub-controllers/ReportCarpoolController.php';
+
+use App\Controllers\users\subControllers\ProfileController;
+use App\Controllers\users\subControllers\UserCarpoolsController;
+use App\Controllers\users\subControllers\ValidateCarpoolController;
+use App\Controllers\users\subControllers\ReportCarpoolController;
+use App\models\users\UserModel;
+use App\models\users\CarsModel;
+use App\models\users\ReviewsModel;
+use App\models\users\UserCarpoolsModel;
+
 
 class UserSpaceController {
 

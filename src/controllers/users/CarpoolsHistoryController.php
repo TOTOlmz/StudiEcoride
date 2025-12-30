@@ -2,14 +2,15 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant l'historique des covoiturages
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\users;
 
-require_once __DIR__ . '/../AccessController.php';
+use App\Controllers\AccessController;
 
-require_once __DIR__ . '/../../models/users/UserModel.php';
-require_once __DIR__ . '/../../models/users/ReviewsModel.php';
-require_once __DIR__ . '/../../models/users/UserCarpoolsModel.php';
-require_once __DIR__ . '/sub-controllers/ValidateCarpoolController.php';
-require_once __DIR__ . '/sub-controllers/ReportCarpoolController.php';
+use App\Controllers\users\subControllers\ValidateCarpoolController;
+use App\Controllers\users\subControllers\ReportCarpoolController;
+use App\models\users\UserModel;
+use App\models\users\ReviewsModel;
+use App\models\users\UserCarpoolsModel;
 
 class CarpoolsHistoryController {
     

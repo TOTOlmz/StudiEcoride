@@ -2,9 +2,10 @@
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
     Controlleur gérant le profil utilisateur
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+namespace App\Controllers\users\subControllers;
 
-require_once __DIR__ . '/../../../models/users/UserProfileModel.php';
-require_once __DIR__ . '/../../../models/users/UserModel.php';
+use App\models\users\UserProfileModel;
+use App\models\users\UserModel;
 
 class ProfileController {
 

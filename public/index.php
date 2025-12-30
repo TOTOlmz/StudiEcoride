@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 ini_set('display_errors', 1);
@@ -7,61 +10,40 @@ error_reporting(E_ALL);
 
 session_start();
 
-// Inclusion et déclaration des contrôleurs
-    // Header
-require_once __DIR__ . '/../src/controllers/HeaderController.php';
+// Initialiser le PDO (charge automatiquement variables.php)
+\App\Models\BaseModel::initializePdo();
+
+// Import des contrôleurs avec namespaces
+use App\Controllers\HeaderController;
+use App\Controllers\ContactController;
+use App\Controllers\ConnectionController;
+use App\Controllers\CarpoolSearchController;
+use App\Controllers\CarpoolDetailsController;
+use App\Controllers\users\RegistrationController;
+use App\Controllers\users\UserSpaceController;
+use App\Controllers\users\UserCarsController;
+use App\Controllers\users\UserCarpoolController;
+use App\Controllers\users\BookConfirmationController;
+use App\Controllers\users\CarpoolsHistoryController;
+use App\Controllers\users\ReviewsController;
+use App\Controllers\staff\StaffSpaceController;
+use App\Controllers\staff\AdminSpaceController;
+
+
+// Instanciation des contrôleurs
 $header = new HeaderController();
-
-    // Contact
-require_once __DIR__ . '/../src/controllers/ContactController.php';
 $contactController = new ContactController();
-
-    // Inscription
-require_once __DIR__ . '/../src/controllers/users/RegistrationController.php';
 $registrationController = new RegistrationController();
-
-    // Connexion
-require_once __DIR__ . '/../src/controllers/ConnectionController.php';
 $connectionController = new ConnectionController();
-
-    // Espace utilisateur
-require_once __DIR__ . '/../src/controllers/users/UserSpaceController.php';
 $userSpaceController = new UserSpaceController();
-
-    // Ajout d'un véhicule
-require_once __DIR__ . '/../src/controllers/users/UserCarsController.php';
 $userCarsController = new UserCarsController();
-
-    // Ajout d'un covoiturage
-require_once __DIR__ . '/../src/controllers/users/UserCarpoolController.php';
 $userCarpoolController = new UserCarpoolController();
-
-    // Recherche de covoiturage
-require_once __DIR__ . '/../src/controllers/CarpoolSearchController.php';
 $carpoolSearchController = new CarpoolSearchController();
-
-    // Détails d'un covoiturage
-require_once __DIR__ . '/../src/controllers/CarpoolDetailsController.php';
 $carpoolDetailsController = new CarpoolDetailsController();
-
-    // Confirmation de réservation
-require_once __DIR__ . '/../src/controllers/users/BookConfirmationController.php';
 $bookConfirmationController = new BookConfirmationController();
-
-    // Historique des covoiturages
-require_once __DIR__ . '/../src/controllers/users/CarpoolsHistoryController.php';
 $carpoolsHistoryController = new CarpoolsHistoryController();
-
-    // Liste des avis utilisateur
-require_once __DIR__ . '/../src/controllers/users/ReviewsController.php';
 $reviewsController = new ReviewsController();
-
-    // Espace staff
-require_once __DIR__ . '/../src/controllers/staff/StaffSpaceController.php';
 $staffSpaceController = new StaffSpaceController();
-
-    // Espace admin
-require_once __DIR__ . '/../src/controllers/staff/AdminSpaceController.php';
 $adminSpaceController = new AdminSpaceController();
 
 
