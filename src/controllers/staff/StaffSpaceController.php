@@ -40,11 +40,11 @@ class StaffSpaceController {
 
         // refus des avis
         if(isset($_POST['reject-review']) && isset($_POST['review-id'])){
-                $result = ReviewsModel::deleteReview($_POST['review-id']);
+                $result = ReviewsModel::rejectReview($_POST['review-id']);
                 if($result){
-                    $success = "L'avis a été supprimé avec succès.";
+                    $success = "L'avis a été refusé avec succès.";
                 } else {
-                    $errors[] = "Une erreur est survenue lors de la suppression de l'avis.";
+                    $errors[] = "Une erreur est survenue lors du refus de l'avis.";
                 }
         }
 

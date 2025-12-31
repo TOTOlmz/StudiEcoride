@@ -50,9 +50,6 @@ class SubmitCarpoolModel extends BaseModel {
             arrival_time, arrival_city, arrival_postalcode, arrival_lat, arrival_lon, 
             duration, status, seats, available_seats, price, driver_id, car_id, is_ecological, smoke, animals, preferences, commission)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0) ';
-        self::executeQuery($sql, [$date, $departureTime, $departureCity, $departurePostalcode, $departureLat, $departureLon,
-        $arrivalTime, $arrivalCity, $arrivalPostalcode, $arrivalLat, $arrivalLon, 
-        $duration, $status, $seats, $availableSeats, $price, $driverId, $carId, $isEcological, $smoke, $animals, $preferences]);
         return self::lastInsert($sql, [$date, $departureTime, $departureCity, $departurePostalcode, $departureLat, $departureLon,
         $arrivalTime, $arrivalCity, $arrivalPostalcode, $arrivalLat, $arrivalLon, 
         $duration, $status, $seats, $availableSeats, $price, $driverId, $carId, $isEcological, $smoke, $animals, $preferences]);

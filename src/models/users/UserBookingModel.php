@@ -22,9 +22,6 @@ class UserBookingModel extends BaseModel {
         if (intval($carpoolId) <= 0) {
             throw new \Exception('Identifiant de covoiturage invalide.');
         }
-        if (intval($seats) <= 0) {
-            throw new \Exception('Nombre de sièges invalide.');
-        }
         $sql = 'UPDATE carpools SET available_seats = available_seats + ? WHERE id = ?';
         return self::executeQuery($sql, [$seats, $carpoolId])->rowCount();
     }

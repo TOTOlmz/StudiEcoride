@@ -81,6 +81,12 @@ abstract class BaseModel {
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 
+    // Fonction qui récupère une seule colonne
+    protected static function fetchColumn(string $sql, array $params = []): ?string {
+        $stmt = self::executeQuery($sql, $params);
+        return $stmt->fetchColumn() ?: null;
+    }
+
     // Fonction qui récupère plusieurs lignes
     protected static function fetchAll(string $sql, array $params = []): array {
         $stmt = self::executeQuery($sql, $params);

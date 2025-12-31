@@ -37,6 +37,8 @@ class BookConfirmationController {
         $carpoolId = intval($carpoolId);
         $cost = $price * $seats;
 
+        echo $seats . ' ' . $price . ' ' . $userId . ' ' . $carpoolId . ' ' . $cost;
+
         // On vérifie que toutes les valeurs sont renseignées
         if ($seats === 0 || $price === 0 || $userId === 0 || $carpoolId === 0) {
             $errors[] = 'Toutes les informations doivent être renseignées.';

@@ -29,7 +29,7 @@ class UserProfileModel extends BaseModel {
             throw new \Exception('Identifiant utilisateur manquant.');
         }
         $sql = 'SELECT AVG(rate) AS average FROM reviews WHERE driver_id = ? AND validate = 1';
-        return self::fetchOne($sql, [$id]);
+        return self::fetchColumn($sql, [$id]);
     }
 
     // Fonction permettant de récupérer les avis reçus par l'utilisateur

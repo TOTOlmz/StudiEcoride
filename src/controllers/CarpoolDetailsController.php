@@ -50,10 +50,11 @@ class CarpoolDetailsController {
         $driver['avg'] = UserProfileModel::getUserAverage($carpool['driver_id']);
 
         if (!intval($driver['avg'])) {
-            $driver['avg'] = 'Non noté';
+            $driver['avg'] = null;
         } else {
             $driver['avg'] = round(intval($driver['avg']), 1);
         }
+        echo $driver['avg'];
 
         // On récupère les commentaires sur le conducteur
         $driverComments = UserProfileModel::getUserReviewsReceived($carpool['driver_id']);

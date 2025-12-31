@@ -26,8 +26,12 @@
             <div>
                 <p>Note laissée : <strong> <?php echo htmlspecialchars($review['rate']); ?> /5</strong></p><br>
                 <p>Commentaire laissé : <em><?php echo html_entity_decode($review['commentary'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?></em>
-                <?php if($review['validate'] == 0): ?>
+                <?php if($review['consulted'] == 0): ?>
                     <span class="review-status">(En attente de validation)</span>
+                <?php elseif($review['consulted'] == 1 && $review['validate'] == 0): ?>
+                    <span class="review-status">(Refusé)</span>
+                <?php elseif($review['consulted'] == 1 && $review['validate'] == 1): ?>
+                    <span class="review-status">(Validé)</span>
                 <?php endif; ?>
             </div>
         <?php endif; ?>

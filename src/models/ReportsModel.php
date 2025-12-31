@@ -42,19 +42,19 @@ class ReportsModel extends BaseModel {
 
     // Fonction permettant de récupérer les rapports non consultés
     public static function getPendingReports(): array {
-        $sql = 'SELECT * FROM reports WHERE is_consulted = 0 ORDER BY created_at DESC';
+        $sql = 'SELECT * FROM reports WHERE is_consulted = 0 ORDER BY id ASC';
         return self::fetchAll($sql);
     }
 
     // Fonction permettant de récupérer les rapports consultés mais non fermés
     public static function getCurrentReports(): array {
-        $sql = 'SELECT * FROM reports WHERE is_consulted = 1 AND is_closed = 0 ORDER BY created_at DESC';
+        $sql = 'SELECT * FROM reports WHERE is_consulted = 1 AND is_closed = 0 ORDER BY id ASC';
         return self::fetchAll($sql);
     }
 
     // Fonction permettant de récupérer les rapports fermés
     public static function getClosedReports(): array {
-        $sql = 'SELECT * FROM reports WHERE is_closed = 1 ORDER BY created_at DESC';
+        $sql = 'SELECT * FROM reports WHERE is_closed = 1 ORDER BY id ASC';
         return self::fetchAll($sql);
     }
 
