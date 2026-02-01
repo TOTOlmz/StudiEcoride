@@ -114,6 +114,6 @@ class AdminSpaceController {
             $errors[] = "Erreur lors de la récupération des données des crédits.";
         }
 
-        require_once __DIR__ . '/../../views/staff/adminSpaceView.php';
+        require_once ROOT_PATH . '/src/views/staff/adminSpaceView.php';
     }
 }

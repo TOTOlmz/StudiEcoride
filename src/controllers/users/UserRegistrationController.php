@@ -6,12 +6,17 @@ namespace App\Controllers\users;
 
 use App\models\users\UserRegistrationModel;
 use App\models\users\UserSpaceModel;
+use PDOException;
 
 class UserRegistrationController {
     
+    protected array $errors = [];
+    protected string $success = '';
+
+
     public function registration() {
-        $errors = [];
-        $success = '';
+        $this->errors = [];
+        $this->success = '';
         // Si le formulaire n'est pas soumis
         
         // Si le formulaire est soumis
@@ -23,32 +28,32 @@ class UserRegistrationController {
             
             
             if (empty($pseudo) || empty($email) || empty($password)) {
-                $errors[] = 'Merci de renseigner tous les champs';
+                $this->errors[] = 'Merci de renseigner tous les champs';
             }
             
             if ($password !== $confirmPassword) {
-                $errors[] = 'Les mots de passe ne correspondent pas';
+                $this->errors[] = 'Les mots de passe ne correspondent pas';
             }
             
             if (!$this->passwordCheck($password)) {
-                $errors[] = 'Le mot de passe ne respecte pas les critères requis';
+                $this->errors[] = 'Le mot de passe ne respecte pas les critères requis';
             }
             
             // On appelle les fonctions du modèle pour vérifier que le mail et le pseudo sont bien uniques
             if (UserRegistrationModel::emailExists($email)) {
-                $errors[] = 'Cet email est déjà utilisé';
+                $this->errors[] = 'Cet email est déjà utilisé';
             }
             
             if (UserRegistrationModel::pseudoExists($pseudo)) {
-                $errors[] = 'Ce pseudo est déjà utilisé';
+                $this->errors[] = 'Ce pseudo est déjà utilisé';
             }
             
             // Si pas d'erreurs, créer l'utilisateur
-            if (empty($errors)) {
+            if (empty($this->errors)) {
                 try {
                     $userId = UserRegistrationModel::create($pseudo, $email, $password);
                     if ($userId) {
-                        $user = UserSpaceModel::getUserData($userId);
+                        $user = UserSpaceModel::getUserById($userId);
 
                         if ($user) {
                             // Créer la session
@@ -56,22 +61,22 @@ class UserRegistrationController {
                             $_SESSION['user_email'] = $user['email'];
                             $_SESSION['user_role'] = $user['roles'];
                             
-                            $success = 'Compte créé avec succès !';
+                            $this->success = 'Compte créé avec succès !';
                         } else {
-                            $errors[] = 'Erreur lors de la récupération des données utilisateur';
+                            $this->errors[] = 'Erreur lors de la récupération des données utilisateur';
                         }
                     } else {
-                        $errors[] = 'Erreur lors de la récupération de la création de compte';
+                        $this->errors[] = 'Erreur lors de la récupération de la création de compte';
                     }                   
                     
                 } catch (PDOException $e) {
-                    $errors[] = 'Erreur lors de la création du compte : ' . $e->getMessage();
+                    $this->errors[] = 'Erreur lors de la création du compte : ' . $e->getMessage();
                 }
             }
         }
         
         // On charge la vue
-        require __DIR__ . '/../../views/users/registrationView.php';
+        require ROOT_PATH . 'src/views/users/registrationView.php';
     }
 
     // Fonction permettant de vérifier la robustesse du mot de passe (et sa confirmation)

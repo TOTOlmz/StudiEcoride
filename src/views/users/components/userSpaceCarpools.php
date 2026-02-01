@@ -35,9 +35,11 @@
                         <?php if ($c['status'] == 'Planifié'): ?>
                             <button type="submit" class="button" name="update-carpool" onclick="return confirm('Démarrer ce covoiturage ?');">Démarrer le covoiturage</button><br>
                             <input type="hidden" class="button" name="carpool-status" value="En cours"/>
+                            <input type="hidden" name="passengers" value="<?php echo intval($c['seats']) - intval($c['available_seats']); ?>"/>
                         <?php elseif ($c['status'] == 'En cours'): ?>
-                            <button type="submit" name="update-carpool" onclick="return confirm('Terminer ce covoiturage ?');">Terminer le covoiturage</button><br>
+                            <button type="submit" class="button" name="update-carpool" onclick="return confirm('Terminer ce covoiturage ?');">Terminer le covoiturage</button><br>
                             <input type="hidden" name="carpool-status" value="A valider"/>
+                            <input type="hidden" name="passengers" value="<?php echo intval($c['seats']) - intval($c['available_seats']); ?>"/>
                         <?php endif; ?>
                     </form>
                 <?php elseif ($c['user_is_passenger'] && $c['status'] == 'A valider' && $c['user_confirmed'] === 0): ?>

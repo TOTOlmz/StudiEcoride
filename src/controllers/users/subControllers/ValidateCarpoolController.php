@@ -7,7 +7,7 @@ namespace App\Controllers\users\subControllers;
 use App\models\users\UserValidationModel;
 use App\models\CarpoolDetailsModel;
 use App\models\users\UserModel;
-use App\models\ReportsModel;
+use App\models\users\UserCarpoolsModel;
 
 class ValidateCarpoolController {
 
@@ -86,7 +86,7 @@ class ValidateCarpoolController {
                 $d = UserModel::getUserById($driverId);
 
                 $reportForm = true;
-                require_once __DIR__ . '/../../../views/users/components/reportScreen.php';
+                require_once ROOT_PATH . 'src/views/users/components/reportScreen.php';
                 return ['success' => 'Votre signalement a bien été envoyé. Nous reviendrons vers vous rapidement.'];
             }
         }

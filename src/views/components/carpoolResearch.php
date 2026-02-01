@@ -1,5 +1,5 @@
 
-<form class="search-box" method="POST" action="">
+<form class="search-box" method="POST" autocomplete="off" action="">
     <input type="text" class="form-control" id="departure-city" name="departure-city" placeholder="Départ" required>
     <input type="text" class="form-control" id="arrival-city" name="arrival-city" placeholder="Arrivée" required>
     <input type="date" class="form-control" name="date" min-value="<?php echo $currentDate; ?>" required>

@@ -13,9 +13,6 @@ class ReviewsController {
     
     public function reviewsArea() {
 
-        $accessChecker = new AccessController();
-        $accessChecker->checkAccess('USER');
-
         $errors = [];
 
         // On récupère les informations de l'utilisateur
@@ -44,7 +41,7 @@ class ReviewsController {
         $average = substr($average, 0, 3);
 
         // On appelle la vue
-        require_once __DIR__ . '/../../views/users/reviewsView.php';
+        require_once ROOT_PATH . 'src/views/users/reviewsView.php';
     }
 
 }

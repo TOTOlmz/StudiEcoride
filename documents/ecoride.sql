@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2025 at 09:34 AM
+-- Generation Time: Feb 01, 2026 at 04:12 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.4.14
 
@@ -20,25 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `ecoride`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `pseudo` varchar(50) DEFAULT NULL,
-  `email` varchar(180) NOT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `photo` varchar(255) DEFAULT 'default.png',
-  `credits` int(11) DEFAULT 20,
-  `roles` longtext DEFAULT NULL,
-  `is_suspended` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
 
 -- --------------------------------------------------------
 
@@ -72,6 +53,7 @@ CREATE TABLE `carpools` (
   `preferences` text NOT NULL,
   `commission` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -132,6 +114,8 @@ CREATE TABLE `reports` (
   `is_closed` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `reviews`
 --
@@ -140,7 +124,8 @@ CREATE TABLE `reviews` (
   `id` int(11) NOT NULL,
   `rate` tinyint(1) DEFAULT NULL,
   `commentary` text DEFAULT NULL,
-  `validate` tinyint(1) DEFAULT NULL,
+  `consulted` tinyint(1) DEFAULT NULL,
+  `validate` tinyint(1) DEFAULT 0,
   `user_id` int(11) NOT NULL,
   `driver_id` int(11) NOT NULL,
   `carpool_id` int(11) NOT NULL
@@ -148,6 +133,20 @@ CREATE TABLE `reviews` (
 
 -- --------------------------------------------------------
 
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `pseudo` varchar(50) DEFAULT NULL,
+  `email` varchar(180) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT 'default.png',
+  `credits` int(11) DEFAULT 20,
+  `roles` longtext DEFAULT NULL,
+  `is_suspended` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -200,37 +199,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `carpools`
 --
 ALTER TABLE `carpools`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `participations`
 --
 ALTER TABLE `participations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

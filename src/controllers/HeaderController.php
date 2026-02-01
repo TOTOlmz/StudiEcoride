@@ -21,6 +21,6 @@ class HeaderController {
         }
 
         // On charge la vue
-        require __DIR__ . '/../views/headerView.php';
+        require ROOT_PATH . '/src/views/headerView.php';
     }
 }

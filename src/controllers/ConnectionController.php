@@ -8,9 +8,11 @@ use App\Models\ConnectionModel;
 
 class ConnectionController {
     
+    protected array $errors = [];
+    protected string $success = '';
+
+    
     public function connection() {
-        $errors = [];
-        $success = '';
         
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -20,19 +22,19 @@ class ConnectionController {
 
 
             if (!$email || !$password) {
-                $errors[] = 'Merci de renseigner tous les champs';
+                $this->errors[] = 'Merci de renseigner tous les champs';
             }
             
             
             // Si pas d'erreurs, on connecte l'utilisateur
-            if (empty($errors)) {
+            if (empty($this->errors)) {
                 
                 $user = ConnectionModel::connection($email, $password);
                 if (empty($user)) {  // Si user n'est pas trouvé :
-                    $errors[] = 'Ces identifiants ne correspondent à aucun compte';
+                    $this->errors[] = 'Ces identifiants ne correspondent à aucun compte';
                 }
 
-                if (empty($errors)) {
+                if (empty($this->errors)) {
                     // On démarre la session
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['user_email'] = $user['email'];
@@ -46,15 +48,19 @@ class ConnectionController {
                     } else {
                         header ('Location: ./mon-espace');
                     }
-                    $success = 'connexion réussie';
-                    return $success;
+                    $this->success = 'connexion réussie';
+                    return $this->success;
                 }
             }
         }
-
-        // On charge la vue
-        require __DIR__ . '/../views/connectionView.php';
         
+    }
+
+
+    public function displayView() {
+        $errors = $this->errors;
+        $success = $this->success;
+        require_once ROOT_PATH . '/src/views/connectionView.php';
     }
 
 }

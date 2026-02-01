@@ -87,7 +87,7 @@ class StaffSpaceController {
             $currentReports[$i]['arrival_time'] = substr($currentReports[$i]['arrival_time'], 0, 5);
         }
 
-        require_once __DIR__ . '/../../views/staff/staffSpaceView.php';
+        require_once ROOT_PATH . '/src/views/staff/staffSpaceView.php';
 
     }
 

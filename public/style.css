@@ -614,6 +614,7 @@ form .buttons {
     border-radius: 5px;
     padding: 5px;
     justify-self: center;
+    width: fit-content;
 }
 
 .car-card .delete-car {

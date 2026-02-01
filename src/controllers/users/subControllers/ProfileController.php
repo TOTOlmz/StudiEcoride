@@ -4,19 +4,14 @@
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\users\subControllers;
 
+use App\Controllers\BaseController;
 use App\models\users\UserProfileModel;
 use App\models\users\UserModel;
 
-class ProfileController {
+class ProfileController extends BaseController {
 
+    
 
-    // Foncion permettant la déconnexion
-    public function logout() {
-        session_unset();
-        session_destroy();
-        header('Location: ./');
-        exit;
-    }
 
     // Foncion mettant la photo de profil à jour dans la bdd
     public function updatePhoto($file, $userId) {

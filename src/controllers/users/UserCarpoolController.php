@@ -17,10 +17,7 @@ class UserCarpoolController {
 
     // Foncion gérant l'affichage des infos utilisateur
     public function usercarpoolArea() {
-
-        $accessChecker = new AccessController();
-        $accessChecker->checkAccess('USER');
-
+        
         $errors = [];
         $success = '';
 
@@ -139,6 +136,6 @@ class UserCarpoolController {
         // On récupère les covoiturages
         $carpools = UserCarpoolsModel::getCarpoolsByUserId($user['id']);
 
-        require_once __DIR__ . '/../../views/users/submitCarpoolView.php';
+        require_once ROOT_PATH . 'src/views/users/submitCarpoolView.php';
     }
 }

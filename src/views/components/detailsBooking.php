@@ -26,6 +26,7 @@
 </div>
 
 <script>
+    const mainDiv = document.querySelector('div.main');
     const bookBtn = document.getElementById('book');
     const popup = document.getElementById('popup-book');
     const overlay = document.getElementById('popup-overlay');
@@ -35,6 +36,8 @@
     const userCredits = <?php echo intval($user['credits']); ?>;
     const confirmBookBtn = document.getElementById('confirm-book');
 
+    mainDiv.appendChild(overlay);
+    mainDiv.appendChild(popup);
     popup.hidden = true;
 
     function updatePrice() {

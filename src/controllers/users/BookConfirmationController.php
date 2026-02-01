@@ -16,11 +16,8 @@ class BookConfirmationController {
         $errors = [];
         $success = false;
 
-        $accessChecker = new AccessController();
-        $accessChecker->checkAccess('USER');
-
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            require_once __DIR__ . '/../../views/users/participationConfirmationView.php';
+            require_once ROOT_PATH . 'src/views/users/BookingConfirmationView.php';
             exit;
         }
         // On récupère l'id du covoiturage qui est passé en paramètre de l'URL
@@ -36,8 +33,6 @@ class BookConfirmationController {
         $userId = intval($_POST['user-id']);
         $carpoolId = intval($carpoolId);
         $cost = $price * $seats;
-
-        echo $seats . ' ' . $price . ' ' . $userId . ' ' . $carpoolId . ' ' . $cost;
 
         // On vérifie que toutes les valeurs sont renseignées
         if ($seats === 0 || $price === 0 || $userId === 0 || $carpoolId === 0) {
@@ -87,6 +82,6 @@ class BookConfirmationController {
                 $errors[] = 'Une erreur est survenue lors de la confirmation de votre participation. Veuillez réessayer.';
             }
         }
-        require_once __DIR__ . '/../../views/users/bookingConfirmationView.php';
+        require_once ROOT_PATH . 'src/views/users/bookingConfirmationView.php';
     }
 }

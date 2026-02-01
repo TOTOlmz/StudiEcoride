@@ -1,8 +1,9 @@
 <?php
 
 declare(strict_types=1);
+define('ROOT_PATH', __DIR__ . '/../');
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once ROOT_PATH . '/vendor/autoload.php';
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -14,6 +15,8 @@ session_start();
 \App\Models\BaseModel::initializePdo();
 
 // Import des contrôleurs avec namespaces
+
+use App\Controllers\AccessController;
 use App\Controllers\HeaderController;
 use App\Controllers\ContactController;
 use App\Controllers\ConnectionController;
@@ -32,6 +35,8 @@ use App\Controllers\staff\AdminSpaceController;
 
 // Instanciation des contrôleurs
 $header = new HeaderController();
+
+$accessController = new AccessController();
 $contactController = new ContactController();
 $registrationController = new RegistrationController();
 $connectionController = new ConnectionController();
@@ -59,6 +64,28 @@ if (stripos($path, $base) === 0) {
 
 $uri = '/'.ltrim($uri, '/'); // garantit un slash initial
 
+if (strpos($uri, '/connexion') === 0) { 
+    $connectionController->connection();
+} else if (strpos($uri, '/inscription') === 0) {
+    $registrationController->registration();
+} else if (strpos($uri, '/mon-espace') === 0 
+        || strpos($uri, '/mes-avis') === 0
+        || strpos($uri, '/ajouter-un-vehicule') === 0
+        || strpos($uri, '/proposer-un-covoiturage') === 0
+        || strpos($uri, '/confirmation-de-reservation') === 0
+        || strpos($uri, '/historique-des-covoiturages') === 0
+        ) {
+    $accessController->checkAccess('USER');
+} else if (strpos($uri, '/espace-staff') === 0 
+        ) {
+    $accessController->checkAccess('STAFF');
+} else if (strpos($uri, '/espace-admin') === 0 
+        ) {
+    $accessController->checkAccess('ADMIN');
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,11 +100,11 @@ $uri = '/'.ltrim($uri, '/'); // garantit un slash initial
 
     <div class="main">
         <?php
-            if ($uri == '/') { include __DIR__ . '/../src/views/homeView.php'; }
+            if ($uri == '/') { include ROOT_PATH . '/src/views/homeView.php'; }
             else if (strpos($uri, '/nous-contacter') === 0) { $contactController->contact(); }
-            else if (strpos($uri, '/legal') === 0) { include __DIR__ . '/../src/views/legalView.php'; }
-            else if (strpos($uri, '/inscription') === 0) { $registrationController->registration(); }
-            else if (strpos($uri, '/connexion') === 0) {  $connectionController->connection(); }
+            else if (strpos($uri, '/legal') === 0) { include ROOT_PATH . '/src/views/legalView.php'; }
+            else if (strpos($uri, '/inscription') === 0) { $registrationController->displayView(); }
+            else if (strpos($uri, '/connexion') === 0) {  $connectionController->displayView(); }
             else if (strpos($uri, '/mon-espace') === 0) { $userSpaceController->userSpaceArea(); }
             else if (strpos($uri, '/mes-avis') === 0) { $reviewsController->reviewsArea(); }
             else if (strpos($uri, '/ajouter-un-vehicule') === 0) { $userCarsController->userCarsArea(); }

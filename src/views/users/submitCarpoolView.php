@@ -3,7 +3,7 @@
 
     <?php include __DIR__ . '/../checks.php'; ?>
     
-    <form class="new-carpool" method="POST" action="">
+    <form class="new-carpool" method="POST" autocomplete="off" action="">
 
         <div>
             <input type="text"  class="carpool-form" id="departure-city" name="departure-city" placeholder="Ville de départ" required>

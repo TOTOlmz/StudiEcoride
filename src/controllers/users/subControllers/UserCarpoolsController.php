@@ -1,17 +1,13 @@
 <?php
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-    Controlleur gérant le les covoiturages
+    Controlleur gérant les covoiturages
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\users\subControllers;
 
+use App\Controllers\BaseController;
 use App\models\users\UserCarpoolsModel;
 
-use Symfony\Component\Mailer\Mailer;
-use Symfony\Component\Mailer\Transport;
-use Symfony\Component\Mime\Email;
-use Symfony\Component\Mime\Address;
-
-class UserCarpoolsController {
+class UserCarpoolsController extends BaseController{
 
     // Fonction permettant de mettre à jour le statut d'un covoiturage
     public function updateCarpoolStatus($carpoolId, $CarpoolStatus) {
@@ -106,30 +102,6 @@ class UserCarpoolsController {
                 return ['errors' => $errors];
             }
             
-        }
-    }
-
-
-    private function sendEmailToUser($to, $subject, $content) {
-        try {
-            // Configuration SMTP Gmail
-            $dsn = 'smtp://ecoride.studi.to@gmail.com:anovznbiwqvexgih@smtp.gmail.com:587?encryption=tls';
-            $transport = Transport::fromDsn($dsn);
-            $mailer = new Mailer($transport);
-
-            // Création et envoi de l'email
-            $email = (new Email())
-                ->from('ecoride.studi.to@gmail.com')
-                ->to($to)
-                ->subject($subject)
-                ->html($content);
-
-            $mailer->send($email);
-            return true;
-            
-        } catch (Exception $e) {
-            error_log('Erreur email : ' . $e->getMessage());
-            return false;
         }
     }
 }

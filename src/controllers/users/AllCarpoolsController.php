@@ -49,7 +49,7 @@ class AllCarpoolsController {
             }
         }
 
-        include __DIR__ . '/../../views/users/carpoolsView.php';
+        include ROOT_PATH . 'src/views/users/carpoolsView.php';
     }
 
 }

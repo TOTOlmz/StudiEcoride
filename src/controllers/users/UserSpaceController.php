@@ -5,8 +5,7 @@
 namespace App\Controllers\users;
 
 use App\Controllers\AccessController;
-
-
+use App\Controllers\BaseController;
 use App\Controllers\users\subControllers\ProfileController;
 use App\Controllers\users\subControllers\UserCarpoolsController;
 use App\Controllers\users\subControllers\ValidateCarpoolController;
@@ -17,13 +16,11 @@ use App\models\users\ReviewsModel;
 use App\models\users\UserCarpoolsModel;
 
 
-class UserSpaceController {
+class UserSpaceController extends BaseController{
 
     // Foncion gérant l'affichage des infos utilisateur
     public function userSpaceArea() {
 
-        $accessChecker = new AccessController();
-        $accessChecker->checkAccess('USER');
 
         $errors = [];
         $success = '';
@@ -31,8 +28,7 @@ class UserSpaceController {
 
         // Appel de la fonction de déconnexion
         if (isset($_POST['logout'])) {
-            $profileController = new ProfileController();
-            return $profileController->logout();
+            $this->logout();
         }
 
         // Appel de la fonction de mise à jour de la photo de profil
@@ -44,8 +40,16 @@ class UserSpaceController {
         // Si le bouton démarrer / Terminer est cliqué,
         // Appel de la fonction d'édition du statut d'un covoiturage
         if (isset($_POST['update-carpool']) && isset($_POST['carpool-id'])) {
+            
             $carpoolsController = new UserCarpoolsController();
-            $carpoolsController->updateCarpoolStatus(intval($_POST['carpool-id']), htmlspecialchars($_POST['carpool-status']));
+
+            // S'il n'y a pas de passagers, on met directement le covoiturage à "Terminé"
+            if (isset($_POST['passengers']) && intval($_POST['passengers']) === 0) {
+                $carpoolsController->updateCarpoolStatus(intval($_POST['carpool-id']), 'Terminé');
+                return;
+            } else {
+                $carpoolsController->updateCarpoolStatus(intval($_POST['carpool-id']), htmlspecialchars($_POST['carpool-status']));
+            }
         }
 
         // Si le bouton annuler est cliqué, on vérifie qui est le conducteur 
@@ -122,7 +126,7 @@ class UserSpaceController {
         $averageRate = $user['avg'] !== null ? round($user['avg'], 2): null;
 
 
-        require_once __DIR__ . '/../../views/users/userSpaceView.php';
+        require_once ROOT_PATH . '/src/views/users/userSpaceView.php';
     }
 
 }

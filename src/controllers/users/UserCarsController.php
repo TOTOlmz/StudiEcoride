@@ -105,7 +105,7 @@ class UserCarsController {
         unset($car); // On se débarasse de la référence 
         
         // On appelle la vue
-        require_once __DIR__ . '/../../views/users/userCarsView.php';
+        require_once ROOT_PATH . 'src/views/users/userCarsView.php';
 
     }
 }
