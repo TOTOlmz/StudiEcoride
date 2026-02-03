@@ -34,7 +34,7 @@
                 return;
             }
 
-            fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(value)}&type=municipality&limit=7`)
+            fetch(`https://data.geopf.fr/geocodage/search/?q=${encodeURIComponent(value)}&type=municipality&limit=7`)
                 .then(res => res.json())
                 .then(data => {
                     suggestionBox.innerHTML = '';

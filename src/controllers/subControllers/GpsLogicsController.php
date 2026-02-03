@@ -23,7 +23,7 @@ class GpsLogicsController {
     function getCoordinates($city) {
         
         // On récupère les informations de l'url
-        $url = 'https://api-adresse.data.gouv.fr/search/?q=' . urlencode($city) . '&type=municipality&limit=7';
+        $url = 'https://data.geopf.fr/geocodage/search/?q=' . urlencode($city) . '&type=municipality&limit=7';
 
         // On cnfigure un contexte pour désactiver les warnings et gérer les erreurs HTTP
         $context = stream_context_create([
