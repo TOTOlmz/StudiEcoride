@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 define('ROOT_PATH', __DIR__ . '/../');
-print_r(ROOT_PATH);
 
 require_once ROOT_PATH . '/vendor/autoload.php';
 require_once ROOT_PATH . 'src/config/variables.php';
