@@ -235,7 +235,17 @@
     background:  var(--light-green);
     outline: none;
 }
+.form-container a {
+    color: var(--green);
+    text-decoration: underline;
+    font-weight: 500;
+    transition: color 0.18s;
+}
 
+.form-container a:hover,
+.form-container a:focus {
+    color: #000000;
+}
 .form-container button {
     width: 100%;
     background: var(--green);
@@ -259,17 +269,6 @@
     text-align: center;
 }
 
-.form-container a {
-    color: var(--green);
-    text-decoration: underline;
-    font-weight: 500;
-    transition: color 0.18s;
-}
-
-.form-container a:hover,
-.form-container a:focus {
-    color: #000000;
-}
 
 .two-buttons-form{
     display: inline-flex;
