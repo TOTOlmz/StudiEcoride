@@ -33,7 +33,6 @@ class CarpoolSearchController {
                     $radius = 1;
                 }
             }
-            print_r($radius);
 
             // On s'assure d'avoir tous les champs
             if (!isset($departureCity) || !isset($arrivalCity) || !isset($date)) {
