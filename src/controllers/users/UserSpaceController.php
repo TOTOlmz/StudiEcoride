@@ -9,10 +9,10 @@ use App\Controllers\users\subControllers\ProfileController;
 use App\Controllers\users\subControllers\UserCarpoolsController;
 use App\Controllers\users\subControllers\ValidateCarpoolController;
 use App\Controllers\users\subControllers\ReportCarpoolController;
-use App\models\users\UserModel;
-use App\models\users\CarsModel;
-use App\models\users\ReviewsModel;
-use App\models\users\UserCarpoolsModel;
+use App\Models\users\UserModel;
+use App\Models\users\CarsModel;
+use App\Models\users\ReviewsModel;
+use App\Models\users\UserCarpoolsModel;
 
 
 class UserSpaceController extends BaseController{

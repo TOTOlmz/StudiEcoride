@@ -4,8 +4,8 @@
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\users;
 
-use App\models\users\UserRegistrationModel;
-use App\models\users\UserSpaceModel;
+use App\Models\users\UserRegistrationModel;
+use App\Models\users\UserSpaceModel;
 use PDOException;
 
 class UserRegistrationController {

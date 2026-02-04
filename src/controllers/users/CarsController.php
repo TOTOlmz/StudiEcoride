@@ -4,8 +4,8 @@
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\users;
 
-use App\models\users\UserModel;
-use App\models\users\CarsModel;
+use App\Models\users\UserModel;
+use App\Models\users\CarsModel;
 
 class CarsController {
 

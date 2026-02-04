@@ -5,7 +5,7 @@
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\users;
 
-use App\models\users\UserModel;
+use App\Models\users\UserModel;
 use PDOException;
 
 class RegistrationController {

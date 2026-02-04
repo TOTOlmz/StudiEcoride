@@ -5,7 +5,7 @@
 namespace App\Controllers\users\subControllers;
 
 use App\Controllers\BaseController;
-use App\models\users\UserCarpoolsModel;
+use App\Models\users\UserCarpoolsModel;
 
 class UserCarpoolsController extends BaseController {
 

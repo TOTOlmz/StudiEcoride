@@ -7,9 +7,9 @@ namespace App\Controllers\users;
 
 use App\Controllers\users\subControllers\ValidateCarpoolController;
 use App\Controllers\users\subControllers\ReportCarpoolController;
-use App\models\users\UserModel;
-use App\models\users\ReviewsModel;
-use App\models\users\UserCarpoolsModel;
+use App\Models\users\UserModel;
+use App\Models\users\ReviewsModel;
+use App\Models\users\UserCarpoolsModel;
 
 class CarpoolsHistoryController {
 

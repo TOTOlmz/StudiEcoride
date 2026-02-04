@@ -5,8 +5,8 @@
 namespace App\Controllers\users;
 
 
-use App\models\users\UserModel;
-use App\models\users\ReviewsModel;
+use App\Models\users\UserModel;
+use App\Models\users\ReviewsModel;
 
 class ReviewsController {
 

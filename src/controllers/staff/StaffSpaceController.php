@@ -5,8 +5,8 @@
 namespace App\Controllers\staff;
 
 use App\Controllers\BaseController;
-use App\models\users\ReviewsModel;
-use App\models\ReportsModel;
+use App\Models\users\ReviewsModel;
+use App\Models\ReportsModel;
 use App\Controllers\subControllers\TimeLogicsController;
 
 class StaffSpaceController extends BaseController {

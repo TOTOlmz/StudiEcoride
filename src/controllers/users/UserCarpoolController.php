@@ -6,10 +6,10 @@ namespace App\Controllers\users;
 
 use App\Controllers\subControllers\GpsLogicsController;
 
-use App\models\users\UserModel;
-use App\models\users\CarsModel;
-use App\models\users\UserCarpoolsModel;
-use App\models\users\SubmitCarpoolModel;
+use App\Models\users\UserModel;
+use App\Models\users\CarsModel;
+use App\Models\users\UserCarpoolsModel;
+use App\Models\users\SubmitCarpoolModel;
 
 
 class UserCarpoolController {

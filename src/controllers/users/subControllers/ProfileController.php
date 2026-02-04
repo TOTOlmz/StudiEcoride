@@ -5,8 +5,8 @@
 namespace App\Controllers\users\subControllers;
 
 use App\Controllers\BaseController;
-use App\models\users\UserProfileModel;
-use App\models\users\UserModel;
+use App\Models\users\UserProfileModel;
+use App\Models\users\UserModel;
 
 class ProfileController extends BaseController {
 

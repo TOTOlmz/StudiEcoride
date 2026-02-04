@@ -4,9 +4,9 @@
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\users;
 
-use App\models\CarpoolDetailsModel;
-use App\models\users\UserModel;
-use App\models\users\UserBookingModel;
+use App\Models\CarpoolDetailsModel;
+use App\Models\users\UserModel;
+use App\Models\users\UserBookingModel;
 
 class BookConfirmationController {
     

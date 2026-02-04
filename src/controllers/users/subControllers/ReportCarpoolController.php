@@ -4,8 +4,8 @@
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\users\subControllers;
 
-use App\models\users\UserValidationModel;
-use App\models\ReportsModel;
+use App\Models\users\UserValidationModel;
+use App\Models\ReportsModel;
 
 class ReportCarpoolController {
 
