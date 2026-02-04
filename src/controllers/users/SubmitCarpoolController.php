@@ -12,11 +12,12 @@ use App\Models\users\ParticipationModel;
 
 class SubmitCarpoolController {
 
+    protected Array $errors = [];
+    protected string $success = '';
+
     // Fonction gérant l'ajout d'un covoiturage
     public function userCarpoolsArea() {
 
-        $errors = [];
-        $success = '';
 
         $user = UserModel::getUserById($_SESSION['user_id']);
         $cars = CarsModel::getUserCars($user['id']);
@@ -46,14 +47,14 @@ class SubmitCarpoolController {
 
             // On vérifie que l'utilisateur a bien des véhicules enregistrés
             if (count($cars) === 0) {
-                $errors[] = 'Vous ne pouvez pas soumettre de covoiturage sans avoir renseigné de véhicule.';
+                $this->errors[] = 'Vous ne pouvez pas soumettre de covoiturage sans avoir renseigné de véhicule.';
             } else {
                 // On récupère son véhicule
                 $car = CarsModel::getOneCar($driverId, $carId);
 
                 // On s'assure que le véhicule appartient à l'utilisateur
                 if (!$car) {
-                    $errors[] = 'Le véhicule ne vous est pas rattaché.';
+                    $this->errors[] = 'Le véhicule ne vous est pas rattaché.';
                 }
 
                 // On configure $isEcological si le moteur est électrique
@@ -62,24 +63,24 @@ class SubmitCarpoolController {
                 }
             }
 
-            if(empty($errors)) {
+            if(empty($this->errors)) {
                 
                 // On appelle la fonction d'ajout de véhicule
-                $departureCoordinates = $this->getCoordinates($departureCity, $errors);
-                $arrivalCoordinates = $this->getCoordinates($arrivalCity, $errors);
+                $departureCoordinates = $this->getCoordinates($departureCity);
+                $arrivalCoordinates = $this->getCoordinates($arrivalCity);
                 if (count($departureCoordinates) === 0 || count($arrivalCoordinates) === 0) {
                     if (count($departureCoordinates) === 0 && count($arrivalCoordinates) === 0) {
-                        $errors[] = 'Erreur de récupération des coordonnées des villes.';
+                        $this->errors[] = 'Erreur de récupération des coordonnées des villes.';
                     } elseif (count($departureCoordinates) === 0) {
-                        $errors[] = 'Erreur de récupération des coordonnées de la ville de départ.';
+                        $this->errors[] = 'Erreur de récupération des coordonnées de la ville de départ.';
                     } else {
-                        $errors[] = 'Erreur de récupération des coordonnées de la ville d\'arrivée.';
+                        $this->errors[] = 'Erreur de récupération des coordonnées de la ville d\'arrivée.';
                     }
                 }
             }
 
             
-            if(empty($errors)) {
+            if(empty($this->errors)) {
                 $submitCarpool = CarpoolsModel::addUserCarpools(
                     $date,
                     date('H:i', $departureTime),
@@ -106,32 +107,34 @@ class SubmitCarpoolController {
                 );
 
                 if ($submitCarpool) {
-                    $success = 'Covoiturage soumis avec succès !';
+                    $this->success = 'Covoiturage soumis avec succès !';
                 } else {
-                    $errors[] = 'Erreur lors de la soumission du covoiturage.';
+                    $this->errors[] = 'Erreur lors de la soumission du covoiturage.';
                 }
             }
 
-            if(empty($errors)) {
+            if(empty($this->errors)) {
                 $addDriver = ParticipationModel::addDriver($user['id'], $submitCarpool);
             }
 
         }
 
-        require_once __DIR__ . '/../../views/users/submitCarpoolView.php';
+        $errors = $this->errors;
+        $success = $this->success;
+        require_once ROOT_PATH . 'src/views/users/submitCarpoolView.php';
     }
 
 
     // Fonction gérant l'ajout d'un véhicule
-    private function getCoordinates($city, $errors) {
+    private function getCoordinates($city) {
         
         // On récupère les informations de l'url
         $url = 'https://api-adresse.data.gouv.fr/search/?q=' . urlencode($city) . '&type=municipality&limit=7';
         $response = file_get_contents($url);
 
         if ($response === false) {
-            $errors[] = 'Erreur lors de la récupération des coordonnées de la ville.';
-            return $errors;
+            $this->errors[] = 'Erreur lors de la récupération des coordonnées de la ville.';
+            return $this->errors;
         }
 
         // Si on a récupérer des infos, on les décode

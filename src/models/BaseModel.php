@@ -7,8 +7,6 @@ namespace App\Models;
 
 use PDO;
 
-// Charger la configuration des variables d'environnement
-require_once __DIR__ . '/../database/variables.php';
 
 abstract class BaseModel {
 

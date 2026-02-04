@@ -1,0 +1,367 @@
+/* Recherche de carpool */
+.carpool-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 700px;
+    margin: 2rem auto;
+}
+.carpool-card {
+    background: var(--white);
+    color: var(--green);
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(25, 110, 68, 0.08);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+.carpool-card li {
+    list-style: none;
+}
+.carpool-card img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.carpool-card {
+    background: white;
+    border: 1px solid var(--green);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+    max-width: 650px;
+    justify-self: center;
+}
+
+.carpool-card .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.carpool-card .driver {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.carpool-card .rating { color: #ffa600ff; font-size: 14px; }
+
+.carpool-card .bubble {
+    background: #00754a;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.carpool-card .trip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: auto;
+    font-weight: 500;
+}
+
+.carpool-card .arrow { font: bold; }
+
+.carpool-card .details {
+    display: flex;
+    gap: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+.new-carpool {
+    display: grid;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    gap: 10px;
+    max-width:500px;
+    margin: auto;
+}
+
+.new-carpool > div {
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.new-carpool .preferences {
+    display: grid;
+    width: 500px;
+    justify-content: space-between;
+}
+
+.new-carpool .preferences div {
+    width: 100%;
+}
+
+.new-carpool .preferences textarea{
+    width: 100%;
+}
+
+.carpool-form {
+    padding: 0.7rem 1rem;
+    border: none;
+    font-size: 1rem;
+    min-width: 160px;
+    background: #f7f7f7;
+    color: var(--green);
+}
+
+.carpool-form:focus {
+    outline: none;
+    background:  var(--light-green);
+}
+
+.history-carpools-cards {
+    display: flex;
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 2rem auto;
+    overflow: hidden;
+    overflow-x: scroll;
+}
+
+.history-carpools-cards .carpool-card {
+    width: 240px;
+}
+
+.car-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    max-width: 700px;
+    margin: 2rem auto;
+}
+
+.car-card {
+    background: white;
+    border: 1px solid var(--dark-green);
+    border-radius: 10px;
+    box-shadow: -5px 0px 0px var(--dark-green);
+    padding: 15px;
+    margin: 10px 0;
+    width: 300px;
+    justify-self: center;
+}
+
+.car-card .plate-number {
+    background: white;
+    border: 2px solid #000000;
+    border-left: 10px solid #0000ff;
+    border-right: 10px solid #0000ff;
+    border-radius: 5px;
+    padding: 5px;
+    justify-self: center;
+    width: fit-content;
+}
+
+.car-card .delete-car {
+    text-align: end;
+    height: 0px;
+}
+
+.car-card .delete-car button {
+    color: var(--white)fff;
+    background-color: #800000;
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.review-cards {
+    max-width: 900px;
+    margin: 2rem auto;
+    display: flex;
+    overflow-x: scroll;
+    background-color: var(--light-green);
+    border-radius: 15px;
+    padding:5px 5px 10px 5px;
+}
+.review-card {
+    background-color: var(--white);
+    padding: 10px;
+    border: 1px solid var(--dark-green);
+    border-radius: 10px;
+    box-shadow: -5px 0px 0px var(--dark-green);
+    margin: 10px;
+    width: 400px;
+    min-width: 400px;
+    max-width: 400px;
+}
+
+.review-card img{
+    width:30px; 
+    height:30px; 
+    border-radius:50%;
+}
+
+.review-card .section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.review-card .rate {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffa600ff;
+    margin-bottom: 6px;
+    min-width: fit-content;
+}
+
+.staff-panel {
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    max-width: 900px;
+    text-align: center;
+}
+
+canvas {
+    background-color: #e2e2e2ff;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+/* Cards des carpools */
+
+.detail-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 700px;
+    margin: 2rem auto;
+}
+
+.detail-card {
+    background: var(--white);
+    color: var(--green);
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(25, 110, 68, 0.08);
+    padding: 1.5rem;
+    list-style: none;
+    margin: 0;
+}
+
+.carpool-card li .green { color: var(--green); }
+.carpool-card li .red { color: var(--error-color); }
+
+/* ||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                       Profile User Space
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+
+.profile-header {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+
+.profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--green);
+    margin-right: 20px;
+}
+
+.profile-section {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.profile-section > div >div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.driver-infos {
+    display: flex;
+    align-items: center;
+}
+
+
+.driver-review-cards {
+    display: flex;
+    overflow-x: scroll;
+    background-color: var(--light-green);
+    border-radius: 10px;
+}
+
+.booking-btn{ text-align: center; }
+
+.review-card .actions form { display: inline; }
+
+.staff-panel creat-form-call { width: 40%; }
+.staff-panel suspend-form-call { width: 40%; }
+
+.review-status{ color:#a5a5a5; }
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .mobile-burger {
+        display: flex;
+    }
+    
+    .links-area {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--green);
+        flex-direction: column;
+        width: 100%;
+        margin-top: 0;
+        padding: 1rem 0;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s ;
+    }
+    
+    .links-area.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+
+    /* Accueil */
+    .cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+    }
+    .card {
+        max-width: 95%;
+    }
+    .offer {
+        margin: 2rem 0 1rem 0;
+    }
+
+    .details {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+}

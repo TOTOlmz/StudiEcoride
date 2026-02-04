@@ -6,14 +6,14 @@ namespace App\Controllers;
 
 use App\Controllers\subControllers\SearchMethodsController;
 use App\Controllers\subControllers\GpsLogicsController;
-use App\Controllers\subControllers\TimeLogicsController;
 
 
 class CarpoolSearchController {
-    
+
+    protected array $errors = [];
+
     public function CarpoolSearchArea() {
 
-        $errors = [];
         $results = [];
         $suggestion = false;
         $research = false;      // Permet de savoir si une recherche est lancée
@@ -29,7 +29,7 @@ class CarpoolSearchController {
 
             // On s'assure d'avoir tous les champs
             if (!isset($departureCity) || !isset($arrivalCity) || !isset($date)) {
-                $errors[] = 'Il est nécessaire de renseigner les lieux et la date.';
+                $this->errors[] = 'Il est nécessaire de renseigner les lieux et la date.';
             }
 
             // On appelle le controller gps
@@ -38,15 +38,15 @@ class CarpoolSearchController {
             // On essaye de récupérer les coordonnées des villes
             $departureCoordinates = $gpsLogics->getCoordinates($departureCity);
             if ($departureCoordinates === null) {
-                $errors[] = 'Ville de départ introuvable.';
+                $this->errors[] = 'Ville de départ introuvable.';
             }  
             $arrivalCoordinates = $gpsLogics->getCoordinates($arrivalCity);
             if ($arrivalCoordinates === null) {
-                $errors[] = 'Ville d\'arrivée introuvable.';
+                $this->errors[] = 'Ville d\'arrivée introuvable.';
             }
             
             // S'il y a eu une erreur, on arrête ...
-            if (!empty($errors)) {
+            if (!empty($this->errors)) {
                 require_once __DIR__ . '/../../views/users/carpoolsSearchView.php';
                 return;
             }
@@ -67,7 +67,8 @@ class CarpoolSearchController {
             
         }
         
-        require_once __DIR__ . '/../views/carpoolSearchView.php';
+        $errors = $this->errors;
+        require_once ROOT_PATH . 'src/views/carpoolSearchView.php';
 
     }
 }

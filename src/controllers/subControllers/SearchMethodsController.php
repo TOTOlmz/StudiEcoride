@@ -10,7 +10,7 @@ use App\Controllers\subControllers\SearchCarpoolProcessController;
 class SearchMethodsController {
 
 
-    // Foncion permettant la déconnexion
+    // Foncion permettant de chercher les covoiturages correspondants aux coordonnées
     public function coordinatesSearch($depart, $arrival, $date, $radius) {
 
         $results = [];          // Tableau qui stockera les covoiturages correspondants
@@ -20,7 +20,7 @@ class SearchMethodsController {
 
 
         $carpools = SearchCarpoolModel::getCarpoolsByDate($date);
-        // On commence par décomposer nos tableaux en différentes variables
+        // On commence par décomposer notre tableau en différentes variables
         $rDLon = $depart['lon'];
         $rDLat = $depart['lat'];
         $rDPostal = $depart['postalcode'];
@@ -59,7 +59,7 @@ class SearchMethodsController {
                     $processingResult = $carpoolLogic->carpoolProcessing($c, $depart, $arrival, $radius);
                     if ($processingResult) {
                         $results[] = $processingResult;
-                        $suggestion = true;
+                        $suggestion = true;     // On précise que c'est une suggestion
                         $results['suggestion'] = 1;
                     } 
                 }

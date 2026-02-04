@@ -1,16 +1,18 @@
 <?php
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-    Controlleur gérant l'affichage de l'espace personnel d'un utilisateur
+    Controlleur gérant le listing des covoiturages
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\users;
 
 use App\models\users\UserModel;
-use App\models\users\CarsModel;
 use App\models\users\CarpoolsModel;
-use App\models\users\ParticipationModel;
 use App\models\users\ReviewsModel;
 
 class AllCarpoolsController {
+
+    
+    protected Array $errors = [];
+    protected string $success = '';
 
     function allCarpoolsArea() {
         
@@ -43,12 +45,14 @@ class AllCarpoolsController {
             // Appel de la fonction pour ajouter l'avis
             $result = ReviewsModel::addReview($user['id'], $carpoolId, $driverId, $rate, $commentary);
             if ($result) {
-                echo '<p style="color:green;">Avis envoyé !</p>';
+                $this->success = 'Avis envoyé !';
             } else {
-                echo '<p style="color:red;">Erreur lors de l\'envoi de l\'avis.</p>';
+                $this->errors[] = 'Erreur lors de l\'envoi de l\'avis.';
             }
         }
 
+        $errors = $this->errors;
+        $success = $this->success;
         include ROOT_PATH . 'src/views/users/carpoolsView.php';
     }
 

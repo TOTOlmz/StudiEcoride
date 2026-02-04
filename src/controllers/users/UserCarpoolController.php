@@ -4,7 +4,6 @@
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\users;
 
-use App\Controllers\AccessController;
 use App\Controllers\subControllers\GpsLogicsController;
 
 use App\models\users\UserModel;
@@ -14,12 +13,13 @@ use App\models\users\SubmitCarpoolModel;
 
 
 class UserCarpoolController {
+    
+    protected Array $errors = [];
+    protected string $success = '';
 
-    // Foncion gérant l'affichage des infos utilisateur
+    // Foncion gérant l'affichage des infos de covoiturage d'un utilisateur
     public function usercarpoolArea() {
         
-        $errors = [];
-        $success = '';
 
         $user = UserModel::getUserById($_SESSION['user_id']);
         $cars = CarsModel::getUserCars($user['id']);
@@ -46,7 +46,7 @@ class UserCarpoolController {
 
             $tomorrow = date("Y-m-d", strtotime("+1 day"));
             if ($date < $tomorrow) {
-                $errors[] = 'Vous ne pouvez soumettre de covoiturage pour une date antérieure au ' . date('d-m-Y', strtotime("+2 day"));
+                $this->errors[] = 'Vous ne pouvez soumettre de covoiturage pour une date antérieure au ' . date('d-m-Y', strtotime("+2 day"));
             }
 
             // On évite les durées négatives
@@ -59,14 +59,14 @@ class UserCarpoolController {
 
             // On vérifie que l'utilisateur a bien des véhicules enregistrés
             if (count($cars) === 0) {
-                $errors[] = 'Vous ne pouvez pas soumettre de covoiturage sans avoir renseigné de véhicule.';
+                $this->errors[] = 'Vous ne pouvez pas soumettre de covoiturage sans avoir renseigné de véhicule.';
             } else {
                 // On récupère son véhicule
                 $car = CarsModel::getOneCar($driverId, $carId);
 
                 // On s'assure que le véhicule appartient à l'utilisateur
                 if (!$car) {
-                    $errors[] = 'Le véhicule ne vous est pas rattaché.';
+                    $this->errors[] = 'Le véhicule ne vous est pas rattaché.';
                 }
 
                 // On configure $isEcological si le moteur est électrique
@@ -76,25 +76,25 @@ class UserCarpoolController {
             }
         
             // Si pas d'erreurs, on continue
-            if(empty($errors)) {
+            if(empty($this->errors)) {
                 
                 $gpsLogics = new GpsLogicsController();
-                // On appelle la fonction d'ajout de véhicule
+                // On appelle la fonction pour récupérer les coordonnées GPS des villes
                 $departureCoordinates = $gpsLogics->getCoordinates($departureCity);
                 $arrivalCoordinates = $gpsLogics->getCoordinates($arrivalCity);
                 if (count($departureCoordinates) === 0 || count($arrivalCoordinates) === 0) {
                     if (count($departureCoordinates) === 0 && count($arrivalCoordinates) === 0) {
-                        $errors[] = 'Erreur de récupération des coordonnées des villes.';
+                        $this->errors[] = 'Erreur de récupération des coordonnées des villes.';
                     } elseif (count($departureCoordinates) === 0) {
-                        $errors[] = 'Erreur de récupération des coordonnées de la ville de départ.';
+                        $this->errors[] = 'Erreur de récupération des coordonnées de la ville de départ.';
                     } else {
-                        $errors[] = 'Erreur de récupération des coordonnées de la ville d\'arrivée.';
+                        $this->errors[] = 'Erreur de récupération des coordonnées de la ville d\'arrivée.';
                     }
                 }
             }
 
             // Si pas d'erreurs, on crée le covoiturage
-            if(empty($errors)) {
+            if(empty($this->errors)) {
                 $submitCarpool = SubmitCarpoolModel::addCarpool(
                     $date,
                     date('H:i', $departureTime),
@@ -121,13 +121,13 @@ class UserCarpoolController {
                 );
                 
                 if ($submitCarpool) {
-                    $success = 'Covoiturage soumis avec succès !';
+                    $this->success = 'Covoiturage soumis avec succès !';
                 } else {
-                    $errors[] = 'Erreur lors de la soumission du covoiturage.';
+                    $this->errors[] = 'Erreur lors de la soumission du covoiturage.';
                 }
             }
 
-            if(empty($errors)) {
+            if(empty($this->errors)) {
                 $addDriver = SubmitCarpoolModel::addDriver($user['id'], $submitCarpool);
             }
 
@@ -135,7 +135,8 @@ class UserCarpoolController {
 
         // On récupère les covoiturages
         $carpools = UserCarpoolsModel::getCarpoolsByUserId($user['id']);
-
+        $errors = $this->errors;
+        $success = $this->success;
         require_once ROOT_PATH . 'src/views/users/submitCarpoolView.php';
     }
 }

@@ -1,9 +1,13 @@
 <?php
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-    Controlleur gérant le profil utilisateur
+    Controlleur principal.
+    Vérifie les accès,
+    Gère les déconnexions
+    Assure l'envoi d'Emails
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers;
 
+use App\Models\users\UserModel;
 // Import des classes Symfony Mailer
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
@@ -12,6 +16,26 @@ use Exception;
 
 class BaseController {
 
+    // Fonction vérifiant l'accès à l'espace utilisateur
+    public function checkAccess($role) {
+        if(!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== $role){
+            header('Location: ./connexion');
+            exit();
+        } else {
+            $this->checkSuspension($_SESSION['user_id']);
+        }
+    }
+
+    // Fonction vérifiant l'état du compte utilisateur (suspendu ou pas)
+    private function checkSuspension($userId) {
+        $user = UserModel::getUserById($userId);
+        if ($user && intval($user['is_suspended']) === 1) {
+            session_unset();
+            session_destroy();
+            header('Location: ./suspendu');
+            exit();
+        }
+    }
     
     // Foncion permettant la déconnexion
     public function logout() {

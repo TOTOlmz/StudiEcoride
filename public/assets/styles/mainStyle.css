@@ -1,0 +1,114 @@
+/* ||||||||||||||||||||||||||||||||||||
+            Variables 
+|||||||||||||||||||||||||||||||||||| */
+
+@font-face {
+    font-family: 'Franklin Gothic Medium';
+    src: url('./../fonts/frankgothic.woff2') format('woff2'),
+         url('./../fonts/frankgothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Franklin Gothic Condensed';
+    src: url('./../fonts/franklin_gothic_condensed.woff2') format('woff2'),
+         url('./../fonts/franklin_gothic_condensed.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Franklin Gothic Italic';
+    src: url('./../fonts/franklin_gothic_italic.woff2') format('woff2'),
+         url('./../fonts/franklin_gothic_italic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+:root {
+    /* Couleurs */
+    --main-background-color: #f3eee1;
+    --light-green: #c7ead2;
+    --green: #196e44;
+    --dark-green: #145a36;
+    --footer-green: #1e3825;
+    --white: #fff;
+
+    --error-color: #aa0000;
+    --success-color: #007700;
+
+    /* Polices d'écruture */
+    --franklin: 'Franklin Gothic Medium', Arial, sans-serif;
+    --franklin-condensed: 'Franklin Gothic Condensed', Arial, sans-serif;
+    --franklin-italic: 'Franklin Gothic Italic', Arial, sans-serif;
+    --franklin-spacing: 0.05rem;
+    --text-font: Arial, sans-serif;
+
+    /* Boutons */
+    --button-onclick-color: #e0e0e0;
+
+
+}
+
+
+/* ||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                        body 
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+body{
+    background-color: var(--main-background-color);
+    margin: 0;
+    font-family: var(--text-font);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    flex: 1; /* Prend tout l'espace disponible */
+    padding-bottom: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--franklin);
+    letter-spacing: var(--franklin-spacing);
+    color: var(--green);
+}
+
+a {
+    text-decoration: none;
+}
+
+h2 a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    text-decoration: none;
+    background-color: var(--dark-green);
+    border-radius: 5px;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--white);
+}
+
+.errors p { color: var(--error-color); }
+.success p { color: var(--success-color); }
+
+
+.rollback-button {
+    margin: 1rem auto;
+    background-color: #00754a;
+    color: var(--white);
+    border: none;
+    border-radius: 10px;;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-self: center;
+    text-align: center;
+}
+.rollback-button:hover,
+.rollback-button:focus {
+    background: var(--dark-green);
+    color: var(--white);
+}

@@ -15,9 +15,6 @@ class UserRegistrationController {
 
 
     public function registration() {
-        $this->errors = [];
-        $this->success = '';
-        // Si le formulaire n'est pas soumis
         
         // Si le formulaire est soumis
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -76,6 +73,8 @@ class UserRegistrationController {
         }
         
         // On charge la vue
+        $errors = $this->errors;
+        $success = $this->success;
         require ROOT_PATH . 'src/views/users/registrationView.php';
     }
 

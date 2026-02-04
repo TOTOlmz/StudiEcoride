@@ -1,28 +1,33 @@
 <?php
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-    Controlleur gérant le les covoiturages
+    Controlleur gérant le les signalements de covoiturages
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\users\subControllers;
 
-use App\model\users\UserValidationModel;
-use App\models\users\UserCarpoolsModel;
-use App\models\users\UserModel;
+use App\models\users\UserValidationModel;
 use App\models\ReportsModel;
 
 class ReportCarpoolController {
 
-    function sendReport($element) {
-        $errors = [];
-        $success = '';
+    
+    protected Array $errors = [];
+    protected string $success = '';
 
+    function sendReport($element) {
+        $this->errors = [];
+        $this->success = '';
+
+        // Valeurs liées au signalant
         $u = [
             'id' => intval($element['user-id']),
             'email' => htmlspecialchars($element['user-email']),
             'pseudo' => htmlspecialchars($element['user-pseudo'])];
+        // Valeurs liées au conducteur
         $d = [
             'id' => intval($element['driver-id']),
             'email' => htmlspecialchars($element['driver-email']),
             'pseudo' => htmlspecialchars($element['driver-pseudo'])];
+        // Valeurs liées au covoiturage
         $c = [
             'id' => intval($element['carpool-id']),
             'date' => htmlspecialchars($element['date']),
@@ -30,13 +35,14 @@ class ReportCarpoolController {
             'departure_time' => htmlspecialchars($element['departure-time']),
             'arrival_city' => htmlspecialchars($element['arrival-city']),
             'arrival_time' => htmlspecialchars($element['arrival-time'])];
+        // Valeurs liées au signalement
         $r = ['subject' => htmlspecialchars($element['subject']),
                 'description' => htmlspecialchars($element['description'])];
 
         // On met à jour la confirmation d'utilisateur
         $confirmationUpdate = UserValidationModel::confirmationUpdate($u['id'], $c['id']);
         if (!$confirmationUpdate) {
-            $errors[] = 'Erreur lors de la mise à jour de la confirmation.';
+            $this->errors[] = 'Erreur lors de la mise à jour de la confirmation.';
         }
 
         $reportAdded = ReportsModel::addReport(
@@ -46,16 +52,16 @@ class ReportCarpoolController {
             $r['subject'], $r['description']);
 
         if ($reportAdded == 0) {
-            $errors[] = 'Erreur lors de l\'envoi du signalement.';
+            $this->errors[] = 'Erreur lors de l\'envoi du signalement.';
         } else {
-            $success = 'Votre signalement a bien été envoyé. Nous reviendrons vers vous rapidement.';
+            $this->success = 'Votre signalement a bien été envoyé. Nous reviendrons vers vous rapidement.';
         }
 
         // Retourner le résultat
-        if (!empty($errors)) {
-            return ['errors' => $errors];
+        if (!empty($this->errors)) {
+            return ['errors' => $this->errors];
         } else {
-            return ['success' => $success];
+            return ['success' => $this->success];
         }
     }
 

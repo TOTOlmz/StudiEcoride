@@ -22,10 +22,10 @@ class GpsLogicsController {
     // Fonction permettant de récupérer les coordonnées d'une ville
     function getCoordinates($city) {
         
-        // On récupère les informations de l'url
+        // On récupère les informations de l'url via l'API du gouvernement
         $url = 'https://data.geopf.fr/geocodage/search/?q=' . urlencode($city) . '&type=municipality&limit=7';
 
-        // On cnfigure un contexte pour désactiver les warnings et gérer les erreurs HTTP
+        // On configure un contexte pour désactiver les warnings et gérer les erreurs HTTP
         $context = stream_context_create([
             'http' => [
                 'ignore_errors' => true,

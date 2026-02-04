@@ -10,17 +10,18 @@ use App\models\users\UserModel;
 
 class ProfileController extends BaseController {
 
-    
+    protected Array $errors = [];
+    protected bool $success = false;
 
 
     // Foncion mettant la photo de profil à jour dans la bdd
     public function updatePhoto($file, $userId) {
-        $errors = [];
+        
 
         // Si on a un fichier uploadé, on lance la mise à jour de la photo
         if ($file['error'] === UPLOAD_ERR_OK) {
 
-            // On récupère le pseeudo de l'utilisateur
+            // On récupère le pseudo de l'utilisateur
             $user = UserModel::getUserById($userId);
             $userPseudo = $user['pseudo'];
 
@@ -28,12 +29,12 @@ class ProfileController extends BaseController {
             $tmpName = $file['tmp_name'];                   // évite le problème de mise en cache
             $fileName = basename($file['name']);            // On récupère le nom du fichier, puis l'extension
             $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-            $success = false;
+            $this->success = false;
 
             // On vérifie que c’est bien une image
             $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
             if (!in_array($fileExt, $allowed)) {
-                $errors[] = 'Format de fichier non autorisé.';
+                $this->errors[] = 'Format de fichier non autorisé.';
             }
 
             // On renomme le fichier et le chemin de stockage
@@ -49,17 +50,17 @@ class ProfileController extends BaseController {
                 // On met à jour la BDD
                 $updateStatus = UserProfileModel::updatePhoto($newName, $userId);
                 if ($updateStatus) {
-                    $success = true;
+                    $this->success = true;
                 } else {
-                    $errors[] = 'Erreur lors de la mise à jour en base de données.';
+                    $this->errors[] = 'Erreur lors de la mise à jour en base de données.';
                 }
 
             } else {
-                $errors[] = 'Erreur lors du dépôt du fichier.';
-                $success = false;
+                $this->errors[] = 'Erreur lors du dépôt du fichier.';
+                $this->success = false;
             }
 
-            return ['errors' => $errors, 'success' => $success];
+            return ['errors' => $this->errors, 'success' => $this->success];
 
         }
 
@@ -68,15 +69,16 @@ class ProfileController extends BaseController {
 
     public function getUserData($userId) {
         // Logique de mise à jour du profil
-        $errors = [];
-        $success = true;
         
         $user = UserModel::getUserById($userId);
         $user['average'] = UserProfileModel::getUserAverage($userId);
         
         // Validation des données
         if (empty($user)) {
-            $errors[] = 'Echec lors de la récupération des infos.';
+            $this->errors[] = 'Echec lors de la récupération des infos.';
+        }
+        if (empty($this->errors)) {
+            $this->success = true;
         }
         
         return $user;

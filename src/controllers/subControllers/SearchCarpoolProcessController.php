@@ -34,7 +34,7 @@ class SearchCarpoolProcessController {
 
             if ($dOk && $aOk) {
 
-                // Si tout correspond, on met les informations en forme
+                // Si tout correspond, on met le tableau en forme
                 $driverRate = SearchCarpoolModel::getDriverAverage($carpool['driver_id']);
                 $carpool['driver_rate'] = $driverRate !== null ? $driverRate : 'Non noté';
                 $driverData = UserModel::getUserById($carpool['driver_id']);

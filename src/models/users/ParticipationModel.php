@@ -1,7 +1,7 @@
 <?php
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
- Modèle permettant de gérer les participations 
- d'un l'utilisateur à un covoiturage
+    Modèle permettant de gérer les participations 
+    d'un utilisateur à un covoiturage
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Models\users;
 

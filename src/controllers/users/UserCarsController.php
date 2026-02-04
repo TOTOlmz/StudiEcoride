@@ -4,7 +4,6 @@
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\users;
 
-use App\Controllers\AccessController;
 use App\Controllers\subControllers\TimeLogicsController;
 
 use App\models\users\UserModel;
@@ -12,14 +11,11 @@ use App\models\users\CarsModel;
 
 class UserCarsController {
 
-    // Foncion gérant l'affichage des infos utilisateur
+    protected Array $errors = [];
+    protected string $success = '';
+
+    // Fonction gérant l'affichage des infos de véhicules d'un utilisateur
     public function usercarsArea() {
-
-        $accessChecker = new AccessController();
-        $accessChecker->checkAccess('USER');
-
-        $errors = [];
-        $success = '';
 
 
         // Si le formulaire est soumis
@@ -35,12 +31,12 @@ class UserCarsController {
 
             // On valide les infos
             if (empty($brand) || empty($model) || empty($color) || empty($energy) || empty($plateNumber) || empty($firstRegistration) || empty($driverId)) {
-                $errors[] = "Tous les champs sont obligatoires.";
+                $this->errors[] = "Tous les champs sont obligatoires.";
             }
 
-            // On esaye de formatter la plaque d'immatriculation (au format AA-000-BB)
+            // On essaye de formatter la plaque d'immatriculation (au format AA-000-BB)
             if(strlen($plateNumber) > 9) {
-                $errors[] = 'Le numéro d\'immatriculation est trop long.';
+                $this->errors[] = 'Le numéro d\'immatriculation est trop long.';
             } else {
                 $plateArray = str_split($plateNumber, 1);
                 if (count($plateArray) === 7) {
@@ -54,7 +50,7 @@ class UserCarsController {
 
                             $plateNumber = strtoupper($firstLetters) . '-' . $numbers . '-' . strtoupper($lastLetters);
                     } else {
-                        $errors[] = 'Le format de la plaque d\'immatriculation est invalide. Merci de respecter le format AA-000-BB.';
+                        $this->errors[] = 'Le format de la plaque d\'immatriculation est invalide. Merci de respecter le format AA-000-BB.';
                     }
                 } elseif ($plateArray[2] === '-' && $plateArray[5] === '-' && count($plateArray) === 9) {
                     if (ctype_alpha($plateArray[0]) && ctype_alpha($plateArray[1])
@@ -67,20 +63,20 @@ class UserCarsController {
 
                             $plateNumber = strtoupper($firstLetters) . '-' . $numbers . '-' . strtoupper($lastLetters);
                     } else {
-                        $errors[] = 'Le format de la plaque d\'immatriculation est invalide. Merci de respecter le format AA-000-BB.';
+                        $this->errors[] = 'Le format de la plaque d\'immatriculation est invalide. Merci de respecter le format AA-000-BB.';
                     }
                 } else {
-                    $errors[] = 'Le format de la plaque d\'immatriculation est invalide. Merci de respecter le format AA-000-BB.';
+                    $this->errors[] = 'Le format de la plaque d\'immatriculation est invalide. Merci de respecter le format AA-000-BB.';
                 }
             }
 
             // Si pas d'erreurs, on ajoute le véhicule
-            if (empty($errors)) {
+            if (empty($this->errors)) {
                 $result = CarsModel::addUserCar($brand, $model, $color, $energy, $plateNumber, $firstRegistration, $driverId);
                 if ($result) {
-                    $success = "Véhicule ajouté avec succès.";
+                    $this->success = "Véhicule ajouté avec succès.";
                 } else {
-                    $errors[] = "Erreur lors de l'ajout du véhicule.";
+                    $this->errors[] = "Erreur lors de l'ajout du véhicule.";
                 }
             }
         }
@@ -88,13 +84,13 @@ class UserCarsController {
         // On récupère les informations de l'utilisateur
         $user = UserModel::getUserById($_SESSION['user_id']);
         if ($user === false) {
-            $errors[] = "Utilisateur non trouvé.";
+            $this->errors[] = "Utilisateur non trouvé.";
         }
 
         // On récupère les véhicules de l'utilisateur
         $cars = CarsModel::getUserCars($user['id']);
         if ($cars === false) {
-            $errors[] = "Erreur lors de la récupération des véhicules.";
+            $this->errors[] = "Erreur lors de la récupération des véhicules.";
         }
 
         // On formate la date de première immatriculation
@@ -105,6 +101,8 @@ class UserCarsController {
         unset($car); // On se débarasse de la référence 
         
         // On appelle la vue
+        $errors = $this->errors;
+        $success = $this->success;
         require_once ROOT_PATH . 'src/views/users/userCarsView.php';
 
     }

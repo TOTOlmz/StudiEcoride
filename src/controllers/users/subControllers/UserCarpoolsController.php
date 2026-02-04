@@ -1,13 +1,17 @@
 <?php
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-    Controlleur gérant les covoiturages
+    Controlleur gérant les covoiturages d'un utilisateur
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\users\subControllers;
 
 use App\Controllers\BaseController;
 use App\models\users\UserCarpoolsModel;
 
-class UserCarpoolsController extends BaseController{
+class UserCarpoolsController extends BaseController {
+
+    
+    protected Array $errors = [];
+    protected string $success = '';
 
     // Fonction permettant de mettre à jour le statut d'un covoiturage
     public function updateCarpoolStatus($carpoolId, $CarpoolStatus) {
@@ -22,15 +26,15 @@ class UserCarpoolsController extends BaseController{
     // Fonction permettant de mettre à jour les participants à un covoiturage
     public function leaveCarpool($userId, $carpoolId) {
 
-        $errors = [];
-        $success = '';
+        $this->errors = [];
+        $this->success = '';
         
         // On appelle le modèle pour récupérer les covoiturages de l'utilisateur
         $carpools = UserCarpoolsModel::getCarpoolsByUserId($userId);
 
         if (empty($carpools)) {
-            $errors[] = 'Covoiturages introuvable.';
-            return ['errors' => $errors];
+            $this->errors[] = 'Covoiturages introuvable.';
+            return ['errors' => $this->errors];
         }
         // On identifie le covoiturage concerné
         $carpool = [];
@@ -41,8 +45,8 @@ class UserCarpoolsController extends BaseController{
             }
         }
         if (empty($carpool)) {
-            $errors[] = 'Covoiturage introuvable.';
-            return ['errors' => $errors];
+            $this->errors[] = 'Covoiturage introuvable.';
+            return ['errors' => $this->errors];
         }
 
         // On vérifie si l'utilisateur est conducteur
@@ -62,7 +66,7 @@ class UserCarpoolsController extends BaseController{
                     $adjustCredits = UserCarpoolsModel::adjustPassengerCredits($p['user_id'], $p['pending_credits']);
                     $leaveCarpool = UserCarpoolsModel::leaveCarpool($p['user_id'], $carpoolId);
                     if (!$adjustCredits || !$leaveCarpool) {
-                        $errors[] = 'Erreur lors du traitement d\'un passager.';
+                        $this->errors[] = 'Erreur lors du traitement d\'un passager.';
                     }
                     $email = UserCarpoolsModel::getPassengerEmail($p['user_id']);
 
@@ -73,7 +77,7 @@ class UserCarpoolsController extends BaseController{
                         $send = $this->sendEmailToUser($to, $subject, $content);
 
                         if (!$send) {
-                            $errors[] = 'Erreur lors de l\'envoi de l\'email à un passager.';
+                            $this->errors[] = 'Erreur lors de l\'envoi de l\'email à un passager.';
                         }
                     }
                     
@@ -82,10 +86,10 @@ class UserCarpoolsController extends BaseController{
             // ...Avant de supprimer le covoiturage
             UserCarpoolsModel::leaveCarpool($userId, $carpoolId);
             UserCarpoolsModel::deleteCarpool($carpoolId);
-            if (empty($errors)) {
-                return ['success' => $success];
+            if (empty($this->errors)) {
+                return ['success' => $this->success];
             } else {
-                return ['errors' => $errors];
+                return ['errors' => $this->errors];
             }
             
         } else {
@@ -97,9 +101,9 @@ class UserCarpoolsController extends BaseController{
             $updateSeats = UserCarpoolsModel::updateCarpoolSeats($carpoolId, 1); // On réajuste le nombre de sièges disponibles
             
             if ($adjustCredits && $leaveCarpool && $updateSeats) {
-                return ['success' => $success];
+                return ['success' => $this->success];
             } else {
-                return ['errors' => $errors];
+                return ['errors' => $this->errors];
             }
             
         }

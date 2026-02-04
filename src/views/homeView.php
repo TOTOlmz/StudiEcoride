@@ -1,8 +1,8 @@
 <div class="hero">
     <h1>Trouvez le trajet qu'il vous faut avec EcoRide</h1>
     <form class="search-box" method="POST" action="./chercher-un-covoiturage">
-        <input type="text" id="departure-city" name="departure-city" placeholder="Départ" required/>
-        <input type="text" id="arrival-city" name="arrival-city" placeholder="Arrivée" required/>
+        <input type="text" id="departure-city" name="departure-city" placeholder="Départ" autocomplete="off" required/>
+        <input type="text" id="arrival-city" name="arrival-city" placeholder="Arrivée" autocomplete="off" required/>
         <input type="date" id="date" name="date" placeholder="Arrivée" required/>
         <button class="button" type="submit">Rechercher</button>
     </form>
@@ -17,7 +17,7 @@
         <p>Ne voyagez plus seul, trouvez le voyage qu'il vous faut ou partagez le votre.</p>
     </div>
     <div class="card economy">
-        <h3>Une écconomie positive</h3>
+        <h3>Une économie positive</h3>
         <p>Voyager avec EcoRide réduit le cout individuel du déplacement. Comme quoi, l'union fait la force.</p>
     </div>
 </div>

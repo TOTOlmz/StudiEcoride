@@ -1,6 +1,6 @@
 <?php
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
- Modèle permettant de gérer réservations
+    Modèle permettant de gérer réservations
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Models\users;
 

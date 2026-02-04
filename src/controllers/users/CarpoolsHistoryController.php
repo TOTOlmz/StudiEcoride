@@ -4,7 +4,6 @@
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\users;
 
-use App\Controllers\AccessController;
 
 use App\Controllers\users\subControllers\ValidateCarpoolController;
 use App\Controllers\users\subControllers\ReportCarpoolController;
@@ -13,15 +12,13 @@ use App\models\users\ReviewsModel;
 use App\models\users\UserCarpoolsModel;
 
 class CarpoolsHistoryController {
+
+    
+    protected Array $errors = [];
+    protected string $success = '';
     
     public function carpoolsHistoryArea() {
 
-
-        $errors = [];
-        $success = '';
-
-        $accessChecker = new AccessController();
-        $accessChecker->checkAccess('USER');
 
 
         $user = UserModel::getUserById($_SESSION['user_id']);
@@ -50,9 +47,9 @@ class CarpoolsHistoryController {
             // Appel de la fonction pour ajouter l'avis
             $result = ReviewsModel::addReview($user['id'], $carpoolId, $driverId, $rate, $commentary);
             if ($result) {
-                $success = 'Avis envoyé !';
+                $this->success = 'Avis envoyé !';
             } else {
-                $errors[] = 'Erreur lors de l\'envoi de l\'avis.';
+                $this->errors[] = 'Erreur lors de l\'envoi de l\'avis.';
             }
         }
 
@@ -65,9 +62,9 @@ class CarpoolsHistoryController {
             
             // Gestion du résultat
             if ($result && isset($result['success'])) {
-                $success = $result['success'];
+                $this->success = $result['success'];
             } elseif ($result && isset($result['errors'])) {
-                $errors = array_merge($errors, $result['errors']);
+                $this->errors = array_merge($this->errors, $result['this->errors']);
             }
         }
 
@@ -79,11 +76,11 @@ class CarpoolsHistoryController {
             
             // Gestion du résultat
             if ($result && isset($result['success'])) {
-                $success = $result['success'];
+                $this->success = $result['success'];
             } elseif ($result && isset($result['errors'])) {
-                $errors = array_merge($errors, $result['errors']);
+                $this->errors = array_merge($this->errors, $result['errors']);
             } else {
-                $errors[] = 'Erreur lors de l\'envoi du signalement.';
+                $this->errors[] = 'Erreur lors de l\'envoi du signalement.';
             }
         }
 
@@ -91,6 +88,8 @@ class CarpoolsHistoryController {
         $reviewsLeft = ReviewsModel::getUserReviewsLeft($user['id']);
         $reviewsReceived = ReviewsModel::getUserReviewsReceived($user['id']);
 
-        include __DIR__ . '/../../views/users/carpoolsHistoryView.php';
+        $errors = $this->errors;
+        $success = $this->success;
+        include ROOT_PATH . 'src/views/users/carpoolsHistoryView.php';
     }
 }

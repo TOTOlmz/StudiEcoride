@@ -19,8 +19,6 @@
     <div>
         <p> Déjà un compte ? <a href="./connexion">cliquez ici</a></p>
     </div>
-</div>
-<div class="form-container">
     <div class="password-requirements">
         <p> Le mot de passe doit contenir au moins :</p>
         <span class="pass pass-length">8 caractères</span>
@@ -31,7 +29,6 @@
     </div>
     
     <?php require_once __DIR__ . '/../checks.php' ?>
-
 </div>
 
 <script>

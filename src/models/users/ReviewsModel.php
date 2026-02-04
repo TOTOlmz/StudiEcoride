@@ -45,7 +45,7 @@ class ReviewsModel extends BaseModel {
 
         $sql = '
             SELECT r.id, r.commentary, r.rate, r.consulted, r.validate, r.carpool_id,
-                   u.photo AS user_photo, u.pseudo AS user_pseudo 
+            u.photo AS user_photo, u.pseudo AS user_pseudo 
             FROM reviews r 
             JOIN users u ON r.driver_id = u.id 
             WHERE r.user_id = ? 

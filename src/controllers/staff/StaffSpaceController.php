@@ -4,37 +4,31 @@
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\staff;
 
-use App\Controllers\AccessController;
-use App\Controllers\users\subControllers\ProfileController;
+use App\Controllers\BaseController;
 use App\models\users\ReviewsModel;
 use App\models\ReportsModel;
 use App\Controllers\subControllers\TimeLogicsController;
 
-class StaffSpaceController {
+class StaffSpaceController extends BaseController {
+    
+    protected Array $errors = [];
+    protected string $success = '';
 
     // Foncion gérant l'affichage des infos utilisateur
     public function staffSpaceArea() {
 
-        $errors = [];
-        $success = '';
-
-        // On vérifie les autorisations
-        $accessChecker = new AccessController();
-        $accessChecker->checkAccess('STAFF');
-
         // Appel de la fonction de déconnexion
         if (isset($_POST['logout'])) {
-            $profileController = new ProfileController();
-            return $profileController->logout();
+            return $this->logout();
         }
 
         // Validation des avis
         if(isset($_POST['validate-review']) && isset($_POST['review-id'])){
                 $result = ReviewsModel::validateReview($_POST['review-id']);
                 if($result){
-                    $success = "L'avis a été validé avec succès.";
+                    $this->success = "L'avis a été validé avec succès.";
                 } else {
-                    $errors[] = "Une erreur est survenue lors de la validation de l'avis.";
+                    $this->errors[] = "Une erreur est survenue lors de la validation de l'avis.";
                 }
         }
 
@@ -42,9 +36,9 @@ class StaffSpaceController {
         if(isset($_POST['reject-review']) && isset($_POST['review-id'])){
                 $result = ReviewsModel::rejectReview($_POST['review-id']);
                 if($result){
-                    $success = "L'avis a été refusé avec succès.";
+                    $this->success = "L'avis a été refusé avec succès.";
                 } else {
-                    $errors[] = "Une erreur est survenue lors du refus de l'avis.";
+                    $this->errors[] = "Une erreur est survenue lors du refus de l'avis.";
                 }
         }
 
@@ -52,9 +46,9 @@ class StaffSpaceController {
         if(isset($_POST['open-report']) && isset($_POST['report-id'])){
                 $result = ReportsModel::openReport($_POST['report-id']);
                 if($result){
-                    $success = "Le signalement a été consulté avec succès.";
+                    $this->success = "Le signalement a été consulté avec succès.";
                 } else {
-                    $errors[] = "Une erreur est survenue lors de la l'activation de la consultation.";
+                    $this->errors[] = "Une erreur est survenue lors de la l'activation de la consultation.";
                 }
         }
 
@@ -62,9 +56,9 @@ class StaffSpaceController {
         if(isset($_POST['close-report']) && isset($_POST['report-id'])){
                 $result = ReportsModel::closeReport($_POST['report-id']);
                 if($result){
-                    $success = "Le signalement a été refermé avec succès.";
+                    $this->success = "Le signalement a été refermé avec succès.";
                 } else {
-                    $errors[] = "Une erreur est survenue lors de la fermeture du signalement.";
+                    $this->errors[] = "Une erreur est survenue lors de la fermeture du signalement.";
                 }
         }
 
@@ -87,6 +81,8 @@ class StaffSpaceController {
             $currentReports[$i]['arrival_time'] = substr($currentReports[$i]['arrival_time'], 0, 5);
         }
 
+        $errors = $this->errors;
+        $success = $this->success;
         require_once ROOT_PATH . '/src/views/staff/staffSpaceView.php';
 
     }

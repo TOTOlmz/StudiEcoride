@@ -4,43 +4,46 @@
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\users;
 
-use App\controllers\AccessController;
 
 use App\models\users\UserModel;
 use App\models\users\ReviewsModel;
 
 class ReviewsController {
+
+    
+    protected Array $errors = [];
+    protected string $success = '';
     
     public function reviewsArea() {
 
-        $errors = [];
 
         // On récupère les informations de l'utilisateur
         $user = UserModel::getUserById($_SESSION['user_id']);
         if ($user === false) {
-            $errors[] = "Utilisateur non trouvé.";
+            $this->errors[] = "Utilisateur non trouvé.";
         }
         
         // On récupère les avis laissés par l'utilisateur
         $reviewsLeft = ReviewsModel::getUserReviewsLeft($user['id']);
         if ($reviewsLeft === false) {
-            $errors[] = "Erreur lors de la récupération des avis laissés.";
+            $this->errors[] = "Erreur lors de la récupération des avis laissés.";
         }
 
         // On récupère les avis reçus par l'utilisateur
         $reviewsReceived = ReviewsModel::getUserReviewsReceived($user['id']);
         if ($reviewsReceived === false) {
-            $errors[] = "Erreur lors de la récupération des avis reçus.";
+            $this->errors[] = "Erreur lors de la récupération des avis reçus.";
         }
 
         // On récupère la note moyenne de l'utilisateur
         $average = ReviewsModel::getUserAverage($user['id']);
         if ($average === false) {
-            $errors[] = "Erreur lors de la récupération de la note moyenne.";
+            $this->errors[] = "Erreur lors de la récupération de la note moyenne.";
         }
         $average = substr($average, 0, 3);
 
         // On appelle la vue
+        $errors = $this->errors;
         require_once ROOT_PATH . 'src/views/users/reviewsView.php';
     }
 

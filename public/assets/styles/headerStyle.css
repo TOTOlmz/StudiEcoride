@@ -1,0 +1,111 @@
+
+/* ||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                        header 
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+    .navbar {
+        position: sticky;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--green);
+        color: var(--white);
+        padding: 0.7rem 2rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        font-family: Arial, sans-serif;
+        height: 40px;
+    }
+
+    .navbar a {
+        color: inherit;
+    }
+    /* Brand area */
+    .brand-area {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0 10px 0 10px;
+    }
+
+    .navbar-logo {
+        height: 38px;
+        width: auto;
+    }
+
+    .brand-area p {
+        color: var(--white);
+        font-family: var(--franklin);
+        letter-spacing: var(--franklin-spacing);
+    }
+    /* Links area */
+    .links-area {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        font-size: 1.08rem;
+    }
+
+    .links-area a {
+        color: var(--white);
+        padding: 6px 14px;
+        border-radius: 4px;
+        transition: background 0.18s, color 0.18s;
+    }
+
+    .links-area a:hover,
+    .links-area a:focus {
+        background: var(--white);
+        color: var(--green);
+        outline: none;
+    }
+
+    .links-area a:active {
+        background: #e0e0e0;
+        color: var(--green);
+    }
+
+
+
+/* Bouton hamburger - caché par défaut */
+.mobile-burger {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    justify-content: space-between;
+}
+
+.mobile-burger span {
+    width: 100%;
+    height: 3px;
+    background-color: var(--white);
+    transition: 0.3s;
+}
+
+/* ||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                        footer 
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+    footer {
+        background-color: var(--footer-green);
+        color: var(--white);
+        text-align: center;
+        padding: 15px 0;
+        height: 20px;
+        width: 100%;
+        font-family: Arial, sans-serif;
+        margin-top: auto; /* Pousse le footer vers le bas */
+    }
+    footer a {
+        color: var(--white);
+        margin: 0 0.7rem;
+        transition: color 0.18s;
+    }
+
+    footer a:hover,
+    footer a:focus {
+        color: var(--light-green);
+    }

@@ -1,5 +1,5 @@
 
-<div class="form-container">
+<div class="center-container">
     <h1>Mentions Légales</h1>
     
     <h2>Éditeur du site</h2>
@@ -26,8 +26,8 @@
         Pour signaler un problème : <strong>ecoride-studi-to@gmail.com</strong></p>
 
     <div><strong>Dernière mise à jour :</strong> Novembre 2025</div>
-    
+
+    <?php include __DIR__ . '/components/rollbackButton.php'; ?>   
     
         
 </div>
-<?php include __DIR__ . '/components/rollbackButton.php'; ?>   

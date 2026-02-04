@@ -2,7 +2,7 @@
 <?php if (count($cars) > 0): ?>
     <h2>Mes covoiturages <a href="./proposer-un-covoiturage">✚</a></h2>
 <?php else: ?>
-    <h2>Mes covoiturages <a href="./ajouter-un-vehicule">✚</a></h2>
+    <h2>Mes covoiturages</h2>
 <?php endif; ?>
 
 <?php if (count($cars) > 0): ?>

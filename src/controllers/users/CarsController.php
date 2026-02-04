@@ -9,18 +9,19 @@ use App\models\users\CarsModel;
 
 class CarsController {
 
+    
+    protected Array $errors = [];
+    protected string $success = '';
+
     // Foncion gérant l'affichage des infos utilisateur
     public function userCarsArea() {
-
-        $errors = [];
-        $success = '';
 
         $user = UserModel::getUserById($_SESSION['user_id']);
         $cars = CarsModel::getUserCars($user['id']);
 
         // Si le formulaire est soumis
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // On crécupère toutes les infos
+            // On récupère toutes les infos
             $brand = trim($_POST['brand'] ?? '');
             $model = trim($_POST['model'] ?? '');
             $color = trim($_POST['color'] ?? '');
@@ -29,9 +30,9 @@ class CarsController {
             $firstRegistration = trim($_POST['first-registration'] ?? '');
             $driverId = trim($_POST['driver-id'] ?? '');
 
-            // On essaye de formation la plaque d'immatriculation au format AA-000-BB
+            // On essaye de formater la plaque d'immatriculation au format AA-000-BB
             if(strlen($plateNumber) > 9) {
-                $errors[] = 'Le numéro d\'immatriculation est trop long.';
+                $this->errors[] = 'Le numéro d\'immatriculation est trop long.';
             } else {
                 $plateArray = str_split($plateNumber, 1);
 
@@ -46,25 +47,27 @@ class CarsController {
 
                             $plateNumber = strtoupper($firstLetters) . '-' . $numbers . '-' . strtoupper($lastLetters);
                     } else {
-                        $errors[] = 'Le format de la plaque d\'immatriculation est invalide.';
+                        $this->errors[] = 'Le format de la plaque d\'immatriculation est invalide.';
                     }
                 }
             }
 
-            if(empty($errors)) {
+            if(empty($this->errors)) {
 
                 // On appelle la fonction d'ajout de véhicule
-                $newCar = $this->addCar($brand, $model, $color, $energy, $plateNumber, $firstRegistration, $driverId, $errors);
+                $newCar = $this->addCar($brand, $model, $color, $energy, $plateNumber, $firstRegistration, $driverId, $this->errors);
                 if ($newCar) {
-                    $success = 'Véhicule ajouté avec succès.';
+                    $this->success = 'Véhicule ajouté avec succès.';
                 } else {
-                    $errors[] = 'Erreur lors de l\'ajout du véhicule.';
+                    $this->errors[] = 'Erreur lors de l\'ajout du véhicule.';
                     var_dump($newCar);
                 }
             }
         }
 
-        require_once __DIR__ . '/../../views/users/carsView.php';
+        $errors = $this->errors;
+        $success = $this->success;
+        require_once ROOT_PATH . 'src/views/users/carsView.php';
     }
 
 

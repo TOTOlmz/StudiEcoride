@@ -1,20 +1,17 @@
 <?php
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-    Controlleur gérant la connexion d'un utilisateur
+    Controlleur gérant la page de contact
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers;
-
-use App\Models\ConnectionModel;
-
 
 
 class ContactController extends BaseController {
     
+    protected array $errors = [];
+    protected string $success = '';
+
     public function contact() {
     
-        $errors = [];
-        $success = '';
-        
         if (isset($_POST['contact-form'])) {
             
             $from = $_POST['email'];
@@ -23,20 +20,22 @@ class ContactController extends BaseController {
             $message = $_POST['message'];
 
             if (!$from && !$name && !$subject && !$message) {
-                $errors[] = "Tous les champs doivent être remplis.";
+                $this->errors[] = "Tous les champs doivent être remplis.";
             }
 
             if (!empty($from)) { 
                 $send = $this->sendEmailFromForm($from, $name, $subject, $message); 
                 if ($send) {
-                    $success = "Email envoyé avec succès.";
+                    $this->success = "Email envoyé avec succès.";
                 } else {
-                    $errors[] = "Erreur lors de l'envoi de l'email.";
+                    $this->errors[] = "Erreur lors de l'envoi de l'email.";
                 }
             }        
         }
 
-        require_once __DIR__ . '/../views/contactView.php';
+        $errors = $this->errors;
+        $success = $this->success;
+        require_once ROOT_PATH . 'src/views/contactView.php';
 
     }
 }

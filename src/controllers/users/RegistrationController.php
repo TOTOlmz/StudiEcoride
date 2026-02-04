@@ -6,6 +6,7 @@
 namespace App\Controllers\users;
 
 use App\models\users\UserModel;
+use PDOException;
 
 class RegistrationController {
     
@@ -15,8 +16,6 @@ class RegistrationController {
 
 
     public function registration() {
-
-        // Si le formulaire n'est pas soumis
         
         // Si le formulaire est soumis
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -58,7 +57,7 @@ class RegistrationController {
                         $user = UserModel::getUserById($userId);
 
                         if ($user) {
-                            // Créer la session
+                            // Création de la session
                             $_SESSION['user_id'] = $user['id'];
                             $_SESSION['user_email'] = $user['email'];
                             $_SESSION['user_role'] = $user['roles'];
@@ -81,6 +80,8 @@ class RegistrationController {
     }
 
     public function displayView() {
+        $errors = $this->errors;
+        $success = $this->success;
         require_once ROOT_PATH . '/src/views/users/registrationView.php';
     }
 

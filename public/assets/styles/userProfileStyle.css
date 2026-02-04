@@ -1,0 +1,58 @@
+
+/* ||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                    Profile User Space
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
+
+.profile-header {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+
+.profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--green);
+    margin-right: 20px;
+}
+
+.profile-section {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.profile-section > div >div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.driver-infos {
+    display: flex;
+    align-items: center;
+}
+
+
+.driver-review-cards {
+    display: flex;
+    overflow-x: scroll;
+    background-color: var(--light-green);
+    border-radius: 10px;
+}
+
+.booking-btn{ text-align: center; }
+
+.review-card .actions form { display: inline; }
+
+.staff-panel creat-form-call { width: 40%; }
+.staff-panel suspend-form-call { width: 40%; }
+
+.review-status{ color:#a5a5a5; }
+

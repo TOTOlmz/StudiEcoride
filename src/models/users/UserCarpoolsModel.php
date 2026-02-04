@@ -1,6 +1,6 @@
 <?php
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
- Modèle permettant de gérer les covoiturages d'un l'utilisateur
+Modèle permettant de gérer les covoiturages d'un utilisateur
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Models\users;
 

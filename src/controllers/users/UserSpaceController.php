@@ -4,7 +4,6 @@
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\users;
 
-use App\Controllers\AccessController;
 use App\Controllers\BaseController;
 use App\Controllers\users\subControllers\ProfileController;
 use App\Controllers\users\subControllers\UserCarpoolsController;
@@ -17,13 +16,14 @@ use App\models\users\UserCarpoolsModel;
 
 
 class UserSpaceController extends BaseController{
+    
+    protected Array $errors = [];
+    protected string $success = '';
 
     // Foncion gérant l'affichage des infos utilisateur
     public function userSpaceArea() {
 
 
-        $errors = [];
-        $success = '';
 
 
         // Appel de la fonction de déconnexion
@@ -58,9 +58,9 @@ class UserSpaceController extends BaseController{
             $leaveCarpoolController = new UserCarpoolsController();
             $results = $leaveCarpoolController->leaveCarpool(intval($_SESSION['user_id']), intval($_POST['carpool-id']));
             if (isset($results['errors'])) {
-                $errors = array_merge($errors, $results['errors']);
+                $this->errors = array_merge($this->errors, $results['errors']);
             } else {
-                $success = 'Covoiturage annulé avec succès';
+                $this->success = 'Covoiturage annulé avec succès';
             }
         }
 
@@ -71,9 +71,9 @@ class UserSpaceController extends BaseController{
             $validateCarpoolController = new ValidateCarpoolController();
             $validateCarpoolController->confirmCarpoolEnd($_POST['user-id'], $_POST['carpool-id'], $_POST['driver-id'], $isSatisfied);  
             if (isset($result['errors'])) {
-                $errors = array_merge($errors, $result['errors']);
+                $this->errors = array_merge($this->errors, $result['errors']);
             } elseif (isset($result['success'])) {
-                $success = $result['success'];
+                $this->success = $result['success'];
             }           
         }
 
@@ -83,9 +83,9 @@ class UserSpaceController extends BaseController{
             $reportsCarpoolController = new ReportCarpoolController();
             $result = $reportsCarpoolController->sendReport($_POST);  
             if (isset($result['errors'])) {
-                $errors = array_merge($errors, $result['errors']);
+                $this->errors = array_merge($this->errors, $result['errors']);
             } elseif (isset($result['success'])) {
-                $success = $result['success'];
+                $this->success = $result['success'];
             }           
         }
 
@@ -94,9 +94,9 @@ class UserSpaceController extends BaseController{
             $carId = intval($_POST['car-id']);
             $deleteCar = CarsModel::deleteCar($carId);
             if ($deleteCar) {
-                $success = 'Véhicule supprimé avec succès';
+                $this->success = 'Véhicule supprimé avec succès';
             } else {
-                $errors[] = 'Erreur lors de la suppression du véhicule';
+                $this->errors[] = 'Erreur lors de la suppression du véhicule';
             } 
         }
 
@@ -108,7 +108,7 @@ class UserSpaceController extends BaseController{
 
         // On vérifie que l'on a bien récupérer les informations de l'utilisateur
         if (empty($user)) {
-            $errors[] = 'Erreur lors de la récupération des informations utilisateur';
+            $this->errors[] = 'Erreur lors de la récupération des informations utilisateur';
         }
 
         // On récupère les covoiturages actifs de l'utilisateur
@@ -125,7 +125,8 @@ class UserSpaceController extends BaseController{
         // On s'assure qu'il y a au moins un avis pour faire la moyenne (et pour l'affichage)
         $averageRate = $user['avg'] !== null ? round($user['avg'], 2): null;
 
-
+        $errors = $this->errors;
+        $success = $this->success;
         require_once ROOT_PATH . '/src/views/users/userSpaceView.php';
     }
 

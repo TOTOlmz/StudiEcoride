@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 define('ROOT_PATH', __DIR__ . '/../');
+print_r(ROOT_PATH);
 
 require_once ROOT_PATH . '/vendor/autoload.php';
+require_once ROOT_PATH . 'src/config/variables.php';
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -16,7 +18,7 @@ session_start();
 
 // Import des contrôleurs avec namespaces
 
-use App\Controllers\AccessController;
+use App\Controllers\BaseController;
 use App\Controllers\HeaderController;
 use App\Controllers\ContactController;
 use App\Controllers\ConnectionController;
@@ -36,7 +38,7 @@ use App\Controllers\staff\AdminSpaceController;
 // Instanciation des contrôleurs
 $header = new HeaderController();
 
-$accessController = new AccessController();
+$baseController = new BaseController();
 $contactController = new ContactController();
 $registrationController = new RegistrationController();
 $connectionController = new ConnectionController();
@@ -64,6 +66,7 @@ if (stripos($path, $base) === 0) {
 
 $uri = '/'.ltrim($uri, '/'); // garantit un slash initial
 
+// On gère la réécriture d'url avant de charger le contenu de la page
 if (strpos($uri, '/connexion') === 0) { 
     $connectionController->connection();
 } else if (strpos($uri, '/inscription') === 0) {
@@ -75,13 +78,13 @@ if (strpos($uri, '/connexion') === 0) {
         || strpos($uri, '/confirmation-de-reservation') === 0
         || strpos($uri, '/historique-des-covoiturages') === 0
         ) {
-    $accessController->checkAccess('USER');
+    $baseController->checkAccess('USER');
 } else if (strpos($uri, '/espace-staff') === 0 
         ) {
-    $accessController->checkAccess('STAFF');
+    $baseController->checkAccess('STAFF');
 } else if (strpos($uri, '/espace-admin') === 0 
         ) {
-    $accessController->checkAccess('ADMIN');
+    $baseController->checkAccess('ADMIN');
 }
 
 
@@ -92,14 +95,23 @@ if (strpos($uri, '/connexion') === 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/styles/mainStyle.css">
+    <link rel="stylesheet" href="assets/styles/headerStyle.css">
+    <link rel="stylesheet" href="assets/styles/homeStyle.css">
+    <link rel="stylesheet" href="assets/styles/carpoolStyle.css">
+    <link rel="stylesheet" href="assets/styles/userProfileStyle.css">
+    <link rel="stylesheet" href="assets/styles/responsiveStyle.css">
     <title>Ecoride</title>
 </head>
 <body>
-    <?php $header->header(); ?>
+    <?php 
+        // appel du header
+        $header->header(); 
+    ?>
 
     <div class="main">
         <?php
+            // On appelle la vue en fonction de l'URI (les réécritures ont déjà été appellées)
             if ($uri == '/') { include ROOT_PATH . '/src/views/homeView.php'; }
             else if (strpos($uri, '/nous-contacter') === 0) { $contactController->contact(); }
             else if (strpos($uri, '/legal') === 0) { include ROOT_PATH . '/src/views/legalView.php'; }
@@ -115,9 +127,9 @@ if (strpos($uri, '/connexion') === 0) {
             else if (strpos($uri, '/historique-des-covoiturages') === 0) { $carpoolsHistoryController->CarpoolsHistoryArea(); }
             else if (strpos($uri, '/espace-staff') === 0) { $staffSpaceController->staffSpaceArea(); }
             else if (strpos($uri, '/espace-admin') === 0) { $adminSpaceController->adminSpaceArea(); }
-            else if (strpos($uri, '/suspendu') === 0) { echo '<h1 style="margin:15px;">Votre compte est suspendu, vous ne pouvez plus l\'utiliser pour l\'instant</h1>'; }
-            
-            else { echo '<h1 style="margin:15px;">404 - Page non trouvée</h1>'; }
+            else if (strpos($uri, '/suspendu') === 0) { include ROOT_PATH . '/src/views/suspendedView.php'; }
+
+            else { include ROOT_PATH . '/src/views/lostView.php'; } // Dans tous les autres cas, page 404
         ?>
     </div>
     <?php

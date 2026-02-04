@@ -1,20 +1,20 @@
 <?php
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-    Controlleur gérant la confirmation d'inscription
+    Controlleur gérant la confirmation de réservation
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\users;
 
-use App\controllers\AccessController;
 use App\models\CarpoolDetailsModel;
 use App\models\users\UserModel;
 use App\models\users\UserBookingModel;
 
 class BookConfirmationController {
     
+    protected Array $errors = [];
+    protected bool $success = false;
+    
     public function bookConfirmationArea() {
 
-        $errors = [];
-        $success = false;
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             require_once ROOT_PATH . 'src/views/users/BookingConfirmationView.php';
@@ -24,7 +24,7 @@ class BookConfirmationController {
         $urlQuery = $_SERVER['QUERY_STRING'];
         $carpoolId = str_replace('c=', '', $urlQuery);
         if ($carpoolId == '') {
-            $errors[] = 'Aucun covoiturage trouvé dans l\'url.';
+            $this->errors[] = 'Aucun covoiturage trouvé dans l\'url.';
         }
 
         // On récupère les valeurs du formulaire
@@ -36,32 +36,32 @@ class BookConfirmationController {
 
         // On vérifie que toutes les valeurs sont renseignées
         if ($seats === 0 || $price === 0 || $userId === 0 || $carpoolId === 0) {
-            $errors[] = 'Toutes les informations doivent être renseignées.';
+            $this->errors[] = 'Toutes les informations doivent être renseignées.';
         }
 
         $carpool = CarpoolDetailsModel::getCarpoolById($carpoolId);
         if (!$carpool) {
-            $errors[] = 'Covoiturage introuvable.';
+            $this->errors[] = 'Covoiturage introuvable.';
         }
 
         // On vérifie que le prix et le nombre de sièges n'ont pas changé pendant la soumission du formulaire
         if ($carpool['available_seats'] < $seats) {
-            $errors[] = 'Le nombre de sièges disponibles a changé. Veuillez vérifier à nouveau.';
+            $this->errors[] = 'Le nombre de sièges disponibles a changé. Veuillez vérifier à nouveau.';
         }
         if ($carpool['price'] != $price) {
-            $errors[] = 'Le prix du covoiturage a changé. Veuillez vérifier à nouveau.';
+            $this->errors[] = 'Le prix du covoiturage a changé. Veuillez vérifier à nouveau.';
         }
 
         $user = UserModel::getUserById($userId);
         if (!$user) {
-            $errors[] = 'Utilisateur introuvable.';
+            $this->errors[] = 'Utilisateur introuvable.';
         }
         if ($cost > $user['credits']) {
-            $errors[] = 'Crédits insuffisants pour confirmer la participation.';
+            $this->errors[] = 'Crédits insuffisants pour confirmer la participation.';
         }
 
         // Si tout est bon, on enregistre la participation
-        if (empty($errors)) {
+        if (empty($this->errors)) {
 
             
             // On met à jour les crédits de l'utilisateur
@@ -77,11 +77,14 @@ class BookConfirmationController {
             }
 
             if ($userCreditsUpdated && $carpoolSeatsUpdated && $participation == $seats) {
-                $success = true;
+                $this->success = true;
             } else {
-                $errors[] = 'Une erreur est survenue lors de la confirmation de votre participation. Veuillez réessayer.';
+                $this->errors[] = 'Une erreur est survenue lors de la confirmation de votre participation. Veuillez réessayer.';
             }
         }
+
+        $errors = $this->errors;
+        $success = $this->success;
         require_once ROOT_PATH . 'src/views/users/bookingConfirmationView.php';
     }
 }

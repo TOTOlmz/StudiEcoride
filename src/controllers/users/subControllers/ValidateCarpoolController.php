@@ -1,6 +1,6 @@
 <?php
 /* |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-    Controlleur gérant le les covoiturages
+    Controlleur gérant la validation des covoiturages
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| */
 namespace App\Controllers\users\subControllers;
 
@@ -11,9 +11,13 @@ use App\models\users\UserCarpoolsModel;
 
 class ValidateCarpoolController {
 
+    
+    protected Array $errors = [];
+    protected string $success = '';
+
     // Fonction permettant de confirmer la fin d'un covoiturage
     function confirmCarpoolEnd($userId, $carpoolId, $driverId, $isSatisfied) {
-        $errors = [];
+        $this->errors = [];
 
         // Si l'utilisateur est satisfait
         if ($isSatisfied === 1) {
@@ -21,56 +25,57 @@ class ValidateCarpoolController {
             // On met à jour la confirmation de l'utilisateur
             $confirmationUpdate = UserValidationModel::confirmationUpdate($userId, $carpoolId);
             if (!$confirmationUpdate) {
-                $errors[] = 'Erreur lors de la mise à jour de la confirmation.';
+                $this->errors[] = 'Erreur lors de la mise à jour de la confirmation.';
             }
 
             // On met à jour la satisfaction de l'utilisateur
             $satisfactionUpdate = UserValidationModel::satisfactionUpdate($userId, $carpoolId);
             if (!$satisfactionUpdate) {
-                $errors[] = 'Erreur lors de la mise à jour de la satisfaction.';
+                $this->errors[] = 'Erreur lors de la mise à jour de la satisfaction.';
             }
 
             // On récupère les crédits en attente
             $pendingCredits = UserValidationModel::getPendingCredits($userId, $carpoolId);
             if (!$pendingCredits) {
-                $errors[] = 'Erreur lors de la récupération des crédits.';
+                $this->errors[] = 'Erreur lors de la récupération des crédits.';
             }
 
             // On vérifie si la commission de la plateforme a déjà été prise
             $commissionValue = UserValidationModel::returnCarpoolCommission($carpoolId);
             if (!$commissionValue) {
-                $errors[] = 'Erreur lors de la récupération de la commission.';
+                $this->errors[] = 'Erreur lors de la récupération de la commission.';
             }
 
             // On vide les crédits en attente de l'utilisateur
             $updateUserPendingCredits = UserValidationModel::deletePendingCredits($userId, $carpoolId, $pendingCredits);
             if (!$updateUserPendingCredits) {
-                $errors[] = 'Erreur lors de la suppression des credits en attente.';
+                $this->errors[] = 'Erreur lors de la suppression des credits en attente.';
             }
 
             // On ajoute les crédits au conducteur, en retirant la commission si nécessaire
             if ($commissionValue === 0) {
 
-                $getCommission = UserValidationModel::adjustCredits(1, 2);  // On donne eux crédits de comission à l'admin
+                $getCommission = UserValidationModel::adjustCredits(1, 2);  // On donne deux crédits de commission à l'admin
                 if (!$getCommission) {
-                    $errors[] = 'Erreur lors de la récupération de la commission.';
+                    $this->errors[] = 'Erreur lors de la récupération de la commission.';
                 }
 
                 $pendingCredits = $pendingCredits - 2;
                 $updateCommission = UserValidationModel::updateCarpoolCommission($carpoolId);
                 if (!$updateCommission) {
-                    $errors[] = 'Erreur lors de la mise à jour de la commission.';
+                    $this->errors[] = 'Erreur lors de la mise à jour de la commission.';
                 }
             }
 
             $updateDriverCredits = UserValidationModel::adjustCredits($driverId, intval($pendingCredits));
             if (!$updateDriverCredits) {
-                $errors[] = 'Erreur lors de l\'ajout des crédits au conducteur.';
+                $this->errors[] = 'Erreur lors de l\'ajout des crédits au conducteur.';
             }
 
-            if (empty($errors)) {
+            if (empty($this->errors)) {
                 $reviewForm = true;
-                return ['success' => 'Votre confirmation a bien été prise en compte.', 'reviewForm' => $reviewForm];
+                $this->success = 'Votre confirmation a bien été prise en compte.';
+                return ['success' => $this->success, 'reviewForm' => $reviewForm];
             }
 
             $everyoneSatisfied = UserValidationModel::everyoneSatisfied($carpoolId);
@@ -79,7 +84,7 @@ class ValidateCarpoolController {
             }
         } else {
             // Si l'utilisateur n'est pas satisfait :
-            if (empty($errors)) {
+            if (empty($this->errors)) {
                 // On invite l'utilisateur à laisser un signalement qui sera traité par un employé
                 $c = CarpoolDetailsModel::getCarpoolById($carpoolId);
                 $u = UserModel::getUserById($userId);
@@ -87,13 +92,14 @@ class ValidateCarpoolController {
 
                 $reportForm = true;
                 require_once ROOT_PATH . 'src/views/users/components/reportScreen.php';
-                return ['success' => 'Votre signalement a bien été envoyé. Nous reviendrons vers vous rapidement.'];
+                $this->success = 'Votre signalement a bien été envoyé. Nous reviendrons vers vous rapidement.';
+                return ['success' => $this->success];
             }
         }
 
         // Retourner les erreurs s'il y en a
-        if (!empty($errors)) {
-            return ['errors' => $errors];
+        if (!empty($this->errors)) {
+            return ['errors' => $this->errors];
         }
 
         return false;

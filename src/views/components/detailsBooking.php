@@ -26,6 +26,7 @@
 </div>
 
 <script>
+    /* Gestion de l'overlay de reservation */
     const mainDiv = document.querySelector('div.main');
     const bookBtn = document.getElementById('book');
     const popup = document.getElementById('popup-book');

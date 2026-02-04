@@ -1,0 +1,49 @@
+/* Responsive */
+@media (max-width: 768px) {
+
+    .mobile-burger {
+        display: flex;
+    }
+    
+    .links-area {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--green);
+        flex-direction: column;
+        width: 100%;
+        margin-top: 0;
+        padding: 1rem 0;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s ;
+    }
+    
+    .links-area.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+
+    /* Accueil */
+    .cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+    }
+    .card {
+        max-width: 95%;
+    }
+    .offer {
+        margin: 2rem 0 1rem 0;
+    }
+
+    .details {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+}
