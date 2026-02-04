@@ -62,7 +62,7 @@ INSERT INTO `carpools` (`id`, `date`, `departure_time`, `departure_city`, `depar
 (37,'2026-04-15','11:30:00','Bordeaux',33000,44.8378,-0.5792,'14:45:00','Pau',64000,43.2951,-0.3708,195,'Terminé',4,0,50,7,6,1,0,0,'',1),
 (38,'2026-04-16','08:10:00','Pau',64000,43.2951,-0.3708,'10:30:00','Bayonne',64100,43.4925,-1.4743,140,'En cours',3,1,18,3,3,0,0,0,'',0),
 (39,'2026-04-17','15:00:00','Agen',47000,44.202,0.6292,'17:30:00','Toulouse',31000,43.6045,1.444,150,'Planifié',4,4,28,5,2,0,1,0,'',0),
-(40,'2026-04-18','07:40:00','Béziers',34500,43.3445,3.2158,'09:40:00','Narbonne',11100,43.1847,3.005,120,'A valider',3,0,18,6,4,0,0,0,'',1);
+(40,'2026-04-18','07:40:00','Béziers',34500,43.3445,3.2158,'09:40:00','Narbonne',11100,43.1847,3.005,120,'A valider',3,0,18,6,4,0,0,0,'',1),
 (41,'2026-04-19','18:20:00','Toulouse',31000,43.6045,1.444,'21:50:00','Biarritz',64200,43.4832,-1.5586,210,'Terminé',5,0,55,8,6,0,0,0,'',1),
 (42,'2026-04-20','09:15:00','Albi',81000,43.9285,2.1431,'11:00:00','Cahors',46000,44.4473,1.4408,105,'En cours',2,1,16,3,1,0,0,0,'',0),
 (43,'2026-04-21','12:00:00','Limoges',87000,45.8336,1.2611,'15:00:00','Brive-la-Gaillarde',19100,45.1596,1.5338,180,'Planifié',4,4,35,5,3,1,0,0,'',0),
@@ -82,7 +82,7 @@ INSERT INTO `carpools` (`id`, `date`, `departure_time`, `departure_city`, `depar
 (57,'2026-04-30','18:30:00','Angers',49000,47.4784,-0.5632,'21:00:00','Nantes',44000,47.2184,-1.5536,150,'En cours',3,1,20,3,1,0,0,0,'',0),
 (58,'2026-05-01','09:10:00','Nice',6000,43.7102,7.262,'11:50:00','Toulon',83000,43.1242,5.928,160,'Planifié',4,3,30,7,4,1,0,0,'',1),
 (59,'2026-05-01','15:00:00','Toulon',83000,43.1242,5.928,'17:30:00','Hyères',83400,43.1218,6.1296,150,'Planifié',3,2,18,6,3,0,0,0,'',0),
-(60,'2026-05-02','07:20:00','Brest',29200,48.3904,-4.4861,'09:50:00','Quimper',29000,48.0006,-4.0962,150,'Planifié',2,2,14,6,4,0,0,0,'',0);
+(60,'2026-05-02','07:20:00','Brest',29200,48.3904,-4.4861,'09:50:00','Quimper',29000,48.0006,-4.0962,150,'Planifié',2,2,14,6,4,0,0,0,'',0),
 (61,'2026-05-02','14:00:00','Quimper',29000,48.0006,-4.0962,'16:30:00','Lorient',56100,47.7483,-3.3702,150,'En cours',3,1,18,3,1,0,0,0,'',0),
 (62,'2026-05-03','08:10:00','Lorient',56100,47.7483,-3.3702,'10:40:00','Vannes',56000,47.6582,-2.7608,150,'Planifié',4,2,22,5,2,0,0,0,'',0),
 (63,'2026-05-03','17:45:00','Vannes',56000,47.6582,-2.7608,'20:15:00','Rennes',35000,48.1173,-1.6778,150,'A valider',3,0,20,6,4,0,0,0,'',1),
@@ -100,12 +100,12 @@ INSERT INTO `carpools` (`id`, `date`, `departure_time`, `departure_city`, `depar
 (75,'2026-05-09','17:30:00','Paris',75000,48.8566,2.3522,'19:30:00','Versailles',78000,48.8049,2.1204,120,'En cours',3,1,16,3,1,0,0,0,'',0),
 (76,'2026-05-10','08:15:00','Versailles',78000,48.8049,2.1204,'10:45:00','Chartres',28000,48.4469,1.489,150,'Planifié',4,3,24,5,3,0,0,0,'',0),
 (77,'2026-05-10','16:50:00','Chartres',28000,48.4469,1.489,'19:20:00','Le Mans',72000,48.0061,0.1996,150,'Terminé',3,0,22,6,4,0,0,0,'',1),
-(78,'2026-03-19','07:30:00','Lattes',34970,43.5676,3.9026,'10:45:00','Aubagne',13400,43.2928,5.5707,195,'Planifié',4,3,35,3,1,1,0,1,'',1),
-(79,'2026-03-20','08:00:00','Castelnau-le-Lez',34170,43.6346,3.9016,'11:15:00','Allauch',13190,43.3357,5.4820,195,'Planifié',5,2,38,5,3,0,0,0,'',1),
-(80,'2026-03-21','09:15:00','Juvignac',34990,43.6136,3.8105,'12:30:00','Marignane',13700,43.4167,5.2146,195,'Planifié',4,4,40,6,4,1,0,0,'',1),
-(81,'2026-03-22','14:00:00','Pérols',34470,43.5637,3.9509,'17:20:00','Cassis',13260,43.2140,5.5396,200,'Planifié',5,1,42,7,5,0,1,0,'',1),
-(82,'2026-03-23','16:45:00','Saint-Jean-de-Védas',34430,43.5763,3.8260,'20:05:00','Aubagne',13400,43.2928,5.5707,200,'Planifié',4,2,37,8,6,1,0,1,'',1),
-(83,'2026-03-24','17:30:00','Villeneuve-lès-Maguelone',34750,43.5336,3.8590,'20:50:00','Allauch',13190,43.3357,5.4820,200,'Planifié',5,5,39,9,7,0,0,0,'',1);
+(78,'2026-03-18','07:30:00','Lattes',34970,43.5676,3.9026,'10:45:00','Aubagne',13400,43.2928,5.5707,195,'Planifié',4,3,35,3,1,1,0,1,'',1),
+(79,'2026-03-18','08:00:00','Castelnau-le-Lez',34170,43.6346,3.9016,'11:15:00','Allauch',13190,43.3357,5.4820,195,'Planifié',5,2,38,5,3,0,0,0,'',1),
+(80,'2026-03-18','09:15:00','Juvignac',34990,43.6136,3.8105,'12:30:00','Marignane',13700,43.4167,5.2146,195,'Planifié',4,4,40,6,4,1,0,0,'',1),
+(81,'2026-03-18','14:00:00','Pérols',34470,43.5637,3.9509,'17:20:00','Cassis',13260,43.2140,5.5396,200,'Planifié',5,1,42,7,5,0,1,0,'',1),
+(82,'2026-03-18','16:45:00','Saint-Jean-de-Védas',34430,43.5763,3.8260,'20:05:00','Aubagne',13400,43.2928,5.5707,200,'Planifié',4,2,37,8,6,1,0,1,'',1),
+(83,'2026-03-18','17:30:00','Villeneuve-lès-Maguelone',34750,43.5336,3.8590,'20:50:00','Allauch',13190,43.3357,5.4820,200,'Planifié',5,5,39,9,7,0,0,0,'',1);
 
 --
 -- Dumping data for table `participations`
@@ -205,24 +205,24 @@ VALUES
 -- Dumping data for table `reviews`
 --
 
-INSERT INTO `reviews` (`id`, `rate`, `commentary`, `validate`, `user_id`, `driver_id`, `carpool_id`) VALUES
-(1, 3, 'Correct et professionnel, je reviendrai', 0, 8, 6, 4),
-(2, 2, 'Conducteur en retard, trajet correct mais déçu', 0, 3, 3, 1),
-(3, 1, 'Mauvaise communication, il ne m''a pas prévenu', 0, 4, 5, 2),
-(4, 2, 'Confort moyen, voiture propre mais conduite rapide', 0, 3, 5, 7),
-(5, 2, 'Arrivée en retard et peu d''explications', 0, 8, 5, 12),
-(6, 3, 'Bon trajet, conversation agréable', 0, 10, 6, 17),
-(7, 2, 'Musique trop forte, passable', 0, 12, 8, 20),
-(8, 3, 'Ponctuel et poli', 0, 13, 5, 21),
-(9, 2, 'Trajet stressant, attention à la vitesse', 0, 14, 6, 22),
-(10, 1, 'Annulation de dernière minute, décevant', 0, 3, 6, 23),
-(11, 2, 'Voiture propre mais climatisation défaillante', 0, 5, 6, 27),
-(12, 3, 'Bonne expérience, je recommande', 0, 7, 5, 31),
-(13, 2, 'Mauvaise organisation pour les bagages', 0, 8, 6, 32),
-(14, 1, 'Trajet trop long et arrêts non prévus', 0, 10, 5, 35),
-(15, 2, 'Confort acceptable mais pourrait s''améliorer', 0, 11, 3, 36),
-(16, 3, 'Très bon conducteur, trajet fluide', 0, 13, 3, 38),
-(17, 2, 'Arrêts imprévus, retardé', 0, 14, 5, 39),
-(18, 2, 'Prix élevé pour la distance parcourue', 0, 3, 6, 40),
-(19, 1, 'Comportement inadapté pendant le trajet', 0, 5, 6, 44),
-(20, 2, 'Respect des règles moyen, correct mais perfectible', 0, 7, 5, 47);
+INSERT INTO `reviews` (`id`, `rate`, `commentary`, `consulted`, `validate`, `user_id`, `driver_id`, `carpool_id`) VALUES
+(1, 3, 'Correct et professionnel, je reviendrai', 1, 1, 8, 6, 4),
+(2, 2, 'Conducteur en retard, trajet correct mais déçu', 1, 1, 3, 3, 1),
+(3, 1, 'Mauvaise communication, il ne m''a pas prévenu', 1, 1, 4, 5, 2),
+(4, 2, 'Confort moyen, voiture propre mais conduite rapide', 1, 1, 3, 5, 7),
+(5, 2, 'Arrivée en retard et peu d''explications', 1, 1, 8, 5, 12),
+(6, 3, 'Bon trajet, conversation agréable', 1, 1, 10, 6, 17),
+(7, 2, 'Musique trop forte, passable', 1, 1, 12, 8, 20),
+(8, 3, 'Ponctuel et poli', 1, 1, 13, 5, 21),
+(9, 2, 'Trajet stressant, attention à la vitesse', 1, 1, 14, 6, 22),
+(10, 1, 'Annulation de dernière minute, décevant', 1, 1, 3, 6, 23),
+(11, 2, 'Voiture propre mais climatisation défaillante', 1, 0, 5, 6, 27),
+(12, 3, 'Bonne expérience, je recommande', 1, 1, 7, 5, 31),
+(13, 2, 'Mauvaise organisation pour les bagages', 1, 1, 8, 6, 32),
+(14, 1, 'Trajet trop long et arrêts non prévus', 1, 1, 10, 5, 35),
+(15, 2, 'Confort acceptable mais pourrait s''améliorer', 1, 1, 11, 3, 36),
+(16, 3, 'Très bon conducteur, trajet fluide', 1, 0, 13, 3, 38),
+(17, 2, 'Arrêts imprévus, retardé', 0, 0, 14, 5, 39),
+(18, 2, 'Prix élevé pour la distance parcourue', 0, 0, 3, 6, 40),
+(19, 1, 'Comportement inadapté pendant le trajet', 0, 0, 5, 6, 44),
+(20, 2, 'Respect des règles moyen, correct mais perfectible', 0, 0, 7, 5, 47);

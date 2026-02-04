@@ -4,7 +4,7 @@ declare(strict_types=1);
 define('ROOT_PATH', __DIR__ . '/../');
 
 require_once ROOT_PATH . '/vendor/autoload.php';
-require_once ROOT_PATH . 'src/config/variables.php';
+require_once ROOT_PATH . 'src/Config/variables.php';
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);

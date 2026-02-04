@@ -5,9 +5,7 @@
     <h2>Mes covoiturages</h2>
 <?php endif; ?>
 
-<?php if (count($cars) > 0): ?>
-    <a href="./proposer-un-covoiturage">Ajouter un trajet</a>
-<?php else: ?>
+<?php if (count($cars) === 0): ?>
     <p>Ajoutez un véhicule pour devenir chauffeur et pouvoir proposer un trajet. <a href="./ajouter-un-vehicule">Ajouter un véhicule</a></p>
 <?php endif; ?>
 

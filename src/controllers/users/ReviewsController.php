@@ -44,7 +44,7 @@ class ReviewsController {
 
         // On appelle la vue
         $errors = $this->errors;
-        require_once ROOT_PATH . 'src/views/users/reviewsView.php';
+        require_once ROOT_PATH . 'src/Views/users/reviewsView.php';
     }
 
 }

@@ -52,13 +52,13 @@ class UserCarsController {
                     } else {
                         $this->errors[] = 'Le format de la plaque d\'immatriculation est invalide. Merci de respecter le format AA-000-BB.';
                     }
-                } elseif ($plateArray[2] === '-' && $plateArray[5] === '-' && count($plateArray) === 9) {
+                } elseif ($plateArray[2] === '-' && $plateArray[6] === '-' && count($plateArray) === 9) {
                     if (ctype_alpha($plateArray[0]) && ctype_alpha($plateArray[1])
-                        && ctype_digit($plateArray[3]) && ctype_digit($plateArray[4]) && ctype_digit($plateArray[6])
+                        && ctype_digit($plateArray[3]) && ctype_digit($plateArray[4]) && ctype_digit($plateArray[5])
                         && ctype_alpha($plateArray[7]) && ctype_alpha($plateArray[8])) {
 
                             $firstLetters = $plateArray[0] . $plateArray[1];
-                            $numbers = $plateArray[3] . $plateArray[4] . $plateArray[6];
+                            $numbers = $plateArray[3] . $plateArray[4] . $plateArray[5];
                             $lastLetters = $plateArray[7] . $plateArray[8];
 
                             $plateNumber = strtoupper($firstLetters) . '-' . $numbers . '-' . strtoupper($lastLetters);
@@ -103,7 +103,7 @@ class UserCarsController {
         // On appelle la vue
         $errors = $this->errors;
         $success = $this->success;
-        require_once ROOT_PATH . 'src/views/users/userCarsView.php';
+        require_once ROOT_PATH . 'src/Views/users/userCarsView.php';
 
     }
 }

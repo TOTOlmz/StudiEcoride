@@ -27,7 +27,7 @@
 
     <div><strong>Dernière mise à jour :</strong> Novembre 2025</div>
 
-    <?php include __DIR__ . '/components/rollbackButton.php'; ?>   
+    <?php include ROOT_PATH . 'src/Views/components/rollbackButton.php'; ?>   
     
         
 </div>

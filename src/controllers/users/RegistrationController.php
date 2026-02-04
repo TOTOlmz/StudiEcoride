@@ -82,7 +82,7 @@ class RegistrationController {
     public function displayView() {
         $errors = $this->errors;
         $success = $this->success;
-        require_once ROOT_PATH . '/src/views/users/registrationView.php';
+        require_once ROOT_PATH . '/src/Views/users/registrationView.php';
     }
 
 

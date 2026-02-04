@@ -28,7 +28,7 @@
         <p id="passconf-label">Les mots de passe ne correspondent pas.</p>
     </div>
     
-    <?php require_once __DIR__ . '/../checks.php' ?>
+    <?php require_once ROOT_PATH . 'src/Views/checks.php' ?>
 </div>
 
 <script>

@@ -1,6 +1,6 @@
 <div class="center-container">
 
-    <?php include __DIR__ . '/../checks.php'; ?>
+    <?php include ROOT_PATH . 'src/Views/checks.php'; ?>
 
     <h2>Mes véhicule</h2>
     <?php if (empty($cars)): ?>
@@ -8,13 +8,13 @@
     <?php else: ?>
         <div class="car-cards">
             <?php foreach ($cars as $car): ?>
-                <?php include __DIR__ . '/components/carsCard.php'; ?>
+                <?php include ROOT_PATH . 'src/Views/users/components/carsCard.php'; ?>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
     <h2>Ajouter un véhicule</h2>
 
-    <?php include __DIR__ . '/components/carForm.php'; ?>
+    <?php include ROOT_PATH . 'src/Views/users/components/carForm.php'; ?>
 
 
 

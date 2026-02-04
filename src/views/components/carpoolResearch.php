@@ -3,7 +3,7 @@
     <input type="text" class="form-control" id="departure-city" name="departure-city" placeholder="Départ" required>
     <input type="text" class="form-control" id="arrival-city" name="arrival-city" placeholder="Arrivée" required>
     <input type="date" class="form-control" name="date" min-value="<?php echo $currentDate; ?>" required>
-    <input type="number" class="form-control" name="radius" placeholder="Rayon (km)">
+    <input type="number" class="form-control" name="radius"  value="null" placeholder="Rayon (km)">
     <button class="button" type="submit">Rechercher</button>
 </form>
 

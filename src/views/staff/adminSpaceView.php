@@ -1,11 +1,11 @@
 
 <div class="staff-panel">
-    <?php include __DIR__ . '/../checks.php'; ?>
-    <?php include __DIR__ . '/components/logout.php'; ?>
+    <?php include ROOT_PATH . 'src/Views/checks.php'; ?>
+    <?php include ROOT_PATH . 'src/Views/components/logout.php'; ?>
 </div>
 <?php
-include __DIR__ . '/components/adminAccountManagement.php';
-include __DIR__ . '/components/adminCharts.php';
+include ROOT_PATH . 'src/Views/staff/components/adminAccountManagement.php';
+include ROOT_PATH . 'src/Views/staff/components/adminCharts.php';
 
 ?>
 

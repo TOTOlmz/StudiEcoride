@@ -25,7 +25,15 @@ class CarpoolSearchController {
             $departureCity = htmlspecialchars($_POST['departure-city']);
             $arrivalCity = htmlspecialchars($_POST['arrival-city']);
             $date = $_POST['date'];
-            $radius = isset($_POST['radius']) ? intval($_POST['radius']) : 20;
+            $radius = 20; // Valeur par défaut
+            if (isset($_POST['radius'])) {
+                if (intval($_POST['radius']) !== 0) {
+                    $radius = intval($_POST['radius']);
+                } else {
+                    $radius = 1;
+                }
+            }
+            print_r($radius);
 
             // On s'assure d'avoir tous les champs
             if (!isset($departureCity) || !isset($arrivalCity) || !isset($date)) {
@@ -47,7 +55,7 @@ class CarpoolSearchController {
             // S'il y a eu une erreur, on arrête ...
             if (!empty($this->errors)) {
                 $errors = $this->errors;
-                require_once ROOT_PATH . 'src/views/users/carpoolsSearchView.php';
+                require_once ROOT_PATH . 'src/Views/users/carpoolsSearchView.php';
                 return;
             }
             
@@ -68,7 +76,7 @@ class CarpoolSearchController {
         }
         
         $errors = $this->errors;
-        require_once ROOT_PATH . 'src/views/carpoolSearchView.php';
+        require_once ROOT_PATH . 'src/Views/carpoolSearchView.php';
 
     }
 }

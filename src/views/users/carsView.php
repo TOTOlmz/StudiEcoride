@@ -40,6 +40,6 @@
         <button type="submit">Ajouter le véhicule</button>
     </form>
 
-    <?php require_once __DIR__ . '/../checks.php' ?>
+    <?php require_once ROOT_PATH . 'src/Views/checks.php' ?>
 
 </div>

@@ -11,7 +11,7 @@
     <?php if (count($reviewsReceived) > 0): ?>
         <div class="review-cards">
             <?php foreach ($reviewsReceived as $review): ?>
-                <?php include __DIR__ . '/components/reviewCard.php'; ?>
+                <?php include ROOT_PATH . 'src/Views/users/components/reviewCard.php'; ?>
             <?php endforeach; ?>
             </div>
     <?php else: ?>
@@ -23,7 +23,7 @@
     <?php if (count($reviewsLeft) > 0): ?>
         <div class="review-cards">
             <?php foreach ($reviewsLeft as $review): ?>
-                <?php include __DIR__ . '/components/reviewCard.php'; ?>
+                <?php include ROOT_PATH . 'src/Views/users/components/reviewCard.php'; ?>
             <?php endforeach; ?>
             </div>
     <?php else: ?>

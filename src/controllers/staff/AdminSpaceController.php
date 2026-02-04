@@ -118,6 +118,6 @@ class AdminSpaceController extends BaseController {
         // On simplifie les variables pour leur intégration dans la vue
         $errors = $this->errors;
         $success = $this->success;
-        require_once ROOT_PATH . '/src/views/staff/adminSpaceView.php';
+        require_once ROOT_PATH . '/src/Views/staff/adminSpaceView.php';
     }
 }

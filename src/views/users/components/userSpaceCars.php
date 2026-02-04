@@ -4,7 +4,7 @@
 <?php else: ?>
     <div class="car-cards">
         <?php foreach ($cars as $car): ?>
-            <?php include __DIR__ . '/carsCard.php'; ?>
+            <?php include ROOT_PATH . 'src/Views/users/components/carsCard.php'; ?>
         <?php endforeach; ?>
         </div>
 <?php endif; ?>

@@ -127,7 +127,7 @@ class UserSpaceController extends BaseController{
 
         $errors = $this->errors;
         $success = $this->success;
-        require_once ROOT_PATH . '/src/views/users/userSpaceView.php';
+        require_once ROOT_PATH . '/src/Views/users/userSpaceView.php';
     }
 
 }

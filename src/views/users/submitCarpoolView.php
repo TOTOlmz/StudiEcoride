@@ -1,7 +1,7 @@
 <div class="center-container">
     <h2>Proposer un nouveau trajet</h2>
 
-    <?php include __DIR__ . '/../checks.php'; ?>
+    <?php include ROOT_PATH . 'src/Views/checks.php'; ?>
     
     <form class="new-carpool" method="POST" autocomplete="off" action="">
 

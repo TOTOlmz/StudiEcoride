@@ -19,9 +19,9 @@
 <div class="action-btn booking-btn">
     <?php if (!isset($_SESSION['user_id'])): ?>
         <p>Connectez vous pour réserver</p>
-        <a href="./connexion">Connexion</a>
+        <a class="button" href="./connexion">Connexion</a>
     <?php else: ?>
-        <a id="book" href="">Réserver</a>
+        <a id="book" class="button" href="">Réserver</a>
     <?php endif; ?>
 </div>
 

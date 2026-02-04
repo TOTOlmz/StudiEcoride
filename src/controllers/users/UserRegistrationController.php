@@ -75,7 +75,7 @@ class UserRegistrationController {
         // On charge la vue
         $errors = $this->errors;
         $success = $this->success;
-        require ROOT_PATH . 'src/views/users/registrationView.php';
+        require ROOT_PATH . 'src/Views/users/registrationView.php';
     }
 
     // Fonction permettant de vérifier la robustesse du mot de passe (et sa confirmation)

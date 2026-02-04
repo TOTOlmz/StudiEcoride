@@ -83,7 +83,7 @@ class StaffSpaceController extends BaseController {
 
         $errors = $this->errors;
         $success = $this->success;
-        require_once ROOT_PATH . '/src/views/staff/staffSpaceView.php';
+        require_once ROOT_PATH . '/src/Views/staff/staffSpaceView.php';
 
     }
 

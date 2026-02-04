@@ -60,7 +60,7 @@ class ConnectionController {
     public function displayView() {
         $errors = $this->errors;
         $success = $this->success;
-        require_once ROOT_PATH . '/src/views/connectionView.php';
+        require_once ROOT_PATH . '/src/Views/connectionView.php';
     }
 
 }

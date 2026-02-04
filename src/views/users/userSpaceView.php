@@ -3,18 +3,18 @@
 
 <?php 
 
-include __DIR__ . '/../checks.php';
+include ROOT_PATH . 'src/Views/checks.php';
 
 
-include __DIR__ . '/components/userSpaceProfile.php';
-include __DIR__ . '/components/userSpaceCarpools.php';
-include __DIR__ . '/components/userSpaceCars.php';
+include ROOT_PATH . 'src/Views/users/components/userSpaceProfile.php';
+include ROOT_PATH . 'src/Views/users/components/userSpaceCarpools.php';
+include ROOT_PATH . 'src/Views/users/components/userSpaceCars.php';
 
 if (isset($reviewForm) && $reviewForm) {
-    include __DIR__ . '/components/leaveReview.php';
+    include ROOT_PATH . 'src/Views/users/components/leaveReview.php';
 }
 if (isset($reportForm) && $reportForm) {
-    include __DIR__ . '/components/leaveReport.php';
+    include ROOT_PATH . 'src/Views/users/components/leaveReport.php';
 }
 
 ?>

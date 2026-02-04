@@ -91,7 +91,7 @@ class ValidateCarpoolController {
                 $d = UserModel::getUserById($driverId);
 
                 $reportForm = true;
-                require_once ROOT_PATH . 'src/views/users/components/reportScreen.php';
+                require_once ROOT_PATH . 'src/Views/users/components/reportScreen.php';
                 $this->success = 'Votre signalement a bien été envoyé. Nous reviendrons vers vous rapidement.';
                 return ['success' => $this->success];
             }

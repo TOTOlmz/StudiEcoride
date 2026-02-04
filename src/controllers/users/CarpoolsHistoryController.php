@@ -90,6 +90,6 @@ class CarpoolsHistoryController {
 
         $errors = $this->errors;
         $success = $this->success;
-        include ROOT_PATH . 'src/views/users/carpoolsHistoryView.php';
+        include ROOT_PATH . 'src/Views/users/carpoolsHistoryView.php';
     }
 }

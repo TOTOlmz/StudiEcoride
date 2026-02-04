@@ -17,7 +17,7 @@ class BookConfirmationController {
 
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            require_once ROOT_PATH . 'src/views/users/BookingConfirmationView.php';
+            require_once ROOT_PATH . 'src/Views/users/BookingConfirmationView.php';
             exit;
         }
         // On récupère l'id du covoiturage qui est passé en paramètre de l'URL
@@ -85,6 +85,6 @@ class BookConfirmationController {
 
         $errors = $this->errors;
         $success = $this->success;
-        require_once ROOT_PATH . 'src/views/users/bookingConfirmationView.php';
+        require_once ROOT_PATH . 'src/Views/users/bookingConfirmationView.php';
     }
 }

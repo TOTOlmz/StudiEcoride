@@ -57,7 +57,6 @@ class CarpoolDetailsController {
         } else {
             $driver['avg'] = round(intval($driver['avg']), 1);
         }
-        echo $driver['avg'];
 
         // On récupère les commentaires sur le conducteur
         $driverComments = UserProfileModel::getUserReviewsReceived($carpool['driver_id']);
@@ -71,7 +70,7 @@ class CarpoolDetailsController {
         $carpool['duration'] = $timeLogics->durationFormatting($carpool['duration']);
 
         $errors = $this->errors;
-        require_once ROOT_PATH . 'src/views/carpoolDetailsView.php';
+        require_once ROOT_PATH . 'src/Views/carpoolDetailsView.php';
 
     }
 

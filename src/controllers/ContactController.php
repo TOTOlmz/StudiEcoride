@@ -35,7 +35,7 @@ class ContactController extends BaseController {
 
         $errors = $this->errors;
         $success = $this->success;
-        require_once ROOT_PATH . 'src/views/contactView.php';
+        require_once ROOT_PATH . 'src/Views/contactView.php';
 
     }
 }

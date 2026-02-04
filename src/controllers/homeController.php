@@ -5,6 +5,6 @@
 
 class HomeController {
     public function homeArea() {
-        require_once ROOT_PATH . 'src/views/homeView.php';
+        require_once ROOT_PATH . 'src/Views/homeView.php';
     }
 }

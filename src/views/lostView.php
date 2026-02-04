@@ -5,6 +5,6 @@
         <img src="assets/images/lost.png" alt="Compte perdu" style="max-width:200px; margin:20px 0;">
         <p>Il semble que la page que vous recherchez n'existe pas.</p>
         <p>Faites demi-tour en cliquant sur le bouton ci-dessous.</p>
-        <?php require ROOT_PATH . '/src/views/components/rollbackButton.php'; ?>
+        <?php require ROOT_PATH . '/src/Views/components/rollbackButton.php'; ?>
     </div>
 </div>
