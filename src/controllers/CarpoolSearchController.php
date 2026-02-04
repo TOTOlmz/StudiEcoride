@@ -44,21 +44,21 @@ class CarpoolSearchController {
             if ($arrivalCoordinates === null) {
                 $this->errors[] = 'Ville d\'arrivée introuvable.';
             }
-            
             // S'il y a eu une erreur, on arrête ...
             if (!empty($this->errors)) {
-                require_once __DIR__ . '/../../views/users/carpoolsSearchView.php';
+                $errors = $this->errors;
+                require_once ROOT_PATH . 'src/views/users/carpoolsSearchView.php';
                 return;
             }
             
             // Sinon, on ajoute les coordonnées aux tableaux
             $departure = array_merge(['city' => $departureCity], $departureCoordinates);
             $arrival = array_merge(['city' => $arrivalCity], $arrivalCoordinates);
-            
             //Et on appelle la methode de recherche par coordonnées
             $searchMethods = new SearchMethodsController;
             // Et on stocke son contenu dans $carpools
             $results = $searchMethods->coordinatesSearch($departure, $arrival, $date, $radius);
+
             
             if (isset($results['suggestion'])) {
                 $suggestion = true;

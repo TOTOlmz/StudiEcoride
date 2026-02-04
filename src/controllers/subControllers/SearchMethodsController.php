@@ -51,6 +51,7 @@ class SearchMethodsController {
 
             foreach($allCarpools as $c) {
 
+
                 // On vérifie le statut et le nombre de places
                 if (htmlspecialchars($c['status']) !== 'Planifié') { continue; }
                 if (intval($c['available_seats']) === 0) { continue; }

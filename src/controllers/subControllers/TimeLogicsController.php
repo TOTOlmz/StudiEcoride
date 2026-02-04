@@ -14,7 +14,7 @@ class TimeLogicsController {
             return 'Date non renseignée';
         }
         $dateObj = DateTime::createFromFormat('Y-m-d', $date);
-        $monthFr = ['jan', 'fév', 'mar', 'avr', 'mai', 'jun', 'jui', 'aoû', 'sep', 'oct', 'nov', 'déc'];
+        $monthFr = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
         $dateFr = $dateObj ? $dateObj->format('d') . ' ' . $monthFr[intval($dateObj->format('n')) - 1] . ' ' . $dateObj->format('Y') : htmlspecialchars($date);
         return $dateFr;
     }

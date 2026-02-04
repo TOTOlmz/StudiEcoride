@@ -133,7 +133,7 @@ if (strpos($uri, '/connexion') === 0) {
     </div>
     <?php
         // Ajout du footer
-        require __DIR__ . '/../src/views/footerView.php';
+        require ROOT_PATH . 'src/views/footerView.php';
     ?>
 </body>
 </html>
