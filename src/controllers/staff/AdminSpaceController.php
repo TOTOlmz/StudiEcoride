@@ -25,8 +25,7 @@ class AdminSpaceController extends BaseController {
 
         // Appel de la fonction de déconnexion
         if (isset($_POST['logout'])) {
-            $profileController = new ProfileController();
-            return $profileController->logout();
+            $this->logout();
         }
 
 

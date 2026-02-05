@@ -1,4 +1,5 @@
- 
+
+
 <?php if ($carpool['user_is_passenger'] == 1 && $carpool['status'] == 'A valider' && $carpool['user_confirmed'] == 0): ?>
     <form method="POST">
         <input type="hidden" name="carpool-id" value="<?php echo intval($carpool['id']); ?>"/>
@@ -8,7 +9,6 @@
         <button type="submit" name="validate-carpool-0">Le trajet s'est mal passé</button><br>
     </form>
 <?php endif; ?>
-
 <?php if ($user['id'] == $carpool['driver_id'] && count($reviewsReceived) !== 0) : ?>
     <?php foreach ($reviewsReceived as $review) : ?>
         <?php if ($review['carpool_id'] == $carpool['id']) : ?>
@@ -18,26 +18,19 @@
             </div>
         <?php endif; ?>
     <?php endforeach;?>
-<?php elseif ($user['id'] !== $carpool['driver_id'] && count($reviewsLeft) !== 0) : ?>
-    <?php $alreadyRate = 0; ?>
-    <?php foreach ($reviewsLeft as $review) : ?>
-        <?php if ($review['carpool_id'] == $carpool['id']) : ?>
-            <?php $alreadyRate = 1; ?>
-            <div>
-                <p>Note laissée : <strong> <?php echo htmlspecialchars($review['rate']); ?> /5</strong></p><br>
-                <p>Commentaire laissé : <em><?php echo html_entity_decode($review['commentary'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?></em>
-                <?php if($review['consulted'] == 0): ?>
-                    <span class="review-status">(En attente de validation)</span>
-                <?php elseif($review['consulted'] == 1 && $review['validate'] == 0): ?>
-                    <span class="review-status">(Refusé)</span>
-                <?php elseif($review['consulted'] == 1 && $review['validate'] == 1): ?>
-                    <span class="review-status">(Validé)</span>
-                <?php endif; ?>
-            </div>
+<?php elseif ($user['id'] !== $carpool['driver_id'] && isset($carpool['review'])) : ?>
+    <div>
+        <p>Note laissée : <strong> <?php echo htmlspecialchars($carpool['review']['rate']); ?> /5</strong></p><br>
+        <p>Commentaire laissé : <em><?php echo html_entity_decode($carpool['review']['commentary'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?></em>
+        <?php if($carpool['review']['consulted'] == 0): ?>
+            <span class="review-status">(En attente de validation)</span>
+        <?php elseif($carpool['review']['consulted'] == 1 && $carpool['review']['validate'] == 0): ?>
+            <span class="review-status">(Refusé)</span>
+        <?php elseif($carpool['review']['consulted'] == 1 && $carpool['review']['validate'] == 1): ?>
+            <span class="review-status">(Validé)</span>
         <?php endif; ?>
-    <?php endforeach;?>
-<?php endif; ?>
-<?php if (!isset($alreadyRate) || $alreadyRate === 0) : ?>
+    </div>
+<?php else : ?>
     <form method="post" class="review-form">
         <p>Laisser un avis pour ce trajet :</p>
         <input type="hidden" name="carpool_id" value="<?php echo intval($carpool['id']); ?>"/>

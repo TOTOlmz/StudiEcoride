@@ -171,7 +171,8 @@ INSERT INTO `participations` (`id`, `user_id`, `carpool_id`, `is_passenger`, `is
 (57, 7, 74, 1, 1, 0, 22),
 (58, 8, 75, 1, 0, 0, 28),
 (59, 9, 76, 1, 1, 0, 26),
-(60, 10, 77, 1, 0, 0, 40);
+(60, 6, 1, 1, 1, 0, 26),
+(61, 10, 77, 1, 0, 0, 40);
 
 --
 -- Dumping data for table `reports`
@@ -207,7 +208,7 @@ VALUES
 
 INSERT INTO `reviews` (`id`, `rate`, `commentary`, `consulted`, `validate`, `user_id`, `driver_id`, `carpool_id`) VALUES
 (1, 3, 'Correct et professionnel, je reviendrai', 1, 1, 8, 6, 4),
-(2, 2, 'Conducteur en retard, trajet correct mais déçu', 1, 1, 3, 3, 1),
+(2, 2, 'Conducteur en retard, trajet correct mais déçu', 1, 1, 6, 3, 1),
 (3, 1, 'Mauvaise communication, il ne m''a pas prévenu', 1, 1, 4, 5, 2),
 (4, 2, 'Confort moyen, voiture propre mais conduite rapide', 1, 1, 3, 5, 7),
 (5, 2, 'Arrivée en retard et peu d''explications', 1, 1, 8, 5, 12),

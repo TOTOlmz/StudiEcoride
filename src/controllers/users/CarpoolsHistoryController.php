@@ -22,19 +22,7 @@ class CarpoolsHistoryController {
 
 
         $user = UserModel::getUserById($_SESSION['user_id']);
-        $carpools = UserCarpoolsModel::getCarpoolsByUserId($user['id']);
-
-
-         // On récupère les covoiturages actifs de l'utilisateur
-        $activeCarpools = [];
-        $historyCarpools = [];
-        foreach ($carpools as $carpool) {
-            if (strtolower($carpool['status']) !== 'terminé' && strtolower($carpool['status']) !== 'a valider') {
-                $activeCarpools[] = $carpool;
-            } else {
-                $historyCarpools[] = $carpool;
-            }
-        }
+        
 
 
         // Traitement du formulaire d'avis
@@ -81,6 +69,26 @@ class CarpoolsHistoryController {
                 $this->errors = array_merge($this->errors, $result['errors']);
             } else {
                 $this->errors[] = 'Erreur lors de l\'envoi du signalement.';
+            }
+        }
+
+
+        
+        $carpools = UserCarpoolsModel::getCarpoolsByUserId($user['id']);
+
+         // On récupère les covoiturages actifs et passés de l'utilisateur
+        $activeCarpools = [];
+        $historyCarpools = [];
+        foreach ($carpools as $carpool) {
+            if (strtolower($carpool['status']) !== 'terminé' && strtolower($carpool['status']) !== 'a valider') {
+                $activeCarpools[] = $carpool;
+            } else {
+                // On récupère les avis pour chaque covoiturage passé
+                $postReview = ReviewsModel::userHasLeftReview($user['id'], $carpool['id']);
+                if ($postReview) {
+                    $carpool['review'] = ReviewsModel::getCarpoolReviewFromUser($user['id'], $carpool['id']);
+                }
+                $historyCarpools[] = $carpool;
             }
         }
 

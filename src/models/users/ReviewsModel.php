@@ -65,6 +65,15 @@ class ReviewsModel extends BaseModel {
         return self::count($sql, [$userId, $carpoolId]) > 0;
     }
 
+    // Fonction permettant de vérifier si un utilisateur a déjà laissé un avis pour un covoiturage donné
+    public static function getCarpoolReviewFromUser(int $userId, int $carpoolId): ?array {
+        if ($userId <= 0 || $carpoolId <= 0) {
+            throw new \Exception('Identifiant utilisateur ou carpool incorrect.');
+        }
+        $sql = 'SELECT * FROM reviews WHERE user_id = ? AND carpool_id = ?';
+        return self::fetchOne($sql, [$userId, $carpoolId]);
+    }
+
     // Fonction permettant d'ajouter un nouvel avis
     public static function addReview(int $userId, int $carpoolId, int $driverId, int $rate, string $commentary): bool {
         if ($userId <= 0 || $carpoolId <= 0 || $driverId <= 0 || $rate < 0 || $rate > 5) {
